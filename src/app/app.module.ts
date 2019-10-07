@@ -7,6 +7,8 @@ import { LoginComponent } from './login/login.component';
 import { VentaComponent } from './venta/venta.component';
 import { MenuComponent } from './menu/menu.component';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,6 +19,8 @@ import { MenuComponent } from './menu/menu.component';
   imports: [
     BrowserModule,
     AppRoutingModule
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]
