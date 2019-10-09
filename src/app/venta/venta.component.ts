@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from '../Servicios/firestore.service';
+import { Router, Params } from '@angular/router';
+
 
 @Component({
   selector: 'app-venta',
@@ -7,17 +9,20 @@ import { FirestoreService } from '../Servicios/firestore.service';
   styleUrls: ['./venta.component.css']
 })
 export class VentaComponent implements OnInit {
+  items: Array<any>;
 
-  solicitud = [];
-  constructor(private fs: FirestoreService) {
-    fs.getSolicitudes().subscribe(solicitud => {
-      this.solicitud = solicitud;
-    });
-
-   }
+  constructor(public firebaseService: FirestoreService) { }
 
   ngOnInit() {
+    this.getData();
+  }
 
+  getData() {
+    this.firebaseService.getSolicitudes()
+    .subscribe(result => {
+      this.items = result;
+      console.log(this.items);
+    });
   }
 
 }

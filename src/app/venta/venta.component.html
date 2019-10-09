@@ -52,11 +52,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
+    <tr *ngFor="let item of items">
       <th scope="row">1</th>
-      <td>--</td>
-      <td>--</td>
-      <td>--</td>
+      <td>{{item.monto}}</td>
+      <td>{{item.tarifa}}</td>
+      <td>{{item.banco}}</td>
       <td><i class="fa fa-times" aria-hidden="false"></i></td>
       <td><i class="fa fa-pencil" aria-hidden="true"></i></td>
 
@@ -64,3 +64,5 @@
 
   </tbody>
 </table>
+
+
