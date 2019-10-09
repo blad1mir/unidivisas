@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { VentaComponent } from './venta/venta.component';
 import { MenuComponent } from './menu/menu.component';
+import { UsuarioComponent } from './usuario/usuario.component';
 
 
 
@@ -14,7 +15,8 @@ import { MenuComponent } from './menu/menu.component';
     AppComponent,
     LoginComponent,
     VentaComponent,
-    MenuComponent
+    MenuComponent,
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,
