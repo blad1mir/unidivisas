@@ -7,6 +7,10 @@ import { LoginComponent } from './login/login.component';
 import { VentaComponent } from './venta/venta.component';
 import { MenuComponent } from './menu/menu.component';
 import { UsuarioComponent } from './usuario/usuario.component';
+import { HttpClientModule} from '@angular/common/http';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 
@@ -20,11 +24,13 @@ import { UsuarioComponent } from './usuario/usuario.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase)
 
 
   ],
-  providers: [],
+  providers: [AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

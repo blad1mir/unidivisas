@@ -30,7 +30,7 @@
 
 <div class="container col-md-3">
   <ul class="list-group">
-    <li class="list-group-item"><a href="https://dolartoday.com/"  target="_blank"> Dolartoday <i class="fal fa-user"></i></a></li>
+    <li class="list-group-item"><a href="https://dolartoday.com/"  target="_blank"> Dolartoday</a></li>
     <li class="list-group-item"><a href="https://www.instagram.com/monitordolar.vzla/?hl=es-la"  target="_blank"> Monitor</a></li>
     <li class="list-group-item"><a href="https://www.airtm.io/"  target="_blank"> AirTM</a></li>
     <li class="list-group-item"><a href="http://bolivarcucuta.com/"  target="_blank"> BolivarCucuta</a></li>
@@ -52,11 +52,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
+    <tr *ngFor="let item of items">
       <th scope="row">1</th>
-      <td>--</td>
-      <td>--</td>
-      <td>--</td>
+      <td>{{item.monto}}</td>
+      <td>{{item.tarifa}}</td>
+      <td>{{item.banco}}</td>
       <td><i class="fa fa-times" aria-hidden="false"></i></td>
       <td><i class="fa fa-pencil" aria-hidden="true"></i></td>
 
@@ -64,3 +64,5 @@
 
   </tbody>
 </table>
+
+
