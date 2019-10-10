@@ -11,6 +11,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 
@@ -26,7 +27,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    ReactiveFormsModule,
+    FormsModule
 
 
   ],

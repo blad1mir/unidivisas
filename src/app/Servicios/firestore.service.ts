@@ -11,4 +11,12 @@ export class FirestoreService {
   getSolicitudes() {
     return this.db.collection('/Solicitud').valueChanges();
 }
+createSolicitud(value){
+  return this.db.collection('Solicitud').add({
+    monto: value.monto,
+    id: value.id,
+    tarifa: value.tarifa,
+    banco: value.banco  
+  });
+}
 }
