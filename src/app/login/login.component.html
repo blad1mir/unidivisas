@@ -5,6 +5,7 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <body>
+    
 <div class="container register">
                 <div class="row">
                     <div class="col-md-3 register-left">
@@ -47,8 +48,16 @@
                                             <input type="text" minlength="11" maxlength="11" name="txtEmpPhone" class="form-control" placeholder="Telefono" value="" />
                                         </div>
                                         <br>
-                                        <br>
+                                        <div *ngIf="auth.user$ | async; then authenticated else guest">
+                                            <!-- template will replace this div -->
+                                        </div>
+                                        <ng-template #guest>
+                                            <button class="btnRegister" (click)="auth.googleSignin()">
+                                                <img src="https://rotulosmatesanz.com/wp-content/uploads/2017/09/2000px-Google_G_Logo.svg_.png" width="15%" alt=""/> Entra con Google
+                                            </button>
+                                        </ng-template>
                                         <input type="submit" class="btnRegister"  value="Registrar"/>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +73,14 @@
                                       </div>
                                     </div>
                                     <div class="col-md-6">
-                                        
+                                        <div *ngIf="auth.user$ | async; then authenticated else guest">
+                                            <!-- template will replace this div -->
+                                        </div>
+                                        <ng-template #guest>
+                                            <button class="btnRegister" (click)="auth.googleSignin()">
+                                                <img src="https://rotulosmatesanz.com/wp-content/uploads/2017/09/2000px-Google_G_Logo.svg_.png" width="15%" alt=""/> Entra con Google
+                                            </button>
+                                        </ng-template>
                                         <input type="submit" class="btnRegister"  value="Entrar"/>
                                     </div>
                                 </div>
@@ -74,4 +90,11 @@
                 </div>
 
             </div>
+            
+           
+          
+            
           </body>
+          
+
+  
