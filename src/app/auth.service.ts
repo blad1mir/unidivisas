@@ -8,6 +8,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { template } from '@angular/core/src/render3';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -32,13 +33,50 @@ export class AuthService {
       )
       
     }
+    async registerEmail(email: string, pass: string, displayName: string, tel: string, adm: number){
+      const credential = await this.afAuth.auth.createUserWithEmailAndPassword(email, pass)
+      return this.updateUserData(credential.user).then((success)=>{
+        this.router.navigate(['/venta']); 
+        this.updateUserData2(credential.user, displayName);
+        });
+    }
+    private updateUserData2(user, name: string) {
+      this.afs.collection('users').doc(user.uid).update({
+        displayName: name
+      })
+    }
+    async updateUserData3(id, name: string, dir: string, corr: string, tele: string, ad: number) {
+
+      this.afs.collection('users').doc(id).update({
+        displayName: name,
+        email: corr,
+        direccion: dir,
+        telf: tele,
+        admim: ad
+      })
+    }
+    async loginEmail(email: string, pass: string){
+      const credential = await this.afAuth.auth.signInWithEmailAndPassword(email, pass)
+        
+          this.router.navigate(['/venta']);
+      
+     }
     async googleSignin() {
       const provider = new auth.GoogleAuthProvider();
       const credential = await this.afAuth.auth.signInWithPopup(provider);
       return this.updateUserData(credential.user),
-      this.router.navigate(['/venta']);;
+      this.router.navigate(['/venta']),
+      alert("Ha iniciado sesión con exito");
       
     }
+    async googleRegister() {
+      const provider = new auth.GoogleAuthProvider();
+      const credential = await this.afAuth.auth.signInWithPopup(provider)
+      return this.updateUserData(credential.user).then((success)=>{
+        this.router.navigate(['/venta']);
+        alert("Se ha registrado con exito");
+      });
+      }
   
     private updateUserData(user) {
       // Sets user data to firestore on login
