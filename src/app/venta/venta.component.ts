@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from '../Servicios/firestore.service';
 import { Router} from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { delay } from 'q';
+
 
 
 @Component({
@@ -9,15 +11,16 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
   templateUrl: './venta.component.html',
   styleUrls: ['./venta.component.css']
 })
+
 export class VentaComponent implements OnInit {
   items: Array<any>;
+  val=0;
   public formGroup: FormGroup;
-  id= 0;
+  constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder,private router: Router) {
 
-  constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder,private router: Router) { }
+   }
 
   ngOnInit() {
-    this.createID();
     this.getData();
     this.buildForm();
   }
@@ -26,28 +29,25 @@ export class VentaComponent implements OnInit {
     this.firebaseService.getSolicitudes()
     .subscribe(result => {
       this.items = result;
-      console.log('item: '+this.items[1].id)
-      if(this.id<this.items[1].id){
-        this.id=this.items[1].id;
-        
-      }
-      this.id=this.id+1;
-      console.log('final: '+this.id)
     });
   }
 
-  buildForm() {
-    this.formGroup = this.formBuilder.group({
-      id: [this.id],
-      monto: ['', Validators.required ],
-      tarifa: ['', Validators.required ],
-      banco: ['', Validators.required ]
-    });
+   
+
+  async buildForm() {
+  await delay(5000);
+     console.log('IDE:'+this.val)
+      this.formGroup = this.formBuilder.group({
+        id: [this.val+1],
+        monto: ['', Validators.required ],
+        tarifa: ['', Validators.required ],
+        banco: ['', Validators.required ]
+      });
+    
+   
   }
 
   onSubmit(value){
-    console.log('Este es el valor: '+ value)
-    console.log('Este es el otro: '+ value.banco)
     this.firebaseService.createSolicitud(value)
     .then(
       res => {
@@ -57,21 +57,37 @@ export class VentaComponent implements OnInit {
     )
   }
 
-  resetForm(){
+  resetForm() {
     this.formGroup = this.formBuilder.group({
-      id: [this.id],
+      id: [this.val],
       monto: new FormControl('', Validators.required),
       tarifa: new FormControl('', Validators.required),
       banco:  new FormControl('', Validators.required)
     });
   }
 
-  getData() {
+    getData() {
     this.firebaseService.getSolicitudes()
-    .subscribe(result => {
-      this.items = result;
-      console.log(this.items);
-    });
+      .subscribe(result => {
+        this.items = result;
+        this.items.forEach(element =>{
+        if(element.id>=this.val){
+          this.val=element.id+1;
+        }
+        //console.log('before: '+ this.val);
+        });
+      }
+    );
+   // await delay(5000);
+   // this.wait(this.val);
   }
+
+//   async wait(valor){
+//   await delay(5000);
+//   console.log('after: '+valor);
+//   console.log("Waited 5s");
+// };
+
+ 
 
 }
