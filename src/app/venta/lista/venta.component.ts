@@ -17,7 +17,7 @@ import { AuthService } from 'src/app/auth.service';
 
 export class VentaComponent implements OnInit {
   items: Array<any>;
-  solicitud= [];
+   solicitud = [];
   solActual=[];
   val = 0;
   id;
@@ -64,7 +64,7 @@ export class VentaComponent implements OnInit {
   // }
 
   getAll(){
-    this.firebaseService.getAllSolicitudes()
+    this.firebaseService.getSolicitudes()
     .subscribe(solicitud =>{
       this.solicitud = solicitud;
       // solicitud.forEach(element => {
@@ -72,7 +72,7 @@ export class VentaComponent implements OnInit {
       //   console.log("thats it:"+ element.usuario);
       //   console.log("usuario actual:"+ this.user);
       //   if(element.usuario==this.user){
-      //     this.solicitud.push(element);
+      //    
       //   }
       // })
     })

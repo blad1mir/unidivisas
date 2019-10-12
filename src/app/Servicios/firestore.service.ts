@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 export class FirestoreService {
 
  solicitudColeccion: AngularFirestoreCollection<Solicitud>;
- Solicitud: Observable<Solicitud[]>;
+ solicitud: Observable<Solicitud[]>;
  solicitudDoc: AngularFirestoreDocument<Solicitud>;
   
   constructor(private db: AngularFirestore) { 
@@ -44,16 +44,16 @@ export class FirestoreService {
         return data;
       }
     }));
- 
-  getSolicitudes() {
-    return this.db.collection('/Solicitud').valueChanges();
+  }
+//   getSolicitudes() {
+//     return this.db.collection('/Solicitud').valueChanges();
   
-}
+// }
 
 getAllSolicitudes(){
   let x = 1;
   this.solicitudColeccion=this.db.collection('Solicitud');
-  this.Solicitud = this.solicitudColeccion.snapshotChanges().pipe(map(actions => {
+  this.solicitud = this.solicitudColeccion.snapshotChanges().pipe(map(actions => {
     x = 1;
     return actions.map(a => {
       const data = a.payload.doc.data() as Solicitud;
