@@ -57,13 +57,14 @@ body {
 .btnRegister{
     float: right;
     margin-top: 10%;
+    margin-left: 5%;
     border: none;
     border-radius: 1.5rem;
     padding: 2%;
     background: #0062cc;
     color: #fff;
     font-weight: 600;
-    width: 50%;
+    width: 45%;
     cursor: pointer;
 }
 .register .nav-tabs{
