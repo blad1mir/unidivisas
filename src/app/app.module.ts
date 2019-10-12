@@ -13,6 +13,9 @@ import { environment } from 'src/environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SolicitudComponent } from './venta/solicitud/solicitud.component';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -31,7 +34,12 @@ import { SolicitudComponent } from './venta/solicitud/solicitud.component';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(config),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+   
+  
 
 
   ],
