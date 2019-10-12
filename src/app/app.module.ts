@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { VentaComponent } from './venta/venta.component';
+import { VentaComponent } from './venta/lista/venta.component';
 import { MenuComponent } from './menu/menu.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { HttpClientModule} from '@angular/common/http';
@@ -12,6 +12,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SolicitudComponent } from './venta/solicitud/solicitud.component';
 
 
 
@@ -21,7 +22,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     LoginComponent,
     VentaComponent,
     MenuComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    SolicitudComponent
   ],
   imports: [
     BrowserModule,
