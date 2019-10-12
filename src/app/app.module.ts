@@ -11,6 +11,8 @@ import { HttpClientModule} from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { CompraComponent } from './compra/compra.component';
+import { TransaccionComponent } from './transaccion/transaccion.component';
 
 
 
@@ -20,7 +22,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
     LoginComponent,
     VentaComponent,
     MenuComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    CompraComponent,
+    TransaccionComponent
   ],
   imports: [
     BrowserModule,
