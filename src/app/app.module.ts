@@ -11,10 +11,13 @@ import { HttpClientModule} from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { CompraComponent } from './compra/compra.component';
+import { TransaccionComponent } from './transaccion/transaccion.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SolicitudComponent } from './venta/solicitud/solicitud.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+
 
 const config = {
   apiKey: "AIzaSyCTBMwIbR_erD_braA5rWhoIVI3MMev6VY",
@@ -34,7 +37,10 @@ const config = {
     VentaComponent,
     MenuComponent,
     UsuarioComponent,
+    CompraComponent,
+    TransaccionComponent,
     SolicitudComponent
+
   ],
   imports: [
     BrowserModule,
