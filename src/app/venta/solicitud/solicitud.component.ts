@@ -3,6 +3,7 @@ import { FirestoreService } from 'src/app/Servicios/firestore.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { delay } from 'q';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-solicitud',
@@ -11,11 +12,15 @@ import { delay } from 'q';
 })
 export class SolicitudComponent implements OnInit {
   public formGroup: FormGroup;
+  user="";
+  
 
-  constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder,private router: Router) { }
-
+  constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder,private router: Router, public auth: AuthService) { }
+  
   ngOnInit() {
     this.buildForm();
+    this.auth.user$.forEach(u => { this.user=u.email
+    console.log("usuario: "+this.user) })
   }
 
    buildForm() {
@@ -26,7 +31,7 @@ export class SolicitudComponent implements OnInit {
            monto: ['', Validators.required ],
            tarifa: ['', Validators.required ],
            banco: ['', Validators.required ],
-           usuario: ['blad', Validators.required ]
+           usuario: [this.user, Validators.required ]
          });
      }
 
@@ -47,7 +52,7 @@ export class SolicitudComponent implements OnInit {
       monto: new FormControl('', Validators.required),
       tarifa: new FormControl('', Validators.required),
       banco:  new FormControl('', Validators.required),
-      usuario: ['blad', Validators.required ]
+      usuario: [this.user, Validators.required ]
     });
   }
 

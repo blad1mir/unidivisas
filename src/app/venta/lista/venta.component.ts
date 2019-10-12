@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { delay } from 'q';
 import { Solicitud } from 'src/app/modelos/interfaces';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/auth.service';
 
 
 
@@ -20,8 +21,9 @@ export class VentaComponent implements OnInit {
   solActual=[];
   val = 0;
   id;
+  user="";
   public formGroup: FormGroup;
-  constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder, private router: Router, public auth: AuthService) {
 
   }
 
@@ -62,10 +64,6 @@ export class VentaComponent implements OnInit {
     this.firebaseService.getAllSolicitudes()
     .subscribe(solicitud =>{
       this.solicitud = solicitud;
-      this.solicitud.forEach(element => {
-    // console.log('thats element: '+element);
-      })
-    
     })
 
 }
@@ -73,9 +71,9 @@ export class VentaComponent implements OnInit {
   setId(item){
    this.id=item.id;
    this.solActual=item;
-   console.log("Colección: "+item.id+' '+item.ref+' '+item.banco+' '+item.monto+' '+item.tarifa);
+   //console.log("Colección: "+item.id+' '+item.ref+' '+item.banco+' '+item.monto+' '+item.tarifa);
    this. buildForm(item);
-   console.log("ID coleccion: "+item.id);
+   console.log("ID usuario "+item.usuario);
   }
 
   Update(value){
