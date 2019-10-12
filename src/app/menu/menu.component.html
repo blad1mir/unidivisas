@@ -1,6 +1,15 @@
+  
+<div *ngIf="auth.user$ | async; then authenticated else guest">
+  <!-- template will replace this div -->
+</div>
 <nav class="nav">
   <a class="nav-link" href="#">Venta</a>
   <a class="nav-link" href="#">Compra</a>
   <a class="nav-link" href="#">Ajustes</a>
-
+  
+<ng-template #authenticated>
+  <div *ngIf="auth.user$ | async as user">
+      <button (click)="auth.signOut()">Logout</button>
+  </div>
+</ng-template>
 </nav>
