@@ -9,7 +9,7 @@ const routes: Routes = [
     path: '',
     children: [
     {path: '',redirectTo:'/login',pathMatch: 'full'},
-    {path: 'venta', component: SolicitudComponent},
+    {path: 'venta', component: SolicitudComponent,  canActivate: [AuthGuard]},
     {path: 'login', component: LoginComponent},
     ],
     },
