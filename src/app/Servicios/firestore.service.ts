@@ -30,7 +30,7 @@ getAllSolicitudes(){
     return actions.map(a => {
       const data = a.payload.doc.data() as Solicitud;
       data.id= a.payload.doc.id;
-      data.ref = x;
+      data['ref'] = x;
       x++;
       console.log("dataaa", data);
       return data
