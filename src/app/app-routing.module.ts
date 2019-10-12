@@ -1,3 +1,4 @@
+import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { VentaComponent } from './venta/lista/venta.component';
@@ -8,6 +9,7 @@ const routes: Routes = [
     path: '',
     children: [
     {path: 'venta', component: SolicitudComponent},
+    {path: 'login', component: LoginComponent},
     ],
     },
 ];
