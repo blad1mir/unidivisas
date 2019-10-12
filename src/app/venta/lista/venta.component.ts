@@ -29,17 +29,20 @@ export class VentaComponent implements OnInit {
 
   ngOnInit() {
     //this.getData();
+    
     this.getAll();
+    this.auth.user$.forEach(u => { this.user=u.email});
    // this. buildForm();
   }
 
    buildForm(item) {
+   
         this.formGroup = this.formBuilder.group({
           ref: [item.ref],
           monto: [item.monto, Validators.required ],
           tarifa: [item.tarifa, Validators.required ],
           banco: [item.banco, Validators.required ],
-          usuario: [item.usuario, Validators.required ]
+          usuario: [this.user, Validators.required ]
         });
     }
 
@@ -64,6 +67,14 @@ export class VentaComponent implements OnInit {
     this.firebaseService.getAllSolicitudes()
     .subscribe(solicitud =>{
       this.solicitud = solicitud;
+      // solicitud.forEach(element => {
+
+      //   console.log("thats it:"+ element.usuario);
+      //   console.log("usuario actual:"+ this.user);
+      //   if(element.usuario==this.user){
+      //     this.solicitud.push(element);
+      //   }
+      // })
     })
 
 }

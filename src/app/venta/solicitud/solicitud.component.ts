@@ -25,7 +25,8 @@ export class SolicitudComponent implements OnInit {
 
    buildForm() {
      //await delay(6000);
-        console.log('IDE: '+this.firebaseService.ide)
+     console.log("NOJODA: "+this.user)
+     this.auth.user$.forEach(u => { this.user=u.email; console.log("COÑOO: "+u.email)});
          this.formGroup = this.formBuilder.group({
            ref: [''],
            monto: ['', Validators.required ],
