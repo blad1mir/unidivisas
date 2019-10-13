@@ -17,6 +17,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SolicitudComponent } from './venta/solicitud/solicitud.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { InicioComponent } from './inicio/inicio.component';
 
 
 const config = {
@@ -39,7 +40,8 @@ const config = {
     UsuarioComponent,
     CompraComponent,
     TransaccionComponent,
-    SolicitudComponent
+    SolicitudComponent,
+    InicioComponent
 
   ],
   imports: [

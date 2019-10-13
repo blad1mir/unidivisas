@@ -1,0 +1,13 @@
+.navbar{
+        color: #ffffff !important;
+        background-color: #0aaaf0 !important;
+        text-align: right;
+        
+}
+li {
+    margin-left: 30%;
+    padding-left: 10%;
+}
+a {
+    color: #ffffff !important;
+}

@@ -1,5 +1,10 @@
+<app-menu></app-menu>
+<div>
+    <h1 align=center>Vender:</h1>
+  </div>
 <div class="row">
-  <div class="container col-md-3">
+
+  <div class="col-md-4 offset-md-2">
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
       <div class="form-group">
         <label for="exampleInputEmail1">Monto a vender ($):</label>
@@ -19,6 +24,14 @@
       <button type="submit" class="btn btn-primary">Enviar solicitud</button>
     </form>
   </div>
-  </div>
+ 
+ 
 
- <app-venta></app-venta>
+  <div class="col-md-6">
+      
+      <app-venta></app-venta>
+    </div>
+    
+</div>
+
+ 

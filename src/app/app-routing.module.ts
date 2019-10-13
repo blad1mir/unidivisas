@@ -6,7 +6,8 @@ import { TransaccionComponent } from './transaccion/transaccion.component';
 import { VentaComponent } from './venta/lista/venta.component';
 import { SolicitudComponent } from './venta/solicitud/solicitud.component';
 import { AuthGuard } from './auth.guard';
-
+import { UsuarioComponent } from './usuario/usuario.component';
+import { InicioComponent } from './inicio/inicio.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,8 @@ const routes: Routes = [
     {path: 'venta', component: SolicitudComponent,  canActivate: [AuthGuard]},
     {path: 'transaccion/:id', component: TransaccionComponent,  canActivate: [AuthGuard]},
     {path: 'compra', component: CompraComponent, canActivate: [AuthGuard]},
+    {path: 'ajustes', component: UsuarioComponent, canActivate: [AuthGuard]},
+    {path: 'inicio', component: InicioComponent, canActivate: [AuthGuard]},
     {path: 'login', component: LoginComponent}
     ],
     },
