@@ -1,7 +1,72 @@
-<table class="table col-md-6  offset-md-3">
+<div *ngIf="auth.user$ | async as usu">
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modifique su solicitud: </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formGroup" (ngSubmit)="Update(formGroup.value)">
+          <input type="hidden" class="form-control" formControlName="usuario" value='usu.email'>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Monto a vender ($):</label>
+            <input type="number" class="form-control" placeholder="00" formControlName="monto">
+            <small id="emailHelp" class="form-text text-muted">el monto está expresado en dólares</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Tarifa (Bolívares por Dólar):</label>
+            <input type="number" class="form-control" placeholder="20.000" formControlName="tarifa">
+            <small id="emailHelp" class="form-text text-muted">tarifa en la que va a vender sus dólares</small>
+          </div>
+          <div class="form-group">
+            <!-- <label for="exampleInputPassword1">Banco:</label>
+            <input type="text" class="form-control" placeholder="Banco" formControlName="banco"> -->
+            <label for="exampleInputPassword1">Banco:</label>
+            <div class="caja">
+              <select formControlName="banco">
+                <option value="Banesco" selected="selected">Banesco</option>
+                <option value="Mercantil">Mercantil</option>
+                <option value="Provincial">Provincial</option>
+                <option value="Bicentenario">Bicentenario</option>
+                <option value="Banco Occidental de Descuento">Banco Occidental de Descuento</option>
+                <option value="BanCaribe">BanCaribe</option>
+                <option value="Venezolano de crédito">Venezolano de crédito</option>
+                <option value="Banco Fondo común">Banco Fondo común</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <!-- <label for="exampleInputPassword1">Banco:</label>
+            <input type="text" class="form-control" placeholder="Banco" formControlName="banco"> -->
+            <label for="exampleInputPassword1">Forma de pago:</label>
+            <div class="caja">
+              <select formControlName="pago">
+                <option value="Zelle" selected="selected">Zelle</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+
+
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<table class="table col-md-6  offset-md-3" *ngIf="auth.user$ | async as usere">
   <thead>
     <tr>
-      
+
       <th scope="col">Monto</th>
       <th scope="col">Tarifa</th>
       <th scope="col">Banco</th>
@@ -11,13 +76,16 @@
 
     </tr>
   </thead>
-  <tbody>
-    <tr *ngFor="let item of solicitud">
-      
+  <tbody *ngFor="let item of solicitud">
+    <!-- <div *ngFor="let comentario of comentarios ">
+          <div *ngIf="comentario.ProductoId == detalle.id"> -->
+    <tr *ngIf="item.usuario == usere.email">
+
       <td>{{item.monto}}</td>
       <td>{{item.tarifa}}</td>
       <td>{{item.banco}}</td>
-      <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" (click)="setId(item)">Editar</button>
+      <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal"
+          (click)="setId(item)">Editar</button>
       </td>
       <td><button type="button" class="btn btn-danger" (click)="Delete(item)">Eliminar</button></td>
     </tr>
@@ -25,33 +93,4 @@
   </tbody>
 </table>
 
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <form [formGroup]="formGroup" (ngSubmit)="Update(formGroup.value)" class="modal-content">
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="exampleInputEmail1">Monto a vender ($):</label>
-          <input type="number" class="form-control" placeholder="00" formControlName="monto" >
-          <small id="emailHelp" class="form-text text-muted">el monto está expresado en dólares</small>
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Tarifa (Bolívares por Dólar):</label>
-          <input type="number" class="form-control" placeholder="20.000" formControlName="tarifa">
-          <small id="emailHelp" class="form-text text-muted">tarifa en la que va a vender sus dólares</small>
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Banco:</label>
-          <input type="text" class="form-control" placeholder="Banco" formControlName="banco">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-        </div>
-      </div>
-
-
-    </form>
-  </div>
 </div>

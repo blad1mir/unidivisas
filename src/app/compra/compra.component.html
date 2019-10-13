@@ -17,7 +17,7 @@
     
     <tbody>
       <tr *ngFor="let solicitud of solicitudes">
-        <th scope="row">1</th>
+        <th scope="row">{{solicitud.ref}}</th>
         <td align=center>{{solicitud.monto}}</td>
         <td align=center>{{solicitud.tarifa}}</td>
         <td align=center>{{solicitud.banco}}</td>

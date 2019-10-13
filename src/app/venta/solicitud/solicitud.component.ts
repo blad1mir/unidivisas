@@ -15,29 +15,35 @@ export class SolicitudComponent implements OnInit {
   user="";
   
 
-  constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder,private router: Router, public auth: AuthService) { }
+  constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder,private router: Router, public auth: AuthService) {
+     
+    auth.user$.forEach(u => { this.user=u.email;  console.log("usuario A: "+this.user)});
+   }
   
   ngOnInit() {
+    this.auth.user$.forEach(u => { this.user=u.email;  console.log("usuario A: "+this.user)});
     this.buildForm();
-    this.auth.user$.forEach(u => { this.user=u.email
-    console.log("usuario: "+this.user) })
   }
 
    buildForm() {
-     //await delay(6000);
-     console.log("NOJODA: "+this.user)
-     this.auth.user$.forEach(u => { this.user=u.email; console.log("COÑOO: "+u.email)});
+     //await delay(3000);
+    console.log("Verifica esto: "+this.user);
+   
+
          this.formGroup = this.formBuilder.group({
            ref: [''],
-           monto: ['', Validators.required ],
-           tarifa: ['', Validators.required ],
-           banco: ['', Validators.required ],
-           usuario: [this.user, Validators.required ]
+           monto: new FormControl('', Validators.required),
+           tarifa: new FormControl('', Validators.required),
+           banco:  new FormControl('', Validators.required),
+           pago:  new FormControl('', Validators.required),
+           usuario: new FormControl('', Validators.required),
          });
      }
 
      
   onSubmit(value){
+    console.log("USUARIOOO: "+ value.usuario)
+    console.log(value.banco +''+value.pago)
     this.firebaseService.createSolicitud(value)
     .then(
       res => {
@@ -53,6 +59,7 @@ export class SolicitudComponent implements OnInit {
       monto: new FormControl('', Validators.required),
       tarifa: new FormControl('', Validators.required),
       banco:  new FormControl('', Validators.required),
+      pago:  new FormControl('', Validators.required),
       usuario: [this.user, Validators.required ]
     });
   }

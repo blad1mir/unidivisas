@@ -10,9 +10,9 @@ import { map } from 'rxjs/operators';
 })
 export class FirestoreService {
 
- solicitudColeccion: AngularFirestoreCollection<Solicitud>;
- solicitud: Observable<Solicitud[]>;
- solicitudDoc: AngularFirestoreDocument<Solicitud>;
+//  solicitudColeccion: AngularFirestoreCollection<Solicitud>;
+//  solicitud: Observable<Solicitud[]>;
+//  solicitudDoc: AngularFirestoreDocument<Solicitud>;
   
   constructor(private db: AngularFirestore) { 
     this.SolicitudesCollection = db.collection<Solicitud>('Solicitud'); //Setear nuestra collección
@@ -25,10 +25,14 @@ export class FirestoreService {
 
   getSolicitudes(){
     //return this.db.collection('/Solicitud').valueChanges(); //esto es de bladimir pero no me sirve para traerme 1 solo producto
+    let x = 1;
     return this.Solicitudes = this.SolicitudesCollection.snapshotChanges().pipe(map( changes => {
+      x = 1;
       return changes.map(action => {
         const data = action.payload.doc.data() as Solicitud;
         data.id = action.payload.doc.id;
+        data['ref'] = x;
+        x++;
         return data;
       });
     }));
@@ -50,24 +54,24 @@ export class FirestoreService {
   
 // }
 
-getAllSolicitudes(){
-  let x = 1;
-  this.solicitudColeccion=this.db.collection('Solicitud');
-  this.solicitud = this.solicitudColeccion.snapshotChanges().pipe(map(actions => {
-    x = 1;
-    return actions.map(a => {
-      const data = a.payload.doc.data() as Solicitud;
-      data.id= a.payload.doc.id;
-      data['ref'] = x;
-      x++;
-      console.log("dataaa", data);
-      return data
+// getAllSolicitudes(){
+//   let x = 1;
+//   this.solicitudColeccion=this.db.collection('Solicitud');
+//   this.solicitud = this.solicitudColeccion.snapshotChanges().pipe(map(actions => {
+//     x = 1;
+//     return actions.map(a => {
+//       const data = a.payload.doc.data() as Solicitud;
+//       data.id= a.payload.doc.id;
+//       data['ref'] = x;
+//       x++;
+//       console.log("dataaa", data);
+//       return data
       
-    })
-  }))
+//     })
+//   }))
 
-  return this.Solicitud;
-}
+//   return this.Solicitud;
+// }
 
 deleteSolicitudes(solkey){
   return this.db.collection('Solicitud').doc(solkey).delete();
@@ -83,6 +87,7 @@ createSolicitud(value){
     ref: value.ref,
     tarifa: value.tarifa,
     banco: value.banco,
+    pago: value.pago,
     usuario: value.usuario
   });
 

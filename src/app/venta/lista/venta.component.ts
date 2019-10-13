@@ -17,32 +17,36 @@ import { AuthService } from 'src/app/auth.service';
 
 export class VentaComponent implements OnInit {
   items: Array<any>;
-   solicitud = [];
-  solActual=[];
+  solicitud = [];
+  solActual = [];
   val = 0;
   id;
   user="";
   public formGroup: FormGroup;
   constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder, private router: Router, public auth: AuthService) {
-
+   
+    auth.user$.forEach(u => { this.user=u.email;  console.log("usuario A: "+this.user)});
   }
 
   ngOnInit() {
     //this.getData();
     
+     
     this.getAll();
-    this.auth.user$.forEach(u => { this.user=u.email});
+    this. buildForm();
    // this. buildForm();
   }
 
-   buildForm(item) {
+   buildForm() {
    
         this.formGroup = this.formBuilder.group({
-          ref: [item.ref],
-          monto: [item.monto, Validators.required ],
-          tarifa: [item.tarifa, Validators.required ],
-          banco: [item.banco, Validators.required ],
-          usuario: [this.user, Validators.required ]
+          ref: [''],
+          monto: ['', Validators.required ],
+          tarifa: ['', Validators.required ],
+          banco: ['', Validators.required ],
+          pago: ['', Validators.required ],
+          usuario: ['', Validators.required ]
+        
         });
     }
 
@@ -64,31 +68,38 @@ export class VentaComponent implements OnInit {
   // }
 
   getAll(){
+   
+    let conta=0;
     this.firebaseService.getSolicitudes()
     .subscribe(solicitud =>{
       this.solicitud = solicitud;
       // solicitud.forEach(element => {
-
-      //   console.log("thats it:"+ element.usuario);
-      //   console.log("usuario actual:"+ this.user);
       //   if(element.usuario==this.user){
-      //    
-      //   }
-      // })
+      //     conta++;
+      //     element.ref=conta;
+      //     this.solActual.push(element);
+      //   } 
+      //  })
     })
-
+  
 }
 
   setId(item){
    this.id=item.id;
    this.solActual=item;
    //console.log("Colección: "+item.id+' '+item.ref+' '+item.banco+' '+item.monto+' '+item.tarifa);
-   this. buildForm(item);
-   console.log("ID usuario "+item.usuario);
+  
+   console.log("ID item: "+ this.id);
   }
 
   Update(value){
-    console.log(value+' acá '+this.id)
+    console.log("Inicio ")
+    console.log(this.id+ " ")
+    console.log(value.banco+ " ")
+    console.log(value.usuario+" ")
+    console.log("Fin")
+  
+
     this.firebaseService.updateSolicitudes(this.id,value);
   }
 

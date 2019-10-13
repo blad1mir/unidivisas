@@ -1,11 +1,12 @@
 <app-menu></app-menu>
 <div>
-    <h1 align=center>Vender:</h1>
-  </div>
+  <h1 align=center>Vender:</h1>
+</div>
 <div class="row">
 
-  <div class="col-md-4 offset-md-2">
+  <div class="col-md-4 offset-md-2" *ngIf="auth.user$ | async as useru">
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+      <input type="hidden" class="form-control" formControlName="usuario" value='useru.email'>
       <div class="form-group">
         <label for="exampleInputEmail1">Monto a vender ($):</label>
         <input type="number" class="form-control" placeholder="00" formControlName="monto">
@@ -17,21 +18,46 @@
         <small id="emailHelp" class="form-text text-muted">tarifa en la que va a vender sus dólares</small>
       </div>
       <div class="form-group">
+        <!-- <label for="exampleInputPassword1">Banco:</label>
+        <input type="text" class="form-control" placeholder="Banco" formControlName="banco"> -->
         <label for="exampleInputPassword1">Banco:</label>
-        <input type="text" class="form-control" placeholder="Banco" formControlName="banco">
+        <div class="caja">
+          <select formControlName="banco">
+            <option value="Banesco" selected="selected">Banesco</option>
+            <option value="Mercantil">Mercantil</option>
+            <option value="Provincial">Provincial</option>
+            <option value="Bicentenario">Bicentenario</option>
+            <option value="Banco Occidental de Descuento">Banco Occidental de Descuento</option>
+            <option value="BanCaribe">BanCaribe</option>
+            <option value="Venezolano de crédito">Venezolano de crédito</option>
+            <option value="Banco Fondo común">Banco Fondo común</option>
+          </select>
+        </div>
       </div>
-  
+
+      <div class="form-group">
+        <!-- <label for="exampleInputPassword1">Banco:</label>
+        <input type="text" class="form-control" placeholder="Banco" formControlName="banco"> -->
+        <label for="exampleInputPassword1">Forma de pago:</label>
+        <div class="caja">
+          <select formControlName="pago">
+            <option value="Zelle" selected="selected">Zelle</option>
+          </select>
+        </div>
+      </div>
+
+
+
+
       <button type="submit" class="btn btn-primary">Enviar solicitud</button>
     </form>
   </div>
- 
- 
+
+
 
   <div class="col-md-6">
-      
-      <app-venta></app-venta>
-    </div>
-    
-</div>
 
- 
+    <app-venta></app-venta>
+  </div>
+
+</div>
