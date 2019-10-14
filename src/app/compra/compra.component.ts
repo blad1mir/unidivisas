@@ -14,6 +14,9 @@ export class CompraComponent implements OnInit {
   public solicitudes = [];
   public solicitud = '';
 
+
+
+
   ngOnInit() {
     //this.getData();
     this.firebaseService.getSolicitudes().subscribe(solicitudes =>{
