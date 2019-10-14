@@ -31,13 +31,16 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/venta']);
       alert("Se ha registrado con exito");
     }).catch(err => console.log('err', err.message));
+
   }
   onlogin(): void{
+    
     this.auth.loginEmail(this.email, this.password)
     .then((res)=>{
       this.router.navigate(['/venta']);
+      alert("Ha iniciado sesión con exito");
     }).catch( err => console.log('err', err.msgError));
-    alert("Ha iniciado sesión con exito");
-  }
-
+    alert("El usuario/contraseña son incorrectos");
+    }
+  
 }
