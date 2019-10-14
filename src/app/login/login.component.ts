@@ -30,8 +30,7 @@ export class LoginComponent implements OnInit {
     .then((res)=> {
       this.router.navigate(['/venta']);
       alert("Se ha registrado con exito");
-    }).catch(err => console.log('err', err.message));
-
+    }).catch(err => alert("Error: "+err.message));
   }
   onlogin(): void{
     
@@ -39,8 +38,7 @@ export class LoginComponent implements OnInit {
     .then((res)=>{
       this.router.navigate(['/venta']);
       alert("Ha iniciado sesión con exito");
-    }).catch( err => console.log('err', err.msgError));
-    alert("El usuario/contraseña son incorrectos");
+    }).catch( err =>alert("Error: "+err.message));
     }
   
 }
