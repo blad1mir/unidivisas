@@ -23,6 +23,7 @@ export class SolicitudComponent implements OnInit {
   ngOnInit() {
     this.auth.user$.forEach(u => { this.user=u.email;  console.log("usuario A: "+this.user)});
     this.buildForm();
+    
   }
 
    buildForm() {
@@ -36,7 +37,7 @@ export class SolicitudComponent implements OnInit {
            tarifa: new FormControl('', Validators.required),
            banco:  new FormControl('', Validators.required),
            pago:  new FormControl('', Validators.required),
-           usuario: new FormControl('', Validators.required),
+           usuario: new FormControl(this.user, Validators.required),
          });
      }
 

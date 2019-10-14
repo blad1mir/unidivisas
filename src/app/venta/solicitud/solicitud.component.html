@@ -6,7 +6,7 @@
 
   <div class="col-md-4 offset-md-2" *ngIf="auth.user$ | async as useru">
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
-      <input type="hidden" class="form-control" formControlName="usuario" value='useru.email'>
+      <input type="text" class="form-control" formControlName="usuario" value="Norway" readonly>
       <div class="form-group">
         <label for="exampleInputEmail1">Monto a vender ($):</label>
         <input type="number" class="form-control" placeholder="00" formControlName="monto">
