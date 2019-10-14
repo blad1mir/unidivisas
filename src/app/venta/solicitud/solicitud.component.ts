@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/auth.service';
 export class SolicitudComponent implements OnInit {
   public formGroup: FormGroup;
   user="";
-  
+
 
   constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder,private router: Router, public auth: AuthService) {
      
@@ -28,7 +28,7 @@ export class SolicitudComponent implements OnInit {
 
    buildForm() {
      //await delay(3000);
-    console.log("Verifica esto: "+this.user);
+    console.log("Verifica esto: "+this.user); 
    
 
          this.formGroup = this.formBuilder.group({
@@ -38,12 +38,13 @@ export class SolicitudComponent implements OnInit {
            banco:  new FormControl('', Validators.required),
            pago:  new FormControl('', Validators.required),
            usuario: new FormControl(this.user, Validators.required),
+           
          });
      }
 
      
-  onSubmit(value){
-    console.log("USUARIOOO: "+ value.usuario)
+  onSubmit(value: { user: string; banco: string; pago: string; }){
+    console.log("USUARIOOO: "+this.user)
     console.log(value.banco +''+value.pago)
     this.firebaseService.createSolicitud(value)
     .then(
