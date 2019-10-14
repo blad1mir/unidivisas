@@ -14,11 +14,11 @@ export class SolicitudComponent implements OnInit {
   public formGroup: FormGroup;
   user="";
 
-  // Crear servicio de Auth que devuelva el usuario actual, estado si esta logged in o no , etc. 
+  // Crear servicio de Auth que devuelva el usuario actual, estado si esta logged in o no , etc. (Ivernon)
 
   constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder,private router: Router, public auth: AuthService) {
-    // Metodo async
-    auth.user$.subscribe( user => {
+    // Metodo async (Ivernon)
+    auth.user$.subscribe( user => { // Reestructurar todo despues de Auth
       this.user = user.email
       console.log("usuario A: " + this.user);
     })
