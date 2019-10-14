@@ -1,4 +1,7 @@
 <div *ngIf="auth.user$ | async as usu">
+
+  
+    
 <div class="modal" id="exampleModal" tabindex="-1" role="dialog" >
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -11,6 +14,7 @@
       <div class="modal-body">
         <form [formGroup]="formGroup" (ngSubmit)="Update(formGroup.value)">
           <input type="hidden" class="form-control" formControlName="usuario" value='usu.email'>
+           
           <div class="form-group">
             <label for="exampleInputEmail1">Monto a vender ($):</label>
             <input type="number" class="form-control" placeholder="00" formControlName="monto">

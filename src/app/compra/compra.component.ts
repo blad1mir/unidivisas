@@ -13,6 +13,7 @@ export class CompraComponent implements OnInit {
   //items: Array<any>;
   public solicitudes = [];
   public solicitud = '';
+  a=10;
 
 
 
@@ -21,9 +22,21 @@ export class CompraComponent implements OnInit {
     //this.getData();
     this.firebaseService.getSolicitudes().subscribe(solicitudes =>{
       console.log('SOLICITUDES', solicitudes);
-      this.solicitudes = solicitudes;
+      this.solicitudes = solicitudes.slice(0,this.a);
     })
   } 
+  mas(){
+    this.firebaseService.getSolicitudes().subscribe(solicitudes =>{
+      console.log('SOLICITUDES', solicitudes);
+      this.solicitudes = solicitudes.slice(0,);
+    })
+    var x = document.getElementById("cargador");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
 
   //getData(){
   //  this.firebaseService.getSolicitudes().subscribe(result =>{
