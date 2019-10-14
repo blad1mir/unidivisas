@@ -14,16 +14,19 @@ export class SolicitudComponent implements OnInit {
   public formGroup: FormGroup;
   user="";
 
+  // Crear servicio de Auth que devuelva el usuario actual, estado si esta logged in o no , etc. 
 
   constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder,private router: Router, public auth: AuthService) {
-     
-    auth.user$.forEach(u => { this.user=u.email;  console.log("usuario A: "+this.user)});
+    // Metodo async
+    auth.user$.subscribe( user => {
+      this.user = user.email
+      console.log("usuario A: " + this.user);
+    })
+    
    }
   
   ngOnInit() {
-    this.auth.user$.forEach(u => { this.user=u.email;  console.log("usuario A: "+this.user)});
-    this.buildForm();
-    
+    this.buildForm(); 
   }
 
    buildForm() {
@@ -38,14 +41,16 @@ export class SolicitudComponent implements OnInit {
            banco:  new FormControl('', Validators.required),
            pago:  new FormControl('', Validators.required),
            usuario: new FormControl(this.user, Validators.required),
-           
          });
      }
 
      
-  onSubmit(value: { user: string; banco: string; pago: string; }){
+  onSubmit(value: { usuario: string; banco: string; pago: string; }){
     console.log("USUARIOOO: "+this.user)
     console.log(value.banco +''+value.pago)
+    value.usuario = (this.user);
+    console.log(this.formGroup.controls)
+    
     this.firebaseService.createSolicitud(value)
     .then(
       res => {
