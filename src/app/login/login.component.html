@@ -28,7 +28,7 @@
                                 <div class="row register-form">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" [(ngModel)]="name" class="form-control" placeholder="Nombre Completo" value="" />
+                                            <input type="text" [(ngModel)]="name" class="form-control" placeholder="Nombre Completo" value=""/>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" [(ngModel)]="password" class="form-control" placeholder="Contraseña" value="" />
@@ -39,16 +39,16 @@
                                             <input type="email" [(ngModel)]="email" class="form-control" placeholder="Email" value="" />
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" [(ngModel)]="telf" minlength="11" maxlength="11" name="txtEmpPhone" class="form-control" placeholder="Telefono" value="" />
+                                            <input type="text" [(ngModel)]="telf" minlength="11" maxlength="11" name="txtEmpPhone" class="form-control" placeholder="Telefono" value="" (keyup.enter)="onAddUser()"/>
                                         </div>
                                         <br>
                                         <div *ngIf="auth.user$ | async; then authenticated else guest">
                                             <!-- template will replace this div -->
                                         </div>
                                         <ng-template #guest>
-                                            <button class="btnRegister" (click)="auth.googleRegister()">
+                                            <!--<button class="btnRegister" (click)="auth.googleRegister()">
                                                 <img src="https://rotulosmatesanz.com/wp-content/uploads/2017/09/2000px-Google_G_Logo.svg_.png" width="15%" alt=""/> Entra con Google
-                                            </button>
+                                            </button>-->
                                         </ng-template>
                                         <ng-template #authenticated>
                                             <div *ngIf="auth.user$ | async as user">
@@ -68,7 +68,7 @@
                                             <input type="email" [(ngModel)]="email" class="form-control" placeholder="Usuario" value="" />
                                         </div>
                                         <div class="form-group">
-                                          <input type="password" [(ngModel)]="password" class="form-control" placeholder="Contraseña" value="" />
+                                          <input type="password" [(ngModel)]="password" class="form-control" placeholder="Contraseña" value="" (keyup.enter)="onlogin()"/>
                                       </div>
                                     </div>
                                     <div class="col-md-6">
@@ -76,9 +76,9 @@
                                             <!-- template will replace this div -->
                                         </div>
                                         <ng-template #guest>
-                                            <button class="btnRegister" (click)="auth.googleSignin()">
+                                           <!-- <button class="btnRegister" (click)="auth.googleSignin()">
                                                 <img src="https://rotulosmatesanz.com/wp-content/uploads/2017/09/2000px-Google_G_Logo.svg_.png" width="15%" alt=""/> Entra con Google
-                                            </button>
+                                            </button>-->
                                         </ng-template>
                                         <ng-template #authenticated>
                                             <div class="btnRegister" *ngIf="auth.user$ | async as user">
