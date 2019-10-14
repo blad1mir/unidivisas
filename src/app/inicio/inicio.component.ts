@@ -1,3 +1,4 @@
+import { FirestoreService } from './../Servicios/firestore.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioComponent implements OnInit {
 
-  constructor() { }
+  constructor(private firebaseService: FirestoreService) { }
+  //items: Array<any>;
+  public solicitudes = [];
+  public solicitud = '';
 
   ngOnInit() {
-  }
+    //this.getData();
+    this.firebaseService.getSolicitudes().subscribe(solicitudes =>{
+      console.log('SOLICITUDES', solicitudes);
+      this.solicitudes = solicitudes;
+    })
+  } 
 
 }
