@@ -86,7 +86,8 @@ export class AuthService {
         email: user.email, 
         displayName: user.displayName, 
         photoURL: user.photoURL,
-        admin:0
+        admin:0,
+        telf: user.telf
       } 
   
       return userRef.set(data, { merge: true })

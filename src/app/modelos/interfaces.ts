@@ -8,3 +8,13 @@ export interface Solicitud { //interfaces utilizadas en todo el codigo
     banco?: string;
     pago?: string;
 }
+
+export interface Banco { 
+    Banco?: number;
+    Cedula?: number;
+    CorreoZelle?: string;
+    NombreZelle?: string;
+    NumeroCuenta?: number;
+    nombreUsuario?: string;
+    
+}

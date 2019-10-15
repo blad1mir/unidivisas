@@ -17,7 +17,7 @@ import { SolicitudComponent } from './venta/solicitud/solicitud.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { InicioComponent } from './inicio/inicio.component';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { FooterComponent } from './footer/footer.component';
 
 
 const config = {
@@ -41,7 +41,8 @@ const config = {
     CompraComponent,
     TransaccionComponent,
     SolicitudComponent,
-    InicioComponent
+    InicioComponent,
+    FooterComponent
 
   ],
   imports: [
@@ -54,7 +55,7 @@ const config = {
     AngularFireModule.initializeApp(config),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    InfiniteScrollModule
+
   ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent]

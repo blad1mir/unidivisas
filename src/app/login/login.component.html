@@ -52,7 +52,7 @@
                                         </ng-template>
                                         <ng-template #authenticated>
                                             <div *ngIf="auth.user$ | async as user">
-                                                <button class="btnRegister" (click)="auth.signOut()">Logout</button>
+                                                <button class="btnRegister" routerLink="/inicio">Inicio</button>
                                             </div>
                                           </ng-template>
                                         <input type="submit" class="btnRegister"  value="Registrar" (click)="onAddUser()"/>
@@ -82,7 +82,7 @@
                                         </ng-template>
                                         <ng-template #authenticated>
                                             <div class="btnRegister" *ngIf="auth.user$ | async as user">
-                                                <button  (click)="auth.signOut()">Logout</button>
+                                                <button  routerLink="/inicio">Inicio</button>
                                             </div>
                                           </ng-template>
                                         <input type="submit" class="btnRegister"  value="Entrar" (click)="onlogin()"/>
