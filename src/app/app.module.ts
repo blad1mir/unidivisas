@@ -57,7 +57,7 @@ const config = {
     AngularFireAuthModule,
 
   ],
-  providers: [AngularFirestore],
+  providers: [AngularFirestoreModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
