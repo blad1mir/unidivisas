@@ -37,6 +37,7 @@ export class FirestoreService {
       });
     }));
   }
+  
   getOneSolicitud(idSolicitud: string){
   this.SolicitudDoc = this.db.doc<Solicitud>(`Solicitud/${idSolicitud}`);
     return this.Solicitud = this.SolicitudDoc.snapshotChanges().pipe(map(action => {
@@ -82,6 +83,7 @@ updateSolicitudes(Key, value){
 }
 
 createSolicitud(value){
+  console.log(value); 
   return this.db.collection('Solicitud').add({
     monto: value.monto,
     ref: value.ref,
@@ -89,6 +91,16 @@ createSolicitud(value){
     banco: value.banco,
     pago: value.pago,
     usuario: value.usuario
+  });
+}
+createDatos(value){
+  return this.db.collection('Usuarios').add({
+    nombreUsuario:  value.nombreUsuario,
+    Banco: value.Banco,
+    NumeroCuenta: value.NumeroCuenta,
+    Cedula: value.Cedula,
+    CorreoZelle: value.CorreoZelle,
+    NombreZelle: value.NombreZelle
   });
 
 }

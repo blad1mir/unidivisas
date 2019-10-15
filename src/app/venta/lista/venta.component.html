@@ -83,7 +83,7 @@
   <tbody *ngFor="let item of solicitud">
     <!-- <div *ngFor="let comentario of comentarios ">
           <div *ngIf="comentario.ProductoId == detalle.id"> -->
-    <tr *ngIf="item.usuario == usere.email">
+    <tr *ngIf="item.usuario === usere.email">
 
       <td>{{item.monto}}</td>
       <td>{{item.tarifa}}</td>

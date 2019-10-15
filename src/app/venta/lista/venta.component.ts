@@ -24,14 +24,13 @@ export class VentaComponent implements OnInit {
   user="";
   public formGroup: FormGroup;
   constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder, private router: Router, public auth: AuthService) {
-   
+    // Transformarlo en un servicio.! 
     auth.user$.forEach(u => { this.user=u.email;  console.log("usuario A: "+this.user)});
   }
 
   ngOnInit() {
     //this.getData();
-    
-     
+
     this.getAll();
     this. buildForm();
    // this. buildForm();
@@ -71,8 +70,9 @@ export class VentaComponent implements OnInit {
    
     let conta=0;
     this.firebaseService.getSolicitudes()
-    .subscribe(solicitud =>{
+    .subscribe( solicitud =>{
       this.solicitud = solicitud;
+      console.log(solicitud);
       // solicitud.forEach(element => {
       //   if(element.usuario==this.user){
       //     conta++;

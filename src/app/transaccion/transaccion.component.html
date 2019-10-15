@@ -1,11 +1,51 @@
-<h1>Detalles de la transacción:</h1>
-    <h5>Usuario que lo publicó:</h5>
-        <p>{{solicitud.usuario}}</p>
-    <h5>Banco donde se realizará:</h5>
-        <p>{{solicitud.banco}}</p>
-    <h5>Monto a intercambiar:</h5>
-        <p>{{solicitud.monto}}</p>
-    <h5>Tarifa propuesta para esta transacción:</h5>
-        <p>{{solicitud.tarifa}}</p>
-    <button class="btn btn-success btn-sm">Acceptar </button>    
-    <button class="btn btn-secondary btn-sm" routerLink="/compra">Volver </button>
+<app-menu></app-menu>
+
+<h1 align="center">Detalles de la transacción:</h1>
+
+<div class="row">
+    <div class="col-med-3 offset-md-2">
+        <div class="card" style="width: 30rem;">
+            <div class="card-body" align=left>
+                <h3 class="card-title" align=center>Información</h3>
+                    <p align=center>Aquí podrás ver a detalle la información de la transacción</p>
+                    <strong>PROPIETARIO:</strong>
+                        <p>  {{solicitud.usuario}}</p>
+                    <strong>BANCO A TRANSFERIR:</strong>
+                        <p>  {{solicitud.banco}}</p>
+                    <strong>MONTO DEL INTERCAMBIO:</strong>
+                        <p>  {{solicitud.monto}}</p>
+                    <strong>TARIFA DE LA TRANSACCIÓN:</strong>
+                        <p>  {{solicitud.tarifa}}</p>
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-success btn-sm btn-block" (click)="confirmartransaccion()">Aceptar </button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-secondary btn-sm btn-block" routerLink="/compra">Volver </button>
+                    </div>
+                </div>     
+            </div>
+        </div>     
+    </div>
+    <div class="col-med-3 offset-md-2">
+        <div class="card" style="width: 30rem;" id="aparecer">
+            <div class="card-body" align=left>
+                <h3 class="card-title" align=center>Detalles del Vendedor</h3>
+                    <p align=center>Los siguientes datos son de ZELLE, se proporcionan a continuación los datos pertenentes</p>
+                    <strong>CORREO:</strong>
+                        <p> </p>
+                    <strong>NOMBRE DE USUARIO:</strong>
+                        <p> </p>
+
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-success btn-sm btn-block" (click)='block'>Aceptar </button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-secondary btn-sm btn-block">Volver </button>
+                    </div>
+                </div>     
+            </div>
+        </div>     
+    </div>      
+</div>  

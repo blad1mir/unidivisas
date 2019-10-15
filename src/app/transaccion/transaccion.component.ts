@@ -17,12 +17,29 @@ export class TransaccionComponent implements OnInit {
   ngOnInit() {
     const idSolicitud = this.route.snapshot.params['id'];
     this.getDetailsSolicitud(idSolicitud);
-    
+
+      var x = document.getElementById("aparecer");
+      x.style.display="none";
   }
+
+  
   getDetailsSolicitud(idSolicitud: string){
     this.firestore.getOneSolicitud(idSolicitud).subscribe(solicitud => {
       this.solicitud = solicitud;
       console.log('DETALLES SOLICITUD', solicitud);
     });
   }
+
+  confirmartransaccion(){
+    if(confirm('SEGURO QUE QUIERES REALIZAR ESTA TRANSACCIÓN')){
+      var x = document.getElementById("aparecer");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+    }
+
+
+    }
 }
