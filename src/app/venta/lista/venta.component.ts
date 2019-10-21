@@ -140,4 +140,4 @@ export class VentaComponent implements OnInit {
   //   console.log("Waited 5s");
   // };
 
-}
+

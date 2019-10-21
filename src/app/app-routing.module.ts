@@ -6,7 +6,6 @@ import { CompraComponent } from './compra/compra.component';
 import { TransaccionComponent } from './transaccion/transaccion.component';
 import { VentaComponent } from './venta/lista/venta.component';
 import { SolicitudComponent } from './venta/solicitud/solicitud.component';
-
 import { UsuarioComponent } from './usuario/usuario.component';
 import { InicioComponent } from './inicio/inicio.component';
 
