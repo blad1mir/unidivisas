@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -18,6 +17,7 @@ import { SolicitudComponent } from './venta/solicitud/solicitud.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { InicioComponent } from './inicio/inicio.component';
+
 
 
 const config = {
@@ -41,7 +41,7 @@ const config = {
     CompraComponent,
     TransaccionComponent,
     SolicitudComponent,
-    InicioComponent
+
 
   ],
   imports: [
@@ -54,6 +54,7 @@ const config = {
     AngularFireModule.initializeApp(config),
     AngularFirestoreModule,
     AngularFireAuthModule,
+
   ],
   providers: [AngularFirestoreModule],
   bootstrap: [AppComponent]

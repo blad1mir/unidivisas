@@ -28,16 +28,5 @@ export class LoginComponent implements OnInit {
   onAddUser(){
     this.auth.registerEmail(this.email, this.password, this.name, this.telf, this.admin)
     .then((res)=> {
-      this.router.navigate(['/venta']);
-      alert("Se ha registrado con exito");
-    }).catch(err => console.log('err', err.message));
-  }
-  onlogin(): void{
-    this.auth.loginEmail(this.email, this.password)
-    .then((res)=>{
-      this.router.navigate(['/venta']);
-    }).catch( err => console.log('err', err.msgError));
-    alert("Ha iniciado sesión con exito");
-  }
 
 }

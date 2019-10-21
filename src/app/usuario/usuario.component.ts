@@ -10,11 +10,13 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 })
 export class UsuarioComponent implements OnInit {
 
+
   public formGroup: FormGroup;
   constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder, public auth: AuthService) { }
 
   ngOnInit() {
     this.buildForm();
+
   }
 
   buildForm() {
@@ -34,7 +36,7 @@ onSubmit(value) {
   .then(
     res => {
       this.resetForm();
-      //this.router.navigate(['/venta']);
+
     }
   )
 }

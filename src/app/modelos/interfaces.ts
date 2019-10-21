@@ -7,4 +7,5 @@ export interface Solicitud { //interfaces utilizadas en todo el codigo
     tarifa?: number;
     banco?: string;
     pago?: string;
+
 }

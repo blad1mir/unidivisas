@@ -1,3 +1,4 @@
+import { Banco } from './../modelos/interfaces';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Solicitud } from '../modelos/interfaces';
@@ -17,7 +18,6 @@ export class FirestoreService {
   constructor(private db: AngularFirestore) { 
     this.SolicitudesCollection = db.collection<Solicitud>('Solicitud'); //Setear nuestra collección
     this.Solicitudes = this.SolicitudesCollection.valueChanges();
-  }
   private SolicitudesCollection: AngularFirestoreCollection <Solicitud>; //Aqui se creo la propiedad de colleccion de las solicitudes
   private Solicitudes: Observable<Solicitud[]>;
   private SolicitudDoc: AngularFirestoreDocument<Solicitud>;
@@ -76,23 +76,7 @@ export class FirestoreService {
 
 deleteSolicitudes(solkey){
   return this.db.collection('Solicitud').doc(solkey).delete();
-}
 
-updateSolicitudes(Key, value){
-  return this.db.collection('Solicitud').doc(Key).set(value);
-}
-
-createSolicitud(value){
-  console.log(value); 
-  return this.db.collection('Solicitud').add({
-    monto: value.monto,
-    ref: value.ref,
-    tarifa: value.tarifa,
-    banco: value.banco,
-    pago: value.pago,
-    usuario: value.usuario
-  });
-}
 createDatos(value){
   return this.db.collection('Usuarios').add({
     nombreUsuario:  value.nombreUsuario,
