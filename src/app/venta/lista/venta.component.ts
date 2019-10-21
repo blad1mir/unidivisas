@@ -33,7 +33,6 @@ export class VentaComponent implements OnInit {
 
     this.getAll();
     this. buildForm();
-   // this. buildForm();
   }
 
    buildForm() {
@@ -92,18 +91,44 @@ export class VentaComponent implements OnInit {
    console.log("ID item: "+ this.id);
   }
 
-  Update(value){
-    console.log("Inicio ")
-    console.log(this.id+ " ")
-    console.log(value.banco+ " ")
-    console.log(value.usuario+" ")
-    console.log("Fin")
+  // Update(value){
+  //   console.log("Inicio ")
+  //   console.log(this.id+ " ")
+  //   console.log(value.banco+ " ")
+  //   console.log(value.usuario+" ")
+  //   console.log("Fin")
   
 
-    this.firebaseService.updateSolicitudes(this.id,value);
+  //   this.firebaseService.updateSolicitudes(this.id,value);
+  // }
+
+       
+  Update(value: { usuario: string; banco: string; pago: string; }){
+    console.log("USUARIOOO: "+this.user)
+    console.log(value.banco +''+value.pago)
+    value.usuario = (this.user);
+    console.log(this.formGroup.controls)
+    this.firebaseService.updateSolicitudes(this.id,value)
+    .then(
+      res => {
+        this.resetForm();
+        //this.router.navigate(['/venta']);
+      }
+    )
   }
 
-  
+  resetForm() {
+    this.formGroup = this.formBuilder.group({
+      ref: [''],
+      monto: new FormControl('', Validators.required),
+      tarifa: new FormControl('', Validators.required),
+      banco:  new FormControl('', Validators.required),
+      pago:  new FormControl('', Validators.required),
+      usuario: [this.user, Validators.required ]
+    });
+  }
+
+
   Delete(item){
     console.log(item.id);
     this.firebaseService.deleteSolicitudes(item.id);
