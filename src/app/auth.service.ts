@@ -8,7 +8,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { template } from '@angular/core/src/render3';
+
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -87,8 +87,8 @@ export class AuthService {
         email: user.email, 
         displayName: user.displayName, 
         photoURL: user.photoURL,
-        admin:0,
-        telf: user.telf
+        admin:0
+        
       } 
   
       return userRef.set(data, { merge: true })
