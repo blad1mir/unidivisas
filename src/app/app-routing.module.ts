@@ -8,6 +8,7 @@ import { VentaComponent } from './transaction/sale/list/sale.component';
 import { SolicitudComponent } from './transaction/sale/request-sale/request-sale.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { RequestPurchaseComponent } from './transaction/purchase/request-purchase/request-purchase.component';
 
 const routes: Routes = [
   {
@@ -19,7 +20,8 @@ const routes: Routes = [
     {path: 'compra', component: CompraComponent, canActivate: [AuthGuard]},
     {path: 'ajustes', component: UsuarioComponent, canActivate: [AuthGuard]},
     {path: 'inicio', component: InicioComponent, canActivate: [AuthGuard]},
-    {path: 'login', component: LoginComponent}
+    {path: 'login', component: LoginComponent},
+    {path: 'purchase', component: RequestPurchaseComponent}
     ],
     },
 ];
