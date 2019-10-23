@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { VentaComponent } from './venta/lista/venta.component';
+import { VentaComponent } from './transaction/sale/list/sale.component';
 import { MenuComponent } from './menu/menu.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { HttpClientModule} from '@angular/common/http';
@@ -13,11 +13,13 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { CompraComponent } from './compra/compra.component';
 import { TransaccionComponent } from './transaccion/transaccion.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { SolicitudComponent } from './venta/solicitud/solicitud.component';
+import { SolicitudComponent } from './transaction/sale/request-sale/request-sale.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { InicioComponent } from './inicio/inicio.component';
 import { FooterComponent } from './footer/footer.component';
+import { ListComponent } from './transaction/purchase/list/purchase.component';
+import { RequestPurchaseComponent } from './transaction/purchase/request-purchase/request-purchase.component';
 
 
 const config = {
@@ -42,7 +44,9 @@ const config = {
     TransaccionComponent,
     SolicitudComponent,
     InicioComponent,
-    FooterComponent
+    FooterComponent,
+    ListComponent,
+    RequestPurchaseComponent,
 
   ],
   imports: [

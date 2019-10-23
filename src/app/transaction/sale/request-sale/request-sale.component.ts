@@ -7,8 +7,8 @@ import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-solicitud',
-  templateUrl: './solicitud.component.html',
-  styleUrls: ['./solicitud.component.css']
+  templateUrl: './request-sale.component.html',
+  styleUrls: ['./request-sale.component.css']
 })
 export class SolicitudComponent implements OnInit {
   public formGroup: FormGroup;

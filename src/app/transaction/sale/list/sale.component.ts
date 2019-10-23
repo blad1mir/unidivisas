@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FirestoreService } from '../../Servicios/firestore.service';
+import { FirestoreService } from '../../../Servicios/firestore.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { delay } from 'q';
@@ -11,8 +11,8 @@ import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-venta',
-  templateUrl: './venta.component.html',
-  styleUrls: ['./venta.component.css']
+  templateUrl: './sale.component.html',
+  styleUrls: ['./sale.component.css']
 })
 
 export class VentaComponent implements OnInit {

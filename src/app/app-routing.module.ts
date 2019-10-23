@@ -4,9 +4,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CompraComponent } from './compra/compra.component';
 import { TransaccionComponent } from './transaccion/transaccion.component';
-import { VentaComponent } from './venta/lista/venta.component';
-import { SolicitudComponent } from './venta/solicitud/solicitud.component';
-
+import { VentaComponent } from './transaction/sale/list/sale.component';
+import { SolicitudComponent } from './transaction/sale/request-sale/request-sale.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { InicioComponent } from './inicio/inicio.component';
 
