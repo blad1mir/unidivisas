@@ -1,29 +1,39 @@
 <app-menu></app-menu>
-<div>
-  <h1 align=center>Opciones a compra:</h1>
+
+
+<div class="row">
+  <div class="col-md-6">
+    <div>
+    <h1 align=center>Opciones a compra:</h1>
+    </div>  
+    <table class="table col-md-6  offset-md-3">
+      <thead align=center>
+        <tr>
+          <th  scope="col" >ID</th>
+          <th  scope="col" >Monto</th>
+          <th  scope="col" >Tarifa</th>
+          <th  scope="col" >Banco</th>
+          <th  scope="col" >Información</th>
+        </tr>
+      </thead>
+        
+      <tbody>
+        <tr *ngFor="let solicitud of solicitudes">
+          <th scope="row">{{solicitud.ref}}</th>
+          <td align=center>{{solicitud.monto}}</td>
+          <td align=center>{{solicitud.tarifa}}</td>
+          <td align=center>{{solicitud.banco}}</td>
+          <td align=center><button name ="" class="btn btn-primary btn-sm" routerLink="/transaccion/{{solicitud.id}}">Ver más</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <button id="cargador" style="display: block; margin: auto;" class="btn btn-primary btn-sm" (click)="mas()">Cargar todo</button>
+  </div>
+  <div class="col-md-6">
+
+  </div>
 </div>
 
-  <table class="table col-md-6  offset-md-3">
-    <thead align=center>
-      <tr>
-        <th  scope="col" >ID</th>
-        <th  scope="col" >Monto</th>
-        <th  scope="col" >Tarifa</th>
-        <th  scope="col" >Banco</th>
-        <th  scope="col" >Información</th>
-      </tr>
-    </thead>
-    
-    <tbody>
-      <tr *ngFor="let solicitud of solicitudes">
-        <th scope="row">{{solicitud.ref}}</th>
-        <td align=center>{{solicitud.monto}}</td>
-        <td align=center>{{solicitud.tarifa}}</td>
-        <td align=center>{{solicitud.banco}}</td>
-        <td align=center><button name ="" class="btn btn-primary btn-sm" routerLink="/transaccion/{{solicitud.id}}">Ver más</button></td>
-      </tr>
-    </tbody>
-  </table>
-  <br>
-  <button id="cargador" style="display: block; margin: auto;" class="btn btn-primary btn-sm" (click)="mas()">Cargar todo</button>
+  
    
