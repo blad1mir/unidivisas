@@ -10,10 +10,10 @@ import { ActivatedRoute, Params} from '@angular/router';
   styleUrls: ['./transaccion.component.css']
 })
 export class TransaccionComponent implements OnInit {
-
   constructor(private firestore: FirestoreService, private route: ActivatedRoute) { }
   public solicitud: Solicitud = {};
-
+  public sumaa;
+   
   ngOnInit() {
     const idSolicitud = this.route.snapshot.params['id'];
     this.getDetailsSolicitud(idSolicitud);
@@ -27,8 +27,12 @@ export class TransaccionComponent implements OnInit {
     this.firestore.getOneSolicitud(idSolicitud).subscribe(solicitud => {
       this.solicitud = solicitud;
       console.log('DETALLES SOLICITUD', solicitud);
+     
+      this.sumaa=this.solicitud.monto*this.solicitud.tarifa;
     });
   }
+
+  
 
   confirmartransaccion(){
     if(confirm('SEGURO QUE QUIERES REALIZAR ESTA TRANSACCIÓN')){

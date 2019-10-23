@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: '',
     children: [
-    {path: '',redirectTo:'/login',pathMatch: 'full'},
+    {path: '',redirectTo:'/inicio',pathMatch: 'full'},
     {path: 'venta', component: SolicitudComponent,  canActivate: [AuthGuard]},
     {path: 'transaccion/:id', component: TransaccionComponent,  canActivate: [AuthGuard]},
     {path: 'compra', component: CompraComponent, canActivate: [AuthGuard]},

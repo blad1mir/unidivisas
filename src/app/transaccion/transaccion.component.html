@@ -7,15 +7,16 @@
         <div class="card" style="width: 30rem;">
             <div class="card-body" align=left>
                 <h3 class="card-title" align=center>Información</h3>
-                    <p align=center>Aquí podrás ver a detalle la información de la transacción</p>
-                    <strong>PROPIETARIO:</strong>
-                        <p>  {{solicitud.usuario}}</p>
+                    <p align=center >Aquí podrás ver a detalle la información de la transacción</p>
+                    
                     <strong>BANCO A TRANSFERIR:</strong>
                         <p>  {{solicitud.banco}}</p>
                     <strong>MONTO DEL INTERCAMBIO:</strong>
-                        <p>  {{solicitud.monto}}</p>
+                        <p>  {{solicitud.monto}} $</p>
                     <strong>TARIFA DE LA TRANSACCIÓN:</strong>
-                        <p>  {{solicitud.tarifa}}</p>
+                        <p>  {{solicitud.tarifa}} Bs.</p>
+                    <strong>TOTAL EN BOLIVARES:</strong>
+                        <p>{{this.sumaa}} Bs.</p>
                 <div class="row">
                     <div class="col">
                         <button class="btn btn-success btn-sm btn-block" (click)="confirmartransaccion()">Aceptar </button>
@@ -32,10 +33,8 @@
             <div class="card-body" align=left>
                 <h3 class="card-title" align=center>Detalles del Vendedor</h3>
                     <p align=center>Los siguientes datos son de ZELLE, se proporcionan a continuación los datos pertenentes</p>
-                    <strong>CORREO:</strong>
-                        <p> </p>
-                    <strong>NOMBRE DE USUARIO:</strong>
-                        <p> </p>
+                    <strong>PROPIETARIO:</strong>
+                        <p>  {{solicitud.usuario}}</p>
 
                 <div class="row">
                     <div class="col">

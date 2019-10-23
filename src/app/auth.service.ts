@@ -65,8 +65,7 @@ export class AuthService {
       const provider = new auth.GoogleAuthProvider();
       const credential = await this.afAuth.auth.signInWithPopup(provider);
       return this.updateUserData(credential.user),
-      this.router.navigate(['/venta']),
-      alert("Ha iniciado sesión con exito");
+      this.router.navigate(['/venta']);
       
     }
     async googleRegister() {
@@ -74,7 +73,6 @@ export class AuthService {
       const credential = await this.afAuth.auth.signInWithPopup(provider)
       return this.updateUserData(credential.user).then((success)=>{
         this.router.navigate(['/venta']);
-        alert("Se ha registrado con exito");
       });
       }
   
