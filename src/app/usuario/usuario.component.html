@@ -6,16 +6,16 @@
   <div class="col-md-4">
       <br>
       <br>
-    <form [formGroup]="formGroupBanco" (ngSubmit)="onSubmitZelle(formGroup.value)">
+    <form [formGroup]="formGroupBanco" (ngSubmit)="RegistrarNuevoBanco(formGroupBanco.value)">
       <h3>Datos bancarios: </h3>
       <div class="form-group">
         <label for="nombreUsuario">Nombre Completo</label>
-        <input type="text" class="form-control" id="nombreUsuario" formControlName="nombreCliente"
+        <input type="text" class="form-control" required="required" formControlName="nombreCliente"
           placeholder="Nombre Apellido">
       </div>
       <div class="form-group">
         <label for="nombreBanco">Banco : </label>
-        <select name="Banco" formControlName="nombreBanco">
+        <select name="Banco" formControlName="nombreBanco" required="required">
           <option value="0156">100%BANCO</option>
           <option value="0196">ABN AMRO BANK</option>
           <option value="0172">BANCAMIGA BANCO MICROFINANCIERO, C.A.</option>
@@ -55,14 +55,14 @@
 
       <div class="form-group">
         <label for="numeroCuenta">Número de cuenta completo: </label>
-        <input type="number" class="form-group" id="NumeroCuenta" formControlName="cuentaBanco"
+        <input type="number" class="form-group" required="required"  formControlName="numeroCuenta"
           placeholder="00000000000000000000" maxlength="16">
         <small id="NCuentaHelp" class="form-text text-muted">Coloque su numero de cuenta completa</small>
       </div>
 
       <div class="form-group">
         <label for="Cedula">Cédula de identidad : </label>
-        <input type="text" class="form-control" id="Cedula" placeholder="E/V 00000000" formControlName="cedulaCliente">
+        <input type="text" class="form-control" required="required"  placeholder="E/V 00000000" formControlName="cedula">
       </div>
 
       <button type="submit" class="btn btn-primary">Agregar </button>
@@ -76,27 +76,26 @@
       <thead>
         <tr>
 
-          <th scope="col">Monto</th>
-          <th scope="col">Tarifa</th>
           <th scope="col">Banco</th>
-          <th scope="col">Editar</th>
+          <th scope="col">Cuenta</th>
+          <th scope="col">Cedula</th>
+          <th scope="col">Nombre</th>
           <th scope="col">Eliminar</th>
 
 
         </tr>
       </thead>
-      <tbody *ngFor="let item of solicitud">
+      <tbody *ngFor="let banco of ListaBanco">
         <!-- <div *ngFor="let comentario of comentarios ">
                 <div *ngIf="comentario.ProductoId == detalle.id"> -->
-        <tr *ngIf="item.usuario === usuario.email">
+        <tr *ngIf="banco.usuario === usuario.email">
 
-          <td>{{item.monto}}</td>
-          <td>{{item.tarifa}}</td>
-          <td>{{item.banco}}</td>
-          <td><button type="button" class="btn btn-warning" 
-              (click)="setId(item)">Editar</button>
-          </td>
-          <td><button type="button" class="btn btn-danger" (click)="Delete(item)">Eliminar</button></td>
+          <td>{{banco.nombreBanco}}</td>
+          <td>{{banco.numeroCuenta}}</td>
+          <td>{{banco.cedula}}</td>
+          <td>{{banco.nombreCliente}}</td>
+         
+          <td><button type="button" class="btn btn-danger" (click)="eliminarBanco(banco)">Eliminar</button></td>
         </tr>
 
       </tbody>
@@ -112,16 +111,21 @@
 <div class="offset-md-2 row" >
   <div class="col-md-4">
     <br>
-    <form [formGroup]="buildFormZelle" (ngSubmit)="onSubmit(formGroup.value)">
+    <form [formGroup]="formGroupZelle" (ngSubmit)="RegistrarNuevoZelle(formGroupZelle.value)">
       <h3>Datos de zelle: </h3>
       <div class="form-group">
         <label for="CorreoZelle">Correo electrónico: </label>
-        <input type="email" class="form-control" id="Correo" placeholder="usuario@user.com" formControlName="correoZelle">
+        <input type="email" class="form-control" required="required" id="Correo" placeholder="usuario@user.com" formControlName="correoZelle">
       </div>
       <div class="form-group">
         <label for="NombreZelle">Nombre de usuario de su cuenta :</label>
-        <input type="text" class="form-control" id="NameUser" placeholder="Nombre Apellido" formControlName="nombreZelle">
+        <input type="text" class="form-control" required="required" id="NameUser" placeholder="Nombre Apellido" formControlName="nombreZelle">
       </div>
+
+      <div class="form-group">
+          <label for="NombreZelle">Alias:</label>
+          <input type="text" class="form-control" required="required" id="NameUser" placeholder="Mi cuenta" formControlName="alias">
+        </div>
 
       <button type="submit" class="btn btn-primary">Agregar </button>
     </form>
@@ -138,7 +142,6 @@
             <th scope="col">Correo </th>
             <th scope="col">Nombre</th>
             <th scope="col">Alias</th>
-            <th scope="col">Editar</th>
             <th scope="col">Eliminar</th>
       
       
@@ -150,10 +153,7 @@
             <td>{{zelle.correoZelle}}</td>
             <td>{{zelle.nombreZelle}}</td>
             <td>{{zelle.alias}}</td>
-            <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal"
-                (click)="setId(item)">Editar</button>
-            </td>
-            <td><button type="button" class="btn btn-danger" (click)="Delete(item)">Eliminar</button></td>
+            <td><button type="button" class="btn btn-danger" (click)="eliminarZelle(zelle)">Eliminar</button></td>
           </tr>
       
         </tbody>
@@ -161,3 +161,5 @@
     </div>
 
 </div>
+
+

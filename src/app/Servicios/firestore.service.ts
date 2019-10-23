@@ -19,6 +19,10 @@ export class FirestoreService {
 
     this.ListaZelleCollection = db.collection<Zelle>('DatosZelle'); //Setear nuestra collección
     this.ListaZelle = this.ListaZelleCollection.valueChanges();
+
+    
+    this.ListaBancoCollection = db.collection<Banco>('DatosBanco'); //Setear nuestra collección
+    this.ListaBanco = this.ListaBancoCollection.valueChanges();
    
   }
   
@@ -32,6 +36,11 @@ export class FirestoreService {
   private ListaZelle: Observable<Zelle[]>;
   private ListaZelleDoc: AngularFirestoreDocument<Zelle>;
   private ListaZellePersonal: Observable<Zelle>;
+
+  private ListaBancoCollection: AngularFirestoreCollection <Banco>; //Aqui se creo la propiedad de colleccion de las solicitudes
+  private ListaBanco: Observable<Banco[]>;
+  private ListaBancoDoc: AngularFirestoreDocument<Banco>;
+  private ListaBancoPersonal: Observable<Banco>;
 
   getSolicitudes(){
     //return this.db.collection('/Solicitud').valueChanges(); //esto es de bladimir pero no me sirve para traerme 1 solo producto
@@ -58,6 +67,17 @@ export class FirestoreService {
       });
     }));
   }
+
+  obtenerListaDeBanco(){
+    //return this.db.collection('/Solicitud').valueChanges(); //esto es de bladimir pero no me sirve para traerme 1 solo producto
+    return this.ListaBanco = this.ListaBancoCollection.snapshotChanges().pipe(map( changes => {
+      return changes.map(action => {
+        const data = action.payload.doc.data() as Banco;
+        data.id = action.payload.doc.id;
+        return data;
+      });
+    }));
+  }
   
   getOneSolicitud(idSolicitud: string){
   this.SolicitudDoc = this.db.doc<Solicitud>(`Solicitud/${idSolicitud}`);
@@ -77,6 +97,14 @@ deleteSolicitudes(solkey){
   return this.db.collection('Solicitud').doc(solkey).delete();
 }
 
+eliminarZelle(solkey){
+  return this.db.collection('DatosZelle').doc(solkey).delete();
+}
+
+eliminarBanco(solkey){
+  return this.db.collection('DatosBanco').doc(solkey).delete();
+}
+
 updateSolicitudes(Key, value){
   return this.db.collection('Solicitud').doc(Key).set(value);
 }
@@ -92,16 +120,24 @@ createSolicitud(value){
     usuario: value.usuario
   });
 }
-createDatos(value){
-  return this.db.collection('Usuarios').add({
-    nombreUsuario:  value.nombreUsuario,
-    Banco: value.Banco,
-    NumeroCuenta: value.NumeroCuenta,
-    Cedula: value.Cedula,
-    CorreoZelle: value.CorreoZelle,
-    NombreZelle: value.NombreZelle
-  });
 
+agregarNuevoZelle(value){
+  return this.db.collection('DatosZelle').add({
+    alias: value.alias,
+    correoZelle: value.correoZelle,
+    nombreZelle: value.nombreZelle,
+    usuario: value.usuario
+  });
+}
+
+agregarNuevoBanco(value){
+  return this.db.collection('DatosBanco').add({
+    cedula: value.cedula,
+    nombreBanco: value.nombreBanco,
+    nombreCliente: value.nombreCliente,
+    numeroCuenta: value.numeroCuenta,
+    usuario: value.usuario
+  });
 }
 
 }

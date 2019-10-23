@@ -21,6 +21,7 @@ export interface Banco {
     id?: string;
     cedula?: string;
     nombreBanco?: string;
+    nombreCliente?: string;
     numerocuenta?: number;
     usuario?: string; 
 }

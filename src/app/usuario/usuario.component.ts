@@ -14,7 +14,7 @@ export class UsuarioComponent implements OnInit {
   public formGroupZelle: FormGroup;
   public formGroupBanco: FormGroup;
   ListaZelle = [];
-  ListaBancos = [];
+  ListaBanco = [];
   usuario="";
   constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder, public auth: AuthService) { 
     auth.user$.forEach(usuario => { this.usuario=usuario.email;  });
@@ -24,6 +24,7 @@ export class UsuarioComponent implements OnInit {
     this.buildFormZelle();
     this.buildFormBanco();
     this.obtenerListaZelle();
+    this.obtenerListaBanco();
 
   }
 
@@ -31,6 +32,7 @@ export class UsuarioComponent implements OnInit {
     this.formGroupZelle = this.formBuilder.group({
       correoZelle: new FormControl('', Validators.required),
       nombreZelle: new FormControl('', Validators.required),
+      alias: new FormControl('', Validators.required),
       usuario: new FormControl('', Validators.required)
     });
   }
@@ -38,9 +40,9 @@ export class UsuarioComponent implements OnInit {
   buildFormBanco() {
     this.formGroupBanco = this.formBuilder.group({
       nombreBanco: new FormControl('', Validators.required),
-      cuentaBanco: new FormControl('', Validators.required),
+      numeroCuenta: new FormControl('', Validators.required),
       nombreCliente: new FormControl('', Validators.required),
-      cedulaCliente: new FormControl('', Validators.required),
+      cedula: new FormControl('', Validators.required),
       usuario: new FormControl('', Validators.required)
     });
   }
@@ -51,26 +53,51 @@ export class UsuarioComponent implements OnInit {
       this.ListaZelle = ListaZelle;
     
     })
+
+}
+
+obtenerListaBanco(){
+  this.firebaseService.obtenerListaDeBanco()
+  .subscribe( ListaBanco =>{
+    this.ListaBanco = ListaBanco;
   
+  })
+
 }
 
 
-  onSubmitZelle(value) {
-    this.firebaseService.createDatos(value)
-      .then(
-        res => {
-          this.resetForm();
-        }
-      )
+  RegistrarNuevoZelle(value: { correoZelle: string; nombreZelle: string;  usuario: string;}) {
+    value.usuario = (this.usuario);
+    this.firebaseService.agregarNuevoZelle(value)
+    .then(
+      res => {
+        this.resetForm();
+        //this.router.navigate(['/venta']);
+      }
+    )
   }
 
-  onSubmitBanco(value) {
-    this.firebaseService.createDatos(value)
-      .then(
-        res => {
-          this.resetForm();
-        }
-      )
+  RegistrarNuevoBanco(value: { nombreCliente: string; nombreBanco: string;  numeroCuenta: number; cedula: string; usuario: string;}) {
+    console.log(value);
+    value.usuario = (this.usuario);
+    this.firebaseService.agregarNuevoBanco(value)
+    .then(
+      res => {
+        this.resetForm();
+        //this.router.navigate(['/venta']);
+      }
+    )
+   
+  }
+
+  eliminarZelle(valor){
+    console.log(valor.id);
+    this.firebaseService.eliminarZelle(valor.id);
+  }
+
+  eliminarBanco(valor){
+    console.log(valor.id);
+    this.firebaseService.eliminarBanco(valor.id);
   }
 
   resetForm() {

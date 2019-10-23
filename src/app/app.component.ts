@@ -13,6 +13,6 @@ export class AppComponent {
   constructor(private router: Router) {}
   title = 'unidivisas';
   ngOnInit() {
-    this.router.navigate(['/login'])
+   
   }
   }
