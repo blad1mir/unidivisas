@@ -1,117 +1,163 @@
 <app-menu></app-menu>
-<div class="row">
-  <div class="col-md-5 offset-md-1" *ngIf="auth.user$ | async as useru" >
 
-<form class="form-horizontal">
-  <fieldset>
-  
-  <!-- Form Name -->
-  <h3>Datos Personales: </h3>
-  
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="FullName">Nombre Completo</label>  
-    <div class="col-md-8">
-    <input id="FullName" name="FullName" type="text" placeholder={{useru.displayName}} class="form-control input-md" required="" readonly="readonly">
-    </div>
-  </div>
-  
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="Email">Email</label>  
-    <div class="col-md-6">
-    <input id="Email" name="Email" type="text" placeholder={{useru.email}} class="form-control input-md" required="" readonly="readonly">
-    </div>
-  </div>
-  
-  <!-- Prepended text-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="Mobile">Telefono</label>
-    <div class="col-md-5">
-      <div class="input-group">
-        <input id="Mobile" name="Mobile" class="form-control" placeholder="{{useru.telf}}" type="text" required="" readonly="readonly">
-      </div>
-    </div>
-  </div>
-  
-  
-  
-  
-  </fieldset>
-  </form>
-  
-  </div>
 
-  <div class="col-md-5" *ngIf="auth.user$ | async as useru" >
+<div class="offset-md-2 row">
+  <br>
+  <div class="col-md-4">
       <br>
-      <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
-        <h3>Datos bancarios: </h3>
-        <div class="form-group">
-            <label for="nombreUsuario">Nombre Completo</label>
-            <input type="text" class="form-control" id="nombreUsuario" formControlName="nombreUsuario" placeholder="Nombre Apellido">
-        </div>
-        <div class="form-group">
-          <label for="nombreBanco">Banco : </label>
-          <select name="Banco" formControlName="Banco">
-            <option value="0156">100%BANCO</option>
-            <option value="0196">ABN AMRO BANK</option>
-            <option value="0172">BANCAMIGA BANCO MICROFINANCIERO, C.A.</option>
-            <option value="0171">BANCO ACTIVO BANCO COMERCIAL, C.A.</option>
-            <option value="0166">BANCO AGRICOLA</option>
-            <option value="0175">BANCO BICENTENARIO</option>
-            <option value="0128">BANCO CARONI, C.A. BANCO UNIVERSAL</option>
-            <option value="0164">BANCO DE DESARROLLO DEL MICROEMPRESARIO</option>
-            <option value="0102">BANCO DE VENEZUELA S.A.I.C.A.</option>
-            <option value="0114">BANCO DEL CARIBE C.A.</option>
-            <option value="0149">BANCO DEL PUEBLO SOBERANO C.A.</option>
-            <option value="0163">BANCO DEL TESORO</option>
-            <option value="0176">BANCO ESPIRITO SANTO, S.A.</option>
-            <option value="0115">BANCO EXTERIOR C.A.</option>
-            <option value="0003">BANCO INDUSTRIAL DE VENEZUELA.</option>
-            <option value="0173">BANCO INTERNACIONAL DE DESARROLLO, C.A.</option>
-            <option value="0105" selected="select">BANCO MERCANTIL C.A.</option>
-            <option value="0191">BANCO NACIONAL DE CREDITO</option>
-            <option value="0116">BANCO OCCIDENTAL DE DESCUENTO.</option>
-            <option value="0138">BANCO PLAZA</option>
-            <option value="0108">BANCO PROVINCIAL BBVA</option>
-            <option value="0104">BANCO VENEZOLANO DE CREDITO S.A.</option>
-            <option value="0168">BANCRECER S.A. BANCO DE DESARROLLO</option>
-            <option value="0134">BANESCO BANCO UNIVERSAL</option>
-            <option value="0177">BANFANB</option>
-            <option value="0146">BANGENTE</option>
-            <option value="0174">BANPLUS BANCO COMERCIAL C.A</option>
-            <option value="0190">CITIBANK.</option>
-            <option value="0121">CORP BANCA.</option>
-            <option value="0157">DELSUR BANCO UNIVERSAL</option>
-            <option value="0151">FONDO COMUN</option>
-            <option value="0601">INSTITUTO MUNICIPAL DE CR&#201;DITO POPULAR</option>
-            <option value="0169">MIBANCO BANCO DE DESARROLLO, C.A.</option>
-            <option value="0137">SOFITASA</option>
-          </select>
-        </div>
-  
-        <div class="form-group">
-            <label for="numeroCuenta">Número de cuenta completo: </label>
-          <input type="number" class="form-group" id="NumeroCuenta" formControlName="NumeroCuenta" placeholder="00000000000000000000" maxlength="16">
-          <small id="NCuentaHelp" class="form-text text-muted">Coloque su numero de cuenta completa</small>
-          </div>
-  
-        <div class="form-group">
-          <label for="Cedula">Cédula de identidad : </label>
-          <input type="text" class="form-control" id="Cedula" placeholder="E/V 00000000" formControlName="Cedula">
-        </div>
-        <h3>Datos de zelle: </h3>
-        <div class="form-group">
-            <label for="CorreoZelle">Correo electrónico: </label>
-            <input type="email" class="form-control" id="Correo" placeholder="usuario@user.com" formControlName="CorreoZelle">
-        </div>
-          <div class="form-group">
-              <label for="NombreZelle">Nombre de usuario de su cuenta :</label>
-              <input type="text" class="form-control" id="NameUser" placeholder="Nombre Apellido" formControlName="NombreZelle">
-          </div>
-  
-        <button type="submit" class="btn btn-primary">Guardar </button>
-      </form>
+      <br>
+    <form [formGroup]="formGroupBanco" (ngSubmit)="onSubmitZelle(formGroup.value)">
+      <h3>Datos bancarios: </h3>
+      <div class="form-group">
+        <label for="nombreUsuario">Nombre Completo</label>
+        <input type="text" class="form-control" id="nombreUsuario" formControlName="nombreCliente"
+          placeholder="Nombre Apellido">
+      </div>
+      <div class="form-group">
+        <label for="nombreBanco">Banco : </label>
+        <select name="Banco" formControlName="nombreBanco">
+          <option value="0156">100%BANCO</option>
+          <option value="0196">ABN AMRO BANK</option>
+          <option value="0172">BANCAMIGA BANCO MICROFINANCIERO, C.A.</option>
+          <option value="0171">BANCO ACTIVO BANCO COMERCIAL, C.A.</option>
+          <option value="0166">BANCO AGRICOLA</option>
+          <option value="0175">BANCO BICENTENARIO</option>
+          <option value="0128">BANCO CARONI, C.A. BANCO UNIVERSAL</option>
+          <option value="0164">BANCO DE DESARROLLO DEL MICROEMPRESARIO</option>
+          <option value="0102">BANCO DE VENEZUELA S.A.I.C.A.</option>
+          <option value="0114">BANCO DEL CARIBE C.A.</option>
+          <option value="0149">BANCO DEL PUEBLO SOBERANO C.A.</option>
+          <option value="0163">BANCO DEL TESORO</option>
+          <option value="0176">BANCO ESPIRITO SANTO, S.A.</option>
+          <option value="0115">BANCO EXTERIOR C.A.</option>
+          <option value="0003">BANCO INDUSTRIAL DE VENEZUELA.</option>
+          <option value="0173">BANCO INTERNACIONAL DE DESARROLLO, C.A.</option>
+          <option value="0105" selected="select">BANCO MERCANTIL C.A.</option>
+          <option value="0191">BANCO NACIONAL DE CREDITO</option>
+          <option value="0116">BANCO OCCIDENTAL DE DESCUENTO.</option>
+          <option value="0138">BANCO PLAZA</option>
+          <option value="0108">BANCO PROVINCIAL BBVA</option>
+          <option value="0104">BANCO VENEZOLANO DE CREDITO S.A.</option>
+          <option value="0168">BANCRECER S.A. BANCO DE DESARROLLO</option>
+          <option value="0134">BANESCO BANCO UNIVERSAL</option>
+          <option value="0177">BANFANB</option>
+          <option value="0146">BANGENTE</option>
+          <option value="0174">BANPLUS BANCO COMERCIAL C.A</option>
+          <option value="0190">CITIBANK.</option>
+          <option value="0121">CORP BANCA.</option>
+          <option value="0157">DELSUR BANCO UNIVERSAL</option>
+          <option value="0151">FONDO COMUN</option>
+          <option value="0601">INSTITUTO MUNICIPAL DE CR&#201;DITO POPULAR</option>
+          <option value="0169">MIBANCO BANCO DE DESARROLLO, C.A.</option>
+          <option value="0137">SOFITASA</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="numeroCuenta">Número de cuenta completo: </label>
+        <input type="number" class="form-group" id="NumeroCuenta" formControlName="cuentaBanco"
+          placeholder="00000000000000000000" maxlength="16">
+        <small id="NCuentaHelp" class="form-text text-muted">Coloque su numero de cuenta completa</small>
+      </div>
+
+      <div class="form-group">
+        <label for="Cedula">Cédula de identidad : </label>
+        <input type="text" class="form-control" id="Cedula" placeholder="E/V 00000000" formControlName="cedulaCliente">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Agregar </button>
+    </form>
+  </div>
+  <div class="col-md-4 offset-md-2">
+      <br>
+      <br>
+      <h3>Listado de sus datos de bancarios: </h3>
+    <table class="table " *ngIf="auth.user$ | async as usuario">
+      <thead>
+        <tr>
+
+          <th scope="col">Monto</th>
+          <th scope="col">Tarifa</th>
+          <th scope="col">Banco</th>
+          <th scope="col">Editar</th>
+          <th scope="col">Eliminar</th>
+
+
+        </tr>
+      </thead>
+      <tbody *ngFor="let item of solicitud">
+        <!-- <div *ngFor="let comentario of comentarios ">
+                <div *ngIf="comentario.ProductoId == detalle.id"> -->
+        <tr *ngIf="item.usuario === usuario.email">
+
+          <td>{{item.monto}}</td>
+          <td>{{item.tarifa}}</td>
+          <td>{{item.banco}}</td>
+          <td><button type="button" class="btn btn-warning" 
+              (click)="setId(item)">Editar</button>
+          </td>
+          <td><button type="button" class="btn btn-danger" (click)="Delete(item)">Eliminar</button></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+
+
+</div>
+<br>
+<br>
+
+<div class="offset-md-2 row" >
+  <div class="col-md-4">
+    <br>
+    <form [formGroup]="buildFormZelle" (ngSubmit)="onSubmit(formGroup.value)">
+      <h3>Datos de zelle: </h3>
+      <div class="form-group">
+        <label for="CorreoZelle">Correo electrónico: </label>
+        <input type="email" class="form-control" id="Correo" placeholder="usuario@user.com" formControlName="correoZelle">
+      </div>
+      <div class="form-group">
+        <label for="NombreZelle">Nombre de usuario de su cuenta :</label>
+        <input type="text" class="form-control" id="NameUser" placeholder="Nombre Apellido" formControlName="nombreZelle">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Agregar </button>
+    </form>
+
+  </div>
+
+  <div class="col-md-4 offset-md-2">
+      <br>
+      <h3>Listado de sus datos de zelle: </h3>
+      <table class="table" *ngIf="auth.user$ | async as usuario">
+        <thead>
+          <tr>
+      
+            <th scope="col">Correo </th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Alias</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Eliminar</th>
+      
+      
+          </tr>
+        </thead>
+        <tbody *ngFor="let zelle of ListaZelle">
+          <tr *ngIf="zelle.usuario === usuario.email">
+      
+            <td>{{zelle.correoZelle}}</td>
+            <td>{{zelle.nombreZelle}}</td>
+            <td>{{zelle.alias}}</td>
+            <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal"
+                (click)="setId(item)">Editar</button>
+            </td>
+            <td><button type="button" class="btn btn-danger" (click)="Delete(item)">Eliminar</button></td>
+          </tr>
+      
+        </tbody>
+      </table>
     </div>
 
-</div> 
+</div>

@@ -10,47 +10,79 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 })
 export class UsuarioComponent implements OnInit {
 
-  public solicitudes = [];
-  public solicitud = '';
-  public formGroup: FormGroup;
-  constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder, public auth: AuthService) { }
 
-  ngOnInit() {
-    this.buildForm();
-    
+  public formGroupZelle: FormGroup;
+  public formGroupBanco: FormGroup;
+  ListaZelle = [];
+  ListaBancos = [];
+  usuario="";
+  constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder, public auth: AuthService) { 
+    auth.user$.forEach(usuario => { this.usuario=usuario.email;  });
   }
 
-  buildForm() {
+  ngOnInit() {
+    this.buildFormZelle();
+    this.buildFormBanco();
+    this.obtenerListaZelle();
 
-    this.formGroup = this.formBuilder.group({
-      nombreUsuario:  new FormControl('', Validators.required),
+  }
+
+  buildFormZelle() {
+    this.formGroupZelle = this.formBuilder.group({
+      correoZelle: new FormControl('', Validators.required),
+      nombreZelle: new FormControl('', Validators.required),
+      usuario: new FormControl('', Validators.required)
+    });
+  }
+
+  buildFormBanco() {
+    this.formGroupBanco = this.formBuilder.group({
+      nombreBanco: new FormControl('', Validators.required),
+      cuentaBanco: new FormControl('', Validators.required),
+      nombreCliente: new FormControl('', Validators.required),
+      cedulaCliente: new FormControl('', Validators.required),
+      usuario: new FormControl('', Validators.required)
+    });
+  }
+
+  obtenerListaZelle(){
+    this.firebaseService.obtenerListaDeZelle()
+    .subscribe( ListaZelle =>{
+      this.ListaZelle = ListaZelle;
+    
+    })
+  
+}
+
+
+  onSubmitZelle(value) {
+    this.firebaseService.createDatos(value)
+      .then(
+        res => {
+          this.resetForm();
+        }
+      )
+  }
+
+  onSubmitBanco(value) {
+    this.firebaseService.createDatos(value)
+      .then(
+        res => {
+          this.resetForm();
+        }
+      )
+  }
+
+  resetForm() {
+    this.formGroupZelle = this.formBuilder.group({
+      nombreUsuario: new FormControl('', Validators.required),
       Banco: new FormControl('', Validators.required),
       NumeroCuenta: new FormControl('', Validators.required),
       Cedula: new FormControl('', Validators.required),
       CorreoZelle: new FormControl('', Validators.required),
       NombreZelle: new FormControl('', Validators.required)
     });
-}
-
-onSubmit(value) {
-  this.firebaseService.createDatos(value)
-  .then(
-    res => {
-      this.resetForm();
-    }
-  )
-}
-
-resetForm() {
-  this.formGroup = this.formBuilder.group({
-      nombreUsuario:  new FormControl('', Validators.required),
-      Banco: new FormControl('', Validators.required),
-      NumeroCuenta: new FormControl('', Validators.required),
-      Cedula: new FormControl('', Validators.required),
-      CorreoZelle: new FormControl('', Validators.required),
-      NombreZelle: new FormControl('', Validators.required)
-  });
-}
+  }
 
 }
 

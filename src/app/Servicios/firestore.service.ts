@@ -1,4 +1,4 @@
-import { Banco } from './../modelos/interfaces';
+import { Banco, Zelle } from './../modelos/interfaces';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Solicitud } from '../modelos/interfaces';
@@ -12,23 +12,26 @@ import { map } from 'rxjs/operators';
 })
 export class FirestoreService {
 
-//  solicitudColeccion: AngularFirestoreCollection<Solicitud>;
-//  solicitud: Observable<Solicitud[]>;
-//  solicitudDoc: AngularFirestoreDocument<Solicitud>;
   
   constructor(private db: AngularFirestore) { 
     this.SolicitudesCollection = db.collection<Solicitud>('Solicitud'); //Setear nuestra collección
     this.Solicitudes = this.SolicitudesCollection.valueChanges();
-    this.BancoCollection = db.collection<Banco>('Usuarios'); //Setear nuestra collección
-    this.Banco = this.BancoCollection.valueChanges();
+
+    this.ListaZelleCollection = db.collection<Zelle>('DatosZelle'); //Setear nuestra collección
+    this.ListaZelle = this.ListaZelleCollection.valueChanges();
+   
   }
   
-  private BancoCollection: AngularFirestoreCollection <Banco>;
-  private Banco: Observable<Banco[]>
+ 
   private SolicitudesCollection: AngularFirestoreCollection <Solicitud>; //Aqui se creo la propiedad de colleccion de las solicitudes
   private Solicitudes: Observable<Solicitud[]>;
   private SolicitudDoc: AngularFirestoreDocument<Solicitud>;
   private Solicitud: Observable<Solicitud>;
+
+  private ListaZelleCollection: AngularFirestoreCollection <Zelle>; //Aqui se creo la propiedad de colleccion de las solicitudes
+  private ListaZelle: Observable<Zelle[]>;
+  private ListaZelleDoc: AngularFirestoreDocument<Zelle>;
+  private ListaZellePersonal: Observable<Zelle>;
 
   getSolicitudes(){
     //return this.db.collection('/Solicitud').valueChanges(); //esto es de bladimir pero no me sirve para traerme 1 solo producto
@@ -40,6 +43,17 @@ export class FirestoreService {
         data.id = action.payload.doc.id;
         data['ref'] = x;
         x++;
+        return data;
+      });
+    }));
+  }
+
+  obtenerListaDeZelle(){
+    //return this.db.collection('/Solicitud').valueChanges(); //esto es de bladimir pero no me sirve para traerme 1 solo producto
+    return this.ListaZelle = this.ListaZelleCollection.snapshotChanges().pipe(map( changes => {
+      return changes.map(action => {
+        const data = action.payload.doc.data() as Zelle;
+        data.id = action.payload.doc.id;
         return data;
       });
     }));
@@ -58,29 +72,6 @@ export class FirestoreService {
     }));
   }
 
-//   getSolicitudes() {
-//     return this.db.collection('/Solicitud').valueChanges();
-  
-// }
-
-// getAllSolicitudes(){
-//   let x = 1;
-//   this.solicitudColeccion=this.db.collection('Solicitud');
-//   this.solicitud = this.solicitudColeccion.snapshotChanges().pipe(map(actions => {
-//     x = 1;
-//     return actions.map(a => {
-//       const data = a.payload.doc.data() as Solicitud;
-//       data.id= a.payload.doc.id;
-//       data['ref'] = x;
-//       x++;
-//       console.log("dataaa", data);
-//       return data
-      
-//     })
-//   }))
-
-//   return this.Solicitud;
-// }
 
 deleteSolicitudes(solkey){
   return this.db.collection('Solicitud').doc(solkey).delete();
