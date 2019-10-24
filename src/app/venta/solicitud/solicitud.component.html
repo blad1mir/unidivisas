@@ -9,12 +9,12 @@
       <input type="hidden" class="form-control" formControlName="usuario" value={{useru.email}} readonly="readonly">
       <div class ="form-group">
         <label for="exampleInputEmail1">Monto a vender ($):</label>
-        <input type="number" class="form-control" placeholder="00" formControlName="monto">
+        <input type="number" class="form-control" formControlName="monto">
         <small id="emailHelp" class="form-text text-muted">el monto está expresado en dólares</small>
       </div>  
       <div class="form-group">
         <label for="exampleInputPassword1">Tarifa (Bolívares por Dólar):</label>
-        <input type="number" class="form-control" placeholder="20.000" formControlName="tarifa">
+        <input type="number" class="form-control" formControlName="tarifa">
         <small id="emailHelp" class="form-text text-muted">tarifa en la que va a vender sus dólares</small>
       </div>
       <div class="form-group">
@@ -23,7 +23,7 @@
         <label for="exampleInputPassword1">Banco:</label>
         <div class="caja">
           <select  name="banco" formControlName="banco">
-            <option *ngFor="let banco of ListaBanco"  [value]="banco.nombreBanco"> <li *ngIf="banco.usuario === useru.email; else other_content"> {{banco.nombreBanco}} - {{banco.nombreCliente}}</li></option>
+            <option *ngFor="let banco of BancosPersonales"  [value]="banco.nombreBanco"> <li> {{banco.nombreBanco}} - {{banco.aliasBanco}}</li></option>
           </select>
         </div>
       </div>
@@ -34,7 +34,7 @@
         <label for="exampleInputPassword1">Forma de pago:</label>
         <div class="caja" >
           <select formControlName="pago" >
-            <option *ngFor="let zelle of ListaZelle" [value]="zelle.correoZelle">Zelle {{zelle.alias}} - {{zelle.correoZelle}}</option></select>
+            <option *ngFor="let zelle of ZellePersonal" [value]="zelle.correoZelle">Zelle {{zelle.alias}} - {{zelle.correoZelle}}</option></select>
         </div>
       </div>
 

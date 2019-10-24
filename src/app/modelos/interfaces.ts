@@ -23,5 +23,6 @@ export interface Banco {
     nombreBanco?: string;
     nombreCliente?: string;
     numerocuenta?: number;
+    aliasBanco?: string;
     usuario?: string; 
 }

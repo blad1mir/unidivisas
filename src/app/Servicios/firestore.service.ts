@@ -136,6 +136,7 @@ agregarNuevoBanco(value){
     nombreBanco: value.nombreBanco,
     nombreCliente: value.nombreCliente,
     numeroCuenta: value.numeroCuenta,
+    aliasBanco: value.aliasBanco,
     usuario: value.usuario
   });
 }

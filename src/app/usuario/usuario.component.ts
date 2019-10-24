@@ -43,6 +43,7 @@ export class UsuarioComponent implements OnInit {
       numeroCuenta: new FormControl('', Validators.required),
       nombreCliente: new FormControl('', Validators.required),
       cedula: new FormControl('', Validators.required),
+      aliasBanco: new FormControl('', Validators.required),
       usuario: new FormControl('', Validators.required)
     });
   }
@@ -60,14 +61,17 @@ obtenerListaBanco(){
   this.firebaseService.obtenerListaDeBanco()
   .subscribe( ListaBanco =>{
     this.ListaBanco = ListaBanco;
-  
+    ListaBanco.forEach(elemento => {
+      console.log(elemento)
+    })
   })
 
 }
 
 
-  RegistrarNuevoZelle(value: { correoZelle: string; nombreZelle: string;  usuario: string;}) {
+  RegistrarNuevoZelle(value: { correoZelle: string; nombreZelle: string; usuario: string; }) {
     value.usuario = (this.usuario);
+    console.log(value)
     this.firebaseService.agregarNuevoZelle(value)
     .then(
       res => {
@@ -77,9 +81,9 @@ obtenerListaBanco(){
     )
   }
 
-  RegistrarNuevoBanco(value: { nombreCliente: string; nombreBanco: string;  numeroCuenta: number; cedula: string; usuario: string;}) {
-    console.log(value);
+  RegistrarNuevoBanco(value: { nombreCliente: string; nombreBanco: string;  numeroCuenta: number; cedula: string; aliasBanco: string; usuario: string;}) {
     value.usuario = (this.usuario);
+    console.log(value);
     this.firebaseService.agregarNuevoBanco(value)
     .then(
       res => {

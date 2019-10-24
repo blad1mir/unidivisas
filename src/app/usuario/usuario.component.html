@@ -65,6 +65,11 @@
         <input type="text" class="form-control" required="required"  placeholder="E/V 00000000" formControlName="cedula">
       </div>
 
+      <div class="form-group">
+          <label for="nombreUsuario">Alias</label>
+          <input type="text" class="form-control" formControlName="aliasBanco">
+        </div>
+
       <button type="submit" class="btn btn-primary">Agregar </button>
     </form>
   </div>
@@ -80,6 +85,7 @@
           <th scope="col">Cuenta</th>
           <th scope="col">Cedula</th>
           <th scope="col">Nombre</th>
+          <th scope="col">Alias</th>
           <th scope="col">Eliminar</th>
 
 
@@ -94,6 +100,7 @@
           <td>{{banco.numeroCuenta}}</td>
           <td>{{banco.cedula}}</td>
           <td>{{banco.nombreCliente}}</td>
+          <td>{{banco.aliasBanco}}</td>
          
           <td><button type="button" class="btn btn-danger" (click)="eliminarBanco(banco)">Eliminar</button></td>
         </tr>
@@ -115,16 +122,16 @@
       <h3>Datos de zelle: </h3>
       <div class="form-group">
         <label for="CorreoZelle">Correo electrónico: </label>
-        <input type="email" class="form-control" required="required" id="Correo" placeholder="usuario@user.com" formControlName="correoZelle">
+        <input type="email" class="form-control" required="required" id="Correo"  formControlName="correoZelle">
       </div>
       <div class="form-group">
         <label for="NombreZelle">Nombre de usuario de su cuenta :</label>
-        <input type="text" class="form-control" required="required" id="NameUser" placeholder="Nombre Apellido" formControlName="nombreZelle">
+        <input type="text" class="form-control" required="required" id="NameUser"  formControlName="nombreZelle">
       </div>
 
       <div class="form-group">
           <label for="NombreZelle">Alias:</label>
-          <input type="text" class="form-control" required="required" id="NameUser" placeholder="Mi cuenta" formControlName="alias">
+          <input type="text" class="form-control" required="required" id="NameUser" formControlName="alias">
         </div>
 
       <button type="submit" class="btn btn-primary">Agregar </button>
