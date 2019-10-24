@@ -22,8 +22,8 @@
         <input type="text" class="form-control" placeholder="Banco" formControlName="banco"> -->
         <label for="exampleInputPassword1">Banco:</label>
         <div class="caja">
-          <select  name="banco" formControlName="banco" >
-            <option *ngFor="let banco of ListaBanco" [value]="banco.nombreBanco">{{banco.nombreBanco}} - {{banco.nombreCliente}}</option>
+          <select  name="banco" formControlName="banco">
+            <option *ngFor="let banco of ListaBanco"  [value]="banco.nombreBanco"> <li *ngIf="banco.usuario === useru.email; else other_content"> {{banco.nombreBanco}} - {{banco.nombreCliente}}</li></option>
           </select>
         </div>
       </div>
@@ -34,7 +34,7 @@
         <label for="exampleInputPassword1">Forma de pago:</label>
         <div class="caja" >
           <select formControlName="pago" >
-            <option *ngFor="let zelle of ListaZelle" [value]="zelle.correoZelle">Zelle {{zelle.alias}} - {{zelle.correoZelle}}</option>          </select>
+            <option *ngFor="let zelle of ListaZelle" [value]="zelle.correoZelle">Zelle {{zelle.alias}} - {{zelle.correoZelle}}</option></select>
         </div>
       </div>
 
@@ -53,3 +53,5 @@
   </div>
 
 </div>
+
+<ng-template #other_content style="display: none">  </ng-template>
