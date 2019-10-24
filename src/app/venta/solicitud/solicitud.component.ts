@@ -13,6 +13,8 @@ import { AuthService } from 'src/app/auth.service';
 export class SolicitudComponent implements OnInit {
   public formGroup: FormGroup;
   user="";
+  ListaBanco = [];
+  ListaZelle = [];
 
   // Crear servicio de Auth que devuelva el usuario actual, estado si esta logged in o no , etc. (Ivernon)
 
@@ -27,6 +29,8 @@ export class SolicitudComponent implements OnInit {
   
   ngOnInit() {
     this.buildForm(); 
+    this.obtenerListaBanco();
+    this.obtenerListaZelle();
   }
 
    buildForm() {
@@ -70,5 +74,23 @@ export class SolicitudComponent implements OnInit {
       usuario: [this.user, Validators.required ]
     });
   }
+
+  obtenerListaBanco(){
+    this.firebaseService.obtenerListaDeBanco()
+    .subscribe( ListaBanco =>{
+      this.ListaBanco = ListaBanco;
+    
+    })
+  
+  }
+
+  obtenerListaZelle(){
+    this.firebaseService.obtenerListaDeZelle()
+    .subscribe( ListaZelle =>{
+      this.ListaZelle = ListaZelle;
+    
+    })
+
+}
 
 }
