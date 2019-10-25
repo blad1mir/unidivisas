@@ -2,7 +2,7 @@
 
 <h1 align="center">Detalles de la transacción:</h1>
 
-<div class="row">
+<div class="row" >
     <div class="col-med-3 offset-md-2">
         <div class="card" style="width: 30rem;">
             <div class="card-body" align=left>
@@ -22,26 +22,33 @@
                         <button class="btn btn-success btn-sm btn-block" (click)="confirmartransaccion()">Aceptar </button>
                     </div>
                     <div class="col">
-                        <button class="btn btn-secondary btn-sm btn-block" routerLink="/compra">Volver </button>
+                        <button class="btn btn-secondary btn-sm btn-block" routerLink="/compra" id="desaparecer">Volver </button>
                     </div>
                 </div>     
             </div>
         </div>     
     </div>
-    <div class="col-med-3 offset-md-2">
+    <div class="col-med-3 offset-md-1"  >
         <div class="card" style="width: 30rem;" id="aparecer">
-            <div class="card-body" align=left>
+            <div class="card-body" align=left *ngFor="let banco of BancosPersonales">
                 <h3 class="card-title" align=center>Detalles del Vendedor</h3>
                     <p align=center>Los siguientes datos son de ZELLE, se proporcionan a continuación los datos pertenentes</p>
-                    <strong>PROPIETARIO:</strong>
-                        <p>  {{solicitud.usuario}}</p>
-
+                    <strong>NOMBRE:</strong>
+                        <p>  {{banco.nombreCliente}}</p>
+                        <strong>NUMERO DE CUENTA:</strong>
+                        <p>  {{banco.numeroCuenta}}</p>
+                        <strong>BANCO:</strong>
+                        <p>  {{banco.nombreBanco}}</p>
+                        <strong>CEDULA:</strong>
+                        <p>  {{banco.cedula}}</p>
+                        <strong>MONTO A TRANSFERIR:</strong>
+                        <p>  {{this.sumaa}} Bs.</p>
+                        <strong>NUMERO DE REFERENCIA:</strong>
+                        <input type="text" [(ngModel)]="numeroRef" class="form-control" placeholder="" value=""/>
+                        <br>
                 <div class="row">
                     <div class="col">
                         <button class="btn btn-success btn-sm btn-block" (click)='block'>Aceptar </button>
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-secondary btn-sm btn-block">Volver </button>
                     </div>
                 </div>     
             </div>
