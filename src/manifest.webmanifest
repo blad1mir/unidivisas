@@ -5,7 +5,8 @@
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",
-  "start_url": "/",
+  "start_url": "/login",
+  
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",
@@ -43,6 +44,8 @@
       "type": "image/png"
     },
     {
+      "plarform": "play",
+      "purpose": "badge",
       "src": "assets/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
@@ -63,6 +66,8 @@
       "polyfills": "polyfills.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.json",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
       "testTsconfig": "tsconfig.json",
       "prefix": "app",
       "serviceWorker": true,
