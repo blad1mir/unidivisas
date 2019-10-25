@@ -10,47 +10,110 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 })
 export class UsuarioComponent implements OnInit {
 
-  public solicitudes = [];
-  public solicitud = '';
-  public formGroup: FormGroup;
-  constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder, public auth: AuthService) { }
 
-  ngOnInit() {
-    this.buildForm();
-    
+  public formGroupZelle: FormGroup;
+  public formGroupBanco: FormGroup;
+  ListaZelle = [];
+  ListaBanco = [];
+  usuario="";
+  constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder, public auth: AuthService) { 
+    auth.user$.forEach(usuario => { this.usuario=usuario.email;  });
   }
 
-  buildForm() {
+  ngOnInit() {
+    this.buildFormZelle();
+    this.buildFormBanco();
+    this.obtenerListaZelle();
+    this.obtenerListaBanco();
 
-    this.formGroup = this.formBuilder.group({
-      nombreUsuario:  new FormControl('', Validators.required),
+  }
+
+  buildFormZelle() {
+    this.formGroupZelle = this.formBuilder.group({
+      correoZelle: new FormControl('', Validators.required),
+      nombreZelle: new FormControl('', Validators.required),
+      alias: new FormControl('', Validators.required),
+      usuario: new FormControl('', Validators.required)
+    });
+  }
+
+  buildFormBanco() {
+    this.formGroupBanco = this.formBuilder.group({
+      nombreBanco: new FormControl('', Validators.required),
+      numeroCuenta: new FormControl('', Validators.required),
+      nombreCliente: new FormControl('', Validators.required),
+      cedula: new FormControl('', Validators.required),
+      aliasBanco: new FormControl('', Validators.required),
+      usuario: new FormControl('', Validators.required)
+    });
+  }
+
+  obtenerListaZelle(){
+    this.firebaseService.obtenerListaDeZelle()
+    .subscribe( ListaZelle =>{
+      this.ListaZelle = ListaZelle;
+    
+    })
+
+}
+
+obtenerListaBanco(){
+  this.firebaseService.obtenerListaDeBanco()
+  .subscribe( ListaBanco =>{
+    this.ListaBanco = ListaBanco;
+    ListaBanco.forEach(elemento => {
+      console.log(elemento)
+    })
+  })
+
+}
+
+
+  RegistrarNuevoZelle(value: { correoZelle: string; nombreZelle: string; usuario: string; }) {
+    value.usuario = (this.usuario);
+    console.log(value)
+    this.firebaseService.agregarNuevoZelle(value)
+    .then(
+      res => {
+        this.resetForm();
+        //this.router.navigate(['/venta']);
+      }
+    )
+  }
+
+  RegistrarNuevoBanco(value: { nombreCliente: string; nombreBanco: string;  numeroCuenta: number; cedula: string; aliasBanco: string; usuario: string;}) {
+    value.usuario = (this.usuario);
+    console.log(value);
+    this.firebaseService.agregarNuevoBanco(value)
+    .then(
+      res => {
+        this.resetForm();
+        //this.router.navigate(['/venta']);
+      }
+    )
+   
+  }
+
+  eliminarZelle(valor){
+    console.log(valor.id);
+    this.firebaseService.eliminarZelle(valor.id);
+  }
+
+  eliminarBanco(valor){
+    console.log(valor.id);
+    this.firebaseService.eliminarBanco(valor.id);
+  }
+
+  resetForm() {
+    this.formGroupZelle = this.formBuilder.group({
+      nombreUsuario: new FormControl('', Validators.required),
       Banco: new FormControl('', Validators.required),
       NumeroCuenta: new FormControl('', Validators.required),
       Cedula: new FormControl('', Validators.required),
       CorreoZelle: new FormControl('', Validators.required),
       NombreZelle: new FormControl('', Validators.required)
     });
-}
-
-onSubmit(value) {
-  this.firebaseService.createDatos(value)
-  .then(
-    res => {
-      this.resetForm();
-    }
-  )
-}
-
-resetForm() {
-  this.formGroup = this.formBuilder.group({
-      nombreUsuario:  new FormControl('', Validators.required),
-      Banco: new FormControl('', Validators.required),
-      NumeroCuenta: new FormControl('', Validators.required),
-      Cedula: new FormControl('', Validators.required),
-      CorreoZelle: new FormControl('', Validators.required),
-      NombreZelle: new FormControl('', Validators.required)
-  });
-}
+  }
 
 }
 

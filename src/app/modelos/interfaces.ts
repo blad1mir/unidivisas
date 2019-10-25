@@ -9,12 +9,20 @@ export interface Solicitud { //interfaces utilizadas en todo el codigo
     pago?: string;
 }
 
+export interface Zelle { 
+    id?: string;
+    alias?: string;
+    correoZelle?: string;
+    nombreZelle?: string;
+    usuario?: string; 
+}
+
 export interface Banco { 
-    Banco?: number;
-    Cedula?: number;
-    CorreoZelle?: string;
-    NombreZelle?: string;
-    NumeroCuenta?: number;
-    nombreUsuario?: string;
-    
+    id?: string;
+    cedula?: string;
+    nombreBanco?: string;
+    nombreCliente?: string;
+    numerocuenta?: number;
+    aliasBanco?: string;
+    usuario?: string; 
 }
