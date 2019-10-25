@@ -69,5 +69,11 @@
       "styles": [
         "styles.css"
       ]
-    }]
+    }],
+    "cacheConfig": {
+      "maxSize": 1,
+      "maxAge": "12h",
+      "timeOut": "5s",
+      "strategy": "freshness"
+    }
 }
