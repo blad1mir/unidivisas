@@ -43,12 +43,14 @@
                         <p>  {{banco.cedula}}</p>
                         <strong>MONTO A TRANSFERIR:</strong>
                         <p>  {{this.sumaa}} Bs.</p>
-                        <strong>NUMERO DE REFERENCIA:</strong>
-                        <input type="text" [(ngModel)]="numeroRef" class="form-control" placeholder="" value=""/>
+                        
                         <br>
-                <div class="row">
+                <div class="row" >
+                        <strong>NUMERO DE REFERENCIA:</strong>
+                        <input  type="number" [(ngModel)]="numeroRef" class="form-control" placeholder="" value=""/>
+                        <br>
                     <div class="col">
-                        <button class="btn btn-success btn-sm btn-block" (click)='block'>Aceptar </button>
+                        <button class="btn btn-success btn-sm btn-block" (click)="transferencia(numeroRef)">Aceptar </button>
                     </div>
                 </div>     
             </div>

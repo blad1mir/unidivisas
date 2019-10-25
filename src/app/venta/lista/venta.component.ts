@@ -1,3 +1,4 @@
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from '../../Servicios/firestore.service';
 import { Router } from '@angular/router';
@@ -22,8 +23,10 @@ export class VentaComponent implements OnInit {
   val = 0;
   id;
   user="";
+  ListaTrans = [];
+  Transfers= [];
   public formGroup: FormGroup;
-  constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder, private router: Router, public auth: AuthService) {
+  constructor(public firebaseService: FirestoreService,private afAuth: AngularFireAuth, private formBuilder: FormBuilder, private router: Router, public auth: AuthService) {
     // Transformarlo en un servicio.! 
     auth.user$.forEach(u => { this.user=u.email;  console.log("usuario A: "+this.user)});
   }
@@ -32,7 +35,8 @@ export class VentaComponent implements OnInit {
     //this.getData();
 
     this.getAll();
-    this. buildForm();
+    this.buildForm();
+    this.obtenerListaTransferencia();
   }
 
    buildForm() {
@@ -48,22 +52,6 @@ export class VentaComponent implements OnInit {
         });
     }
 
-  // getData() {
-  //   this.firebaseService.getSolicitudes()
-  //     .subscribe(result => {
-  //       this.items = result;
-  //       this.items.forEach(element => {
-  //         if (element.ref >= this.firebaseService.ide) {
-  //           this.firebaseService.ide = element.ref + 1;
-  //           console.log('before: ' +this.firebaseService.ide);
-  //         }
-  //         //console.log('before: '+ this.val);
-  //       });
-  //     }
-  //     );
-  //   //   // await delay(5000);
-  //   //   // this.wait(this.val);
-  // }
 
   getAll(){
    
@@ -72,13 +60,7 @@ export class VentaComponent implements OnInit {
     .subscribe( solicitud =>{
       this.solicitud = solicitud;
       console.log(solicitud);
-      // solicitud.forEach(element => {
-      //   if(element.usuario==this.user){
-      //     conta++;
-      //     element.ref=conta;
-      //     this.solActual.push(element);
-      //   } 
-      //  })
+  
     })
   
 }
@@ -91,16 +73,6 @@ export class VentaComponent implements OnInit {
    console.log("ID item: "+ this.id);
   }
 
-  // Update(value){
-  //   console.log("Inicio ")
-  //   console.log(this.id+ " ")
-  //   console.log(value.banco+ " ")
-  //   console.log(value.usuario+" ")
-  //   console.log("Fin")
-  
-
-  //   this.firebaseService.updateSolicitudes(this.id,value);
-  // }
 
        
   Update(value: { usuario: string; banco: string; pago: string; }){
@@ -115,6 +87,22 @@ export class VentaComponent implements OnInit {
         //this.router.navigate(['/venta']);
       }
     )
+  }
+
+  obtenerListaTransferencia(){
+    this.Transfers= [];
+    this.firebaseService.obtenerListaDeTransferencia()
+    .subscribe((transSnap) => {
+      this.Transfers = [];
+      transSnap.forEach(elemento => {
+        if(elemento.vendedor==this.afAuth.auth.currentUser.email){
+          console.log(elemento.vendedor)
+          console.log("aqui"+this.user)
+          this.Transfers.push(elemento);
+        }
+      })
+    })
+  
   }
 
   resetForm() {
@@ -132,6 +120,10 @@ export class VentaComponent implements OnInit {
   Delete(item){
     console.log(item.id);
     this.firebaseService.deleteSolicitudes(item.id);
+  }
+  aceptar(item){
+    console.log(item.id);
+    this.firebaseService.updateTransfer(item.id);
   }
 
   //   async wait(valor){

@@ -17,6 +17,15 @@ export interface Zelle {
     usuario?: string; 
 }
 
+export interface Transfer { 
+   
+    comprador?: string;
+    vendedor?: string;
+    refbanco?: number;
+    id?: number;
+    pagado?:boolean;
+}
+
 export interface Banco { 
     id?: string;
     cedula?: string;

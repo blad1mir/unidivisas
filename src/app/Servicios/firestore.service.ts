@@ -1,4 +1,4 @@
-import { Banco, Zelle } from './../modelos/interfaces';
+import { Banco, Zelle, Transfer } from './../modelos/interfaces';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Solicitud } from '../modelos/interfaces';
@@ -20,6 +20,9 @@ export class FirestoreService {
     this.ListaZelleCollection = db.collection<Zelle>('DatosZelle'); //Setear nuestra collección
     this.ListaZelle = this.ListaZelleCollection.valueChanges();
 
+    this.ListaTransferCollection = db.collection<Transfer>('Transferencia'); //Setear nuestra collección
+    this.ListaTransfer = this.ListaTransferCollection.valueChanges();
+
     
     this.ListaBancoCollection = db.collection<Banco>('DatosBanco'); //Setear nuestra collección
     this.ListaBanco = this.ListaBancoCollection.valueChanges();
@@ -36,6 +39,11 @@ export class FirestoreService {
   private ListaZelle: Observable<Zelle[]>;
   private ListaZelleDoc: AngularFirestoreDocument<Zelle>;
   private ListaZellePersonal: Observable<Zelle>;
+
+  private ListaTransferCollection: AngularFirestoreCollection <Transfer>; //Aqui se creo la propiedad de colleccion de las solicitudes
+  private ListaTransfer: Observable<Transfer[]>;
+  private ListaTransferDoc: AngularFirestoreDocument<Transfer>;
+  private ListaTransferPersonal: Observable<Transfer>;
 
   private ListaBancoCollection: AngularFirestoreCollection <Banco>; //Aqui se creo la propiedad de colleccion de las solicitudes
   private ListaBanco: Observable<Banco[]>;
@@ -108,6 +116,9 @@ eliminarBanco(solkey){
 updateSolicitudes(Key, value){
   return this.db.collection('Solicitud').doc(Key).set(value);
 }
+updateTransfer(Key){
+  return this.db.collection('Transferencia').doc(Key).update({ pagado: true });
+}
 
 createSolicitud(value){
   console.log(value); 
@@ -129,7 +140,27 @@ agregarNuevoZelle(value){
     usuario: value.usuario
   });
 }
+transferneciaBancaria(compra, vende, trans, id, monto){
+  return this.db.collection('Transferencia').add({
+    comprador: compra,
+    vendedor: vende,
+    refbanco: trans,
+    idventa: id,
+    montoDolar: monto,
+    pagado: false
+  });
+}
 
+obtenerListaDeTransferencia(){
+  //return this.db.collection('/Solicitud').valueChanges(); //esto es de bladimir pero no me sirve para traerme 1 solo producto
+  return this.ListaTransfer = this.ListaTransferCollection.snapshotChanges().pipe(map( changes => {
+    return changes.map(action => {
+      const data = action.payload.doc.data() as Transfer;
+     
+      return data;
+    });
+  }));
+}
 agregarNuevoBanco(value){
   return this.db.collection('DatosBanco').add({
     cedula: value.cedula,

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { User } from './../user.model';
+import { Component, OnInit, ɵCompiler_compileModuleAsync__POST_R3__ } from '@angular/core';
 import { FirestoreService } from '../Servicios/firestore.service';
 import { Solicitud } from '../modelos/interfaces';
-import { ActivatedRoute, Params} from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 
 @Component({
@@ -10,7 +12,7 @@ import { ActivatedRoute, Params} from '@angular/router';
   styleUrls: ['./transaccion.component.css']
 })
 export class TransaccionComponent implements OnInit {
-  constructor(private firestore: FirestoreService, private route: ActivatedRoute) { }
+  constructor(private router: Router,private firestore: FirestoreService, private afAuth: AngularFireAuth, private route: ActivatedRoute) { }
   public solicitud: Solicitud = {};
   public sumaa;
   user="";
@@ -51,6 +53,12 @@ export class TransaccionComponent implements OnInit {
       })
     })
   
+  }
+
+  transferencia(numeroRef){
+    this.firestore.transferneciaBancaria(this.afAuth.auth.currentUser.email,this.solicitud.usuario,numeroRef,this.solicitud.id, this.solicitud.monto)
+    alert("Su transferencia fue realizada con exito");
+    this.router.navigate(['/compra']);
   }
   
 
