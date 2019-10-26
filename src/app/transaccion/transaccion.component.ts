@@ -56,7 +56,9 @@ export class TransaccionComponent implements OnInit {
   }
 
   transferencia(numeroRef){
-    this.firestore.transferneciaBancaria(this.afAuth.auth.currentUser.email,this.solicitud.usuario,numeroRef,this.solicitud.id, this.solicitud.monto)
+    const idSolicitud = this.route.snapshot.params['id'];
+    this.firestore.deleteSolicitudes(idSolicitud);
+  
     alert("Su transferencia fue realizada con exito");
     this.router.navigate(['/compra']);
   }
@@ -64,7 +66,8 @@ export class TransaccionComponent implements OnInit {
 
   confirmartransaccion(){
     if(confirm('Seguro que quieres realizar esta transacción, no podra cancelar despues de este punto.')){
-      var x = document.getElementById("aparecer");
+      var x = document.getElementById("aparecer"); 
+      this.firestore.transferneciaBancaria(this.afAuth.auth.currentUser.email,this.solicitud.usuario,0,this.solicitud.id, this.solicitud.monto)
     if (x.style.display === "none") {
       x.style.display = "block";
     } else {

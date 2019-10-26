@@ -107,8 +107,8 @@
             <div *ngIf="comentario.ProductoId == detalle.id"> -->
       <tr *ngIf="item.usuario === usere.email">
   
-        <td>{{item.monto}}</td>
-        <td>{{item.tarifa}}</td>
+        <td>{{item.monto}} $</td>
+        <td>{{item.tarifa}} Bs.</td>
         <td>{{item.banco}}</td>
         <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal"
             (click)="setId(item)">Editar</button>
@@ -121,12 +121,11 @@
 
 
   <br>
-  <table class="table col-md-6  offset-md-3" *ngIf="auth.user$ | async as usere">
+  <table class="table col-md-6  offset-md-3" *ngIf="auth.user$ | async as usuario">
     <thead>
       <tr>
   
         <th scope="col">Zelle</th>
-        <th scope="col">Referencia Bancaria</th>
         <th scope="col">Monto</th>
         <th scope="col">Pagar</th>
   
@@ -136,11 +135,10 @@
       <!-- <div *ngFor="let comentario of comentarios ">
             <div *ngIf="comentario.ProductoId == detalle.id"> -->
       
-        <tr *ngIf="item.vendedor === usere.email">
+        <tr *ngIf="item.vendedor === usuario.email">
         <td>{{item.comprador}}</td>
-        <td>{{item.refbanco}}</td>
         <td>{{item.montoDolar}} $</td>
-        <td><button type="button" class="btn btn-success" (click)="aceptar(item)">Pagado</button></td>
+        <td><button type="button" class="btn btn-primary" (click)="aceptar(item)">Pagar</button></td>
         
       </tr>
   
