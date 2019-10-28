@@ -2,8 +2,50 @@
 <div>
   <h1 align=center>Opciones a compra:</h1>
 </div>
+  <div class="filtros col-sm-6">
+          <p>Cantidad en $:</p>
+          <input type="number"
+                [(ngModel)]="monto" placeholder="Desde"
+                (change)="filtrarMayor('monto', monto)">
 
-  <table class="table col-md-6  offset-md-3">
+              <button *ngIf="monto"
+                (click)="QuitarFiltro('monto')">
+                  X
+              </button>
+      <input type="number"
+            [(ngModel)]="monto2" placeholder="Hasta"
+            (change)="filtrarMenor('monto', monto2)">
+
+          <button *ngIf="monto"
+            (click)="QuitarFiltro('monto')">
+              X
+          </button>
+          <hr>
+
+          <p>Tarifa en Bs.:</p>
+          <input type="number"
+                [(ngModel)]="tarifa" placeholder="Desde"
+                (change)="filtrarMayor('tarifa', tarifa)">
+
+              <button *ngIf="tarifa"
+                (click)="QuitarFiltro('tarifa')">
+                  X
+              </button>
+              
+      <input type="number"
+            [(ngModel)]="tarifa2" placeholder="Hasta"
+            (change)="filtrarMenor('tarifa', tarifa2)">
+
+          <button *ngIf="tarifa"
+            (click)="QuitarFiltro('tarifa')">
+              X
+          </button>
+          <hr>
+</div>
+
+
+
+  <table class="table col-sm-6">
     <thead align=center>
       <tr>
         <th  scope="col" >Monto</th>
@@ -14,7 +56,7 @@
     </thead>
     
     <tbody>
-      <tr *ngFor="let solicitud of solicitudes">
+      <tr *ngFor="let solicitud of ventasFiltradas">
         <td align=center>{{solicitud.monto}} $</td>
         <td align=center>{{solicitud.tarifa}} Bs.</td>
         <td align=center>{{solicitud.banco}}</td>

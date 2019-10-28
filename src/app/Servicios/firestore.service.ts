@@ -1,4 +1,4 @@
-import { Banco, Zelle, Transfer } from './../modelos/interfaces';
+import { Banco, Zelle, Transfer, Filtro1, Filtro2 } from './../modelos/interfaces';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Solicitud } from '../modelos/interfaces';
@@ -49,6 +49,13 @@ export class FirestoreService {
   private ListaBanco: Observable<Banco[]>;
   private ListaBancoDoc: AngularFirestoreDocument<Banco>;
   private ListaBancoPersonal: Observable<Banco>;
+
+  f1Coleccion: AngularFirestoreCollection<Filtro1>;
+  f1: Observable<Filtro1[]>;
+  f1Doc: AngularFirestoreDocument<Filtro1>;
+  f2Coleccion: AngularFirestoreCollection<Filtro2>;
+  f2: Observable<Filtro2[]>;
+  f2Doc: AngularFirestoreDocument<Filtro2>;
 
   getSolicitudes(){
     //return this.db.collection('/Solicitud').valueChanges(); //esto es de bladimir pero no me sirve para traerme 1 solo producto
@@ -130,6 +137,28 @@ createSolicitud(value){
     pago: value.pago,
     usuario: value.usuario
   });
+}
+obtenerf1(){
+  this.f1Coleccion = this.db.collection('Pagina');
+  this.f1 = this.f1Coleccion.snapshotChanges().pipe(map(actions => {
+    return actions.map(a => {
+      const data = a.payload.doc.data() as Filtro1;
+      console.log("dataaa", data);
+      return data
+    })
+  }))
+  return this.f1;
+}
+obtenerf2(){
+  this.f2Coleccion = this.db.collection('Pagina');
+  this.f2 = this.f2Coleccion.snapshotChanges().pipe(map(actions => {
+    return actions.map(a => {
+      const data = a.payload.doc.data() as Filtro2;
+      console.log("dataaa", data);
+      return data
+    })
+  }))
+  return this.f2;
 }
 
 agregarNuevoZelle(value){
