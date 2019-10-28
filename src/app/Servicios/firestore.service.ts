@@ -50,7 +50,7 @@ export class FirestoreService {
   private ListaBancoDoc: AngularFirestoreDocument<Banco>;
   private ListaBancoPersonal: Observable<Banco>;
 
-  getSolicitudes(){
+  obtenerSolicitudes(){
     //return this.db.collection('/Solicitud').valueChanges(); //esto es de bladimir pero no me sirve para traerme 1 solo producto
     let x = 1;
     return this.Solicitudes = this.SolicitudesCollection.snapshotChanges().pipe(map( changes => {
@@ -87,6 +87,16 @@ export class FirestoreService {
     }));
   }
   
+  obtenerListaDeTransferencia(){
+  //return this.db.collection('/Solicitud').valueChanges(); //esto es de bladimir pero no me sirve para traerme 1 solo producto
+  return this.ListaTransfer = this.ListaTransferCollection.snapshotChanges().pipe(map( changes => {
+    return changes.map(action => {
+      const data = action.payload.doc.data() as Transfer;
+      data.idventa = action.payload.doc.id;
+      return data;
+    });
+  }));
+}
   getOneSolicitud(idSolicitud: string){
   this.SolicitudDoc = this.db.doc<Solicitud>(`Solicitud/${idSolicitud}`);
     return this.Solicitud = this.SolicitudDoc.snapshotChanges().pipe(map(action => {
@@ -113,7 +123,11 @@ eliminarBanco(solkey){
   return this.db.collection('DatosBanco').doc(solkey).delete();
 }
 
-updateSolicitudes(Key, value){
+eliminarTransferencias(solkey){
+  return this.db.collection('Transferencia').doc(solkey).delete();
+}
+
+ActualizarSolicitudes(Key, value){
   return this.db.collection('Solicitud').doc(Key).set(value);
 }
 updateTransfer(Key,value){
@@ -151,16 +165,7 @@ transferneciaBancaria(compra, vende, trans, id, monto){
   });
 }
 
-obtenerListaDeTransferencia(){
-  //return this.db.collection('/Solicitud').valueChanges(); //esto es de bladimir pero no me sirve para traerme 1 solo producto
-  return this.ListaTransfer = this.ListaTransferCollection.snapshotChanges().pipe(map( changes => {
-    return changes.map(action => {
-      const data = action.payload.doc.data() as Transfer;
-     
-      return data;
-    });
-  }));
-}
+
 agregarNuevoBanco(value){
   return this.db.collection('DatosBanco').add({
     cedula: value.cedula,

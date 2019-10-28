@@ -132,7 +132,7 @@
   
       </tr>
     </thead>
-    <tbody *ngFor="let item of Transfers">
+    <tbody *ngFor="let item of Transferencias">
       <!-- <div *ngFor="let comentario of comentarios ">
             <div *ngIf="comentario.ProductoId == detalle.id"> -->
       
@@ -140,7 +140,8 @@
         <td>{{item.comprador}}</td>
         <td>{{item.montoDolar}} $</td>
         <td *ngIf="item.refbanco != 0 ; else espera">Recibido</td>
-        <td><button type="button" class="btn btn-primary" (click)="aceptar(item)">Pagar</button></td>
+        <td><button type="button" class="btn btn-primary" (click)="EliminarTransferencias(item)">Pagar</button></td>
+      
         
       </tr>
   

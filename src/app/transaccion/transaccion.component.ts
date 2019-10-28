@@ -57,11 +57,13 @@ export class TransaccionComponent implements OnInit {
   }
 
   transferencia(numeroRef){
-    
+     console.log(numeroRef)
     this.Transfers[0].refbanco=numeroRef;
     this.Transfers[0].pagado=true;
 
     this.firestore.updateTransfer(this.Transfers[0].idventa, this.Transfers[0]);
+    const idSolicitud = this.route.snapshot.params['id'];
+    this.firestore.deleteSolicitudes(idSolicitud);
     alert("Su transferencia fue realizada con exito");
     this.router.navigate(['/compra']);
   }

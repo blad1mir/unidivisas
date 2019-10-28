@@ -17,24 +17,21 @@ import { AuthService } from 'src/app/auth.service';
 })
 
 export class VentaComponent implements OnInit {
-  items: Array<any>;
   solicitud = [];
-  solActual = [];
-  val = 0;
-  id;
-  user="";
-  ListaTrans = [];
-  Transfers= [];
+  solicitudActual = [];
+  idColeccionActual;
+  usuario="";
+  Transferencias= [];
   public formGroup: FormGroup;
   constructor(public firebaseService: FirestoreService,private afAuth: AngularFireAuth, private formBuilder: FormBuilder, private router: Router, public auth: AuthService) {
     // Transformarlo en un servicio.! 
-    auth.user$.forEach(u => { this.user=u.email;  console.log("usuario A: "+this.user)});
+    auth.user$.forEach(u => { this.usuario=u.email;  console.log("usuario A: "+this.usuario)});
   }
 
   ngOnInit() {
     //this.getData();
 
-    this.getAll();
+    this.obtenerSolicitudes();
     this.buildForm();
     this.obtenerListaTransferencia();
   }
@@ -53,10 +50,8 @@ export class VentaComponent implements OnInit {
     }
 
 
-  getAll(){
-   
-    let conta=0;
-    this.firebaseService.getSolicitudes()
+  obtenerSolicitudes(){
+    this.firebaseService.obtenerSolicitudes()
     .subscribe( solicitud =>{
       this.solicitud = solicitud;
       console.log(solicitud);
@@ -65,22 +60,20 @@ export class VentaComponent implements OnInit {
   
 }
 
-  setId(item){
-   this.id=item.id;
-   this.solActual=item;
+  colocarID(item){
+   this.idColeccionActual=item.id;
+   this.solicitudActual=item;
    //console.log("Colección: "+item.id+' '+item.ref+' '+item.banco+' '+item.monto+' '+item.tarifa);
-  
-   console.log("ID item: "+ this.id);
   }
 
 
        
-  Update(value: { usuario: string; banco: string; pago: string; }){
-    console.log("USUARIOOO: "+this.user)
+  ActualizarSolicitudes(value: { usuario: string; banco: string; pago: string; }){
+    console.log("USUARIOOO: "+this.usuario)
     console.log(value.banco +''+value.pago)
-    value.usuario = (this.user);
+    value.usuario = (this.usuario);
     console.log(this.formGroup.controls)
-    this.firebaseService.updateSolicitudes(this.id,value)
+    this.firebaseService.ActualizarSolicitudes(this.idColeccionActual,value)
     .then(
       res => {
         this.resetForm();
@@ -90,13 +83,13 @@ export class VentaComponent implements OnInit {
   }
 
   obtenerListaTransferencia(){
-    this.Transfers= [];
+    this.Transferencias= [];
     this.firebaseService.obtenerListaDeTransferencia()
     .subscribe((transSnap) => {
-      this.Transfers = [];
+      this.Transferencias = [];
       transSnap.forEach(elemento => {
         if(elemento.vendedor==this.afAuth.auth.currentUser.email){
-          this.Transfers.push(elemento);
+          this.Transferencias.push(elemento);
         }
       })
     })
@@ -110,14 +103,19 @@ export class VentaComponent implements OnInit {
       tarifa: new FormControl('', Validators.required),
       banco:  new FormControl('', Validators.required),
       pago:  new FormControl('', Validators.required),
-      usuario: [this.user, Validators.required ]
+      usuario: [this.usuario, Validators.required ]
     });
   }
 
 
-  Delete(item){
+  EliminarSolicitudes(item){
     console.log(item.id);
     this.firebaseService.deleteSolicitudes(item.id);
+  }
+
+  EliminarTransferencias(item){
+    console.log(item);
+    this.firebaseService.eliminarTransferencias(item.idventa);
   }
   aceptar(item){
     console.log(item.id);

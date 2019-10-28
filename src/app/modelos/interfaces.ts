@@ -23,7 +23,7 @@ export interface Transfer {
     vendedor?: string;
     refbanco?: number;
     montoDolar?: number;
-    id?: number;
+    idventa?: string;
     pagado?:boolean;
 }
 

@@ -20,13 +20,13 @@ export class CompraComponent implements OnInit {
 
   ngOnInit() {
     //this.getData();
-    this.firebaseService.getSolicitudes().subscribe(solicitudes =>{
+    this.firebaseService.obtenerSolicitudes().subscribe(solicitudes =>{
       console.log('SOLICITUDES', solicitudes);
       this.solicitudes = solicitudes.slice(0,this.a);
     })
   } 
   mas(){
-    this.firebaseService.getSolicitudes().subscribe(solicitudes =>{
+    this.firebaseService.obtenerSolicitudes().subscribe(solicitudes =>{
       console.log('SOLICITUDES', solicitudes);
       this.solicitudes = solicitudes.slice(0,);
     })

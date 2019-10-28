@@ -15,7 +15,7 @@ export class InicioComponent implements OnInit {
 
   ngOnInit() {
     //this.getData();
-    this.firebaseService.getSolicitudes().subscribe(solicitudes =>{
+    this.firebaseService.obtenerSolicitudes().subscribe(solicitudes =>{
       console.log('SOLICITUDES', solicitudes);
       this.solicitudes = solicitudes;
     })
