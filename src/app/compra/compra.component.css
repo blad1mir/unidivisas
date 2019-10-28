@@ -9,3 +9,14 @@
     box-shadow: 3px 3px 0px transparent;
     transition: 0.5s;
     }
+    .filtros{
+      margin: 2%;
+      width: 20%;
+      float: left;
+      color: white;
+      background-color: #0aaaf0;
+  }
+  
+  .filtros input{
+      width: 90%;
+  }
