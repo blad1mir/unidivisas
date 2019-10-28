@@ -18,6 +18,7 @@ export class TransaccionComponent implements OnInit {
   user="";
   ListaBanco = [];
   BancosPersonales= [];
+  Transfers= [];
    
   ngOnInit() {
     const idSolicitud = this.route.snapshot.params['id'];
@@ -56,7 +57,13 @@ export class TransaccionComponent implements OnInit {
   }
 
   transferencia(numeroRef){
-    this.firestore.transferneciaBancaria(this.afAuth.auth.currentUser.email,this.solicitud.usuario,numeroRef,this.solicitud.id, this.solicitud.monto)
+     console.log(numeroRef)
+    this.Transfers[0].refbanco=numeroRef;
+    this.Transfers[0].pagado=true;
+
+    this.firestore.updateTransfer(this.Transfers[0].idventa, this.Transfers[0]);
+    const idSolicitud = this.route.snapshot.params['id'];
+    this.firestore.deleteSolicitudes(idSolicitud);
     alert("Su transferencia fue realizada con exito");
     this.router.navigate(['/compra']);
   }
@@ -64,7 +71,11 @@ export class TransaccionComponent implements OnInit {
 
   confirmartransaccion(){
     if(confirm('Seguro que quieres realizar esta transacción, no podra cancelar despues de este punto.')){
-      var x = document.getElementById("aparecer");
+      var x = document.getElementById("aparecer"); 
+      this.firestore.transferneciaBancaria(this.afAuth.auth.currentUser.email,this.solicitud.usuario,0,this.solicitud.id, this.solicitud.monto);
+      this.obtenerListaTransferencia();
+      //const idSolicitud = this.route.snapshot.params['id'];
+      //this.firestore.deleteSolicitudes(idSolicitud);
     if (x.style.display === "none") {
       x.style.display = "block";
     } else {
@@ -81,5 +92,21 @@ export class TransaccionComponent implements OnInit {
     
 
 
+    }
+
+    obtenerListaTransferencia(){
+      this.Transfers= [];
+      this.firestore.obtenerListaDeTransferencia()
+      .subscribe((transSnap) => {
+        this.Transfers = [];
+        transSnap.forEach(elemento => {
+          if((elemento.comprador==this.afAuth.auth.currentUser.email) && (elemento.vendedor==this.solicitud.usuario)&& (elemento.montoDolar==this.solicitud.monto) && (elemento.pagado==false)){
+           
+            this.Transfers.push(elemento);
+            console.log("Transferencia"+this.Transfers[0].idventa)
+          }
+        })
+      })
+    
     }
 }
