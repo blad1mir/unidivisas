@@ -96,8 +96,6 @@ export class VentaComponent implements OnInit {
       this.Transfers = [];
       transSnap.forEach(elemento => {
         if(elemento.vendedor==this.afAuth.auth.currentUser.email){
-          console.log(elemento.vendedor)
-          console.log("aqui"+this.user)
           this.Transfers.push(elemento);
         }
       })
@@ -123,7 +121,7 @@ export class VentaComponent implements OnInit {
   }
   aceptar(item){
     console.log(item.id);
-    this.firebaseService.updateTransfer(item.id);
+    //this.firebaseService.updateTransfer(item.id);
   }
 
   //   async wait(valor){

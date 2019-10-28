@@ -127,6 +127,7 @@
   
         <th scope="col">Zelle</th>
         <th scope="col">Monto</th>
+        <th scope="col">Estatus</th>
         <th scope="col">Pagar</th>
   
       </tr>
@@ -138,6 +139,7 @@
         <tr *ngIf="item.vendedor === usuario.email">
         <td>{{item.comprador}}</td>
         <td>{{item.montoDolar}} $</td>
+        <td *ngIf="item.refbanco != 0 ; else espera">Recibido</td>
         <td><button type="button" class="btn btn-primary" (click)="aceptar(item)">Pagar</button></td>
         
       </tr>
@@ -146,3 +148,7 @@
   </table>
   
   </div>
+
+  <ng-template #espera>
+    <td> En proceso</td>
+  </ng-template>

@@ -116,8 +116,8 @@ eliminarBanco(solkey){
 updateSolicitudes(Key, value){
   return this.db.collection('Solicitud').doc(Key).set(value);
 }
-updateTransfer(Key){
-  return this.db.collection('Transferencia').doc(Key).update({ pagado: true });
+updateTransfer(Key,value){
+  return this.db.collection('Transferencia').doc(Key).set(value);
 }
 
 createSolicitud(value){
