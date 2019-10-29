@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { FirestoreService } from '../Servicios/firestore.service';
+import { FirestoreService } from '../Servicios/firestore.service';4
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -9,8 +10,25 @@ import { FirestoreService } from '../Servicios/firestore.service';
 })
 export class MenuComponent implements OnInit {
   user ="";
+  bgClass = '';
 
-  constructor(public firebaseService: FirestoreService, public auth: AuthService) { }
+  constructor(
+    public firebaseService: FirestoreService, 
+    public auth: AuthService,
+    private router: Router) { 
+    // subscribe to router navigation
+    this.router.events.subscribe(event => {
+      // filter `NavigationEnd` events
+      if (event instanceof NavigationEnd) {
+        // get current route without leading slash `/`
+        const eventUrl = /(?<=\/).+/.exec(event.urlAfterRedirects);
+        const currentRoute = (eventUrl || []).join('');
+        // set bgClass property with the value of the current route
+        this.bgClass = currentRoute;
+      }
+    });
+
+    }
 
   ngOnInit() {
   }
