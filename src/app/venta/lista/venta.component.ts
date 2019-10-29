@@ -37,14 +37,21 @@ export class VentaComponent implements OnInit {
     this.getAll();
     this.buildForm();
     this.obtenerListaTransferencia();
+    //this.Validador();
   }
 
-   buildForm() {
+  //Validador(){
+  //  if(ngModel){
+  //    var convert
+  //  }
+  //}
+
+  buildForm() {
    
         this.formGroup = this.formBuilder.group({
           ref: [''],
-          monto: ['', Validators.required ],
-          tarifa: ['', Validators.required ],
+          monto: ['', [Validators.pattern("^[0-9]*$"), Validators.required] ],
+          tarifa: ['', [Validators.pattern("^[0-9]*$"), Validators.required] ],
           banco: ['', Validators.required ],
           pago: ['', Validators.required ],
           usuario: ['', Validators.required ]
@@ -75,18 +82,23 @@ export class VentaComponent implements OnInit {
 
 
        
-  Update(value: { usuario: string; banco: string; pago: string; }){
+  Update(form: FormGroup){
+  // Update(value: { usuario: string; banco: string; pago: string; }){
     console.log("USUARIOOO: "+this.user)
-    console.log(value.banco +''+value.pago)
-    value.usuario = (this.user);
-    console.log(this.formGroup.controls)
-    this.firebaseService.updateSolicitudes(this.id,value)
-    .then(
-      res => {
-        this.resetForm();
-        //this.router.navigate(['/venta']);
-      }
-    )
+    if (form.valid) {
+      console.log(form.value.banco +''+ form.value.pago)
+      form.value.usuario = (this.user);
+      console.log(this.formGroup.controls)
+      this.firebaseService.updateSolicitudes(this.id, form.value)
+      .then(
+        res => {
+          this.resetForm();
+          //this.router.navigate(['/venta']);
+        }
+      )
+    } else {
+      //console.log("Algo es invalido")
+    }
   }
 
   obtenerListaTransferencia(){
@@ -122,8 +134,12 @@ export class VentaComponent implements OnInit {
     this.firebaseService.deleteSolicitudes(item.id);
   }
   aceptar(item){
-    console.log(item.id);
-    this.firebaseService.updateTransfer(item.id);
+    console.log("sssss", item.value);
+    if (item.value) {
+      this.firebaseService.updateTransfer(item.value.id);
+    } else {
+      console.log("Algo no era valido")
+    }
   }
 
   //   async wait(valor){

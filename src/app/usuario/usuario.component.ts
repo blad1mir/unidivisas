@@ -57,6 +57,14 @@ export class UsuarioComponent implements OnInit {
 
 }
 
+validateForm() {
+  var x = document.forms["myForm"]["fname"].value;
+  if (x == "") {
+    alert("Name must be filled out");
+    return false;
+  }
+}
+
 obtenerListaBanco(){
   this.firebaseService.obtenerListaDeBanco()
   .subscribe( ListaBanco =>{
@@ -69,30 +77,41 @@ obtenerListaBanco(){
 }
 
 
-  RegistrarNuevoZelle(value: { correoZelle: string; nombreZelle: string; usuario: string; }) {
-    value.usuario = (this.usuario);
-    console.log(value)
-    this.firebaseService.agregarNuevoZelle(value)
-    .then(
-      res => {
-        this.resetForm();
-        //this.router.navigate(['/venta']);
-      }
-    )
+  //RegistrarNuevoZelle(value: { correoZelle: string; nombreZelle: string; usuario: string; }) {
+  RegistrarNuevoZelle(form: FormGroup){
+    if (form.valid){
+      console.log(form.value.bnco +''+ form.value.pago)
+      form.value.usuario = (this.usuario);
+      console.log(this.formGroupZelle.controls);
+      this.firebaseService.agregarNuevoZelle(form.value)
+      .then(
+        res => {
+          this.resetForm();
+          //this.router.navigate(['/venta']);
+        }
+      )
+    } else {
+      //console.log("jojojojo")
+    }
   }
 
-  RegistrarNuevoBanco(value: { nombreCliente: string; nombreBanco: string;  numeroCuenta: number; cedula: string; aliasBanco: string; usuario: string;}) {
-    value.usuario = (this.usuario);
-    console.log(value);
-    this.firebaseService.agregarNuevoBanco(value)
-    .then(
-      res => {
-        this.resetForm();
-        //this.router.navigate(['/venta']);
-      }
-    )
-   
+  //RegistrarNuevoBanco(value: { nombreCliente: string; nombreBanco: string;  numeroCuenta: number; cedula: string; aliasBanco: string; usuario: string;}) {
+  RegistrarNuevoBanco(form: FormGroup){  
+    if (form.valid){
+      form.value.usuario = (this.usuario);
+      console.log(this.formGroupBanco.controls)
+      this.firebaseService.agregarNuevoBanco(form.value)
+      .then(
+        res => {
+          this.resetForm();
+          //this.router.navigate(['/venta']);
+        }
+      )
+    } else {
+      //console.log("jejejeje")
+    }
   }
+    
 
   eliminarZelle(valor){
     console.log(valor.id);

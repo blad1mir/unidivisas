@@ -42,8 +42,8 @@ export class SolicitudComponent implements OnInit {
 
          this.formGroup = this.formBuilder.group({
            ref: [''],
-           monto: new FormControl('', Validators.required),
-           tarifa: new FormControl('', Validators.required),
+           monto: new FormControl('', [Validators.pattern("^[0-9]*$"), Validators.required]),
+           tarifa: new FormControl('', [Validators.pattern("^[0-9]*$"), Validators.required]),
            banco:  new FormControl('', Validators.required),
            pago:  new FormControl('', Validators.required),
            usuario: new FormControl(this.user, Validators.required),
@@ -51,19 +51,25 @@ export class SolicitudComponent implements OnInit {
      }
 
      
-  onSubmit(value: { usuario: string; banco: string; pago: string; }){
+  //onSubmit(value: { usuario: string; banco: string; pago: string; }){
+  onSubmit(form: FormGroup){
     console.log("USUARIOOO: "+this.user)
-    console.log(value.banco +''+value.pago)
-    value.usuario = (this.user);
-    console.log(this.formGroup.controls)
-    
-    this.firebaseService.createSolicitud(value)
-    .then(
-      res => {
-        this.resetForm();
-        //this.router.navigate(['/venta']);
-      }
-    )
+    console.log(form.value.banco +''+ form.value.pago)
+    if (form.valid){
+
+      form.value.usuario = (this.user);
+      console.log(this.formGroup.controls)
+      
+      this.firebaseService.createSolicitud(form.value)
+      .then(
+        res => {
+          this.resetForm();
+          //this.router.navigate(['/venta']);
+        }
+      )
+    } else {
+      //console.log("ajajajaja")
+    }
   }
 
   resetForm() {
