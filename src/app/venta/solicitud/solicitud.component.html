@@ -3,8 +3,25 @@
   <h1 align=center>Vender:</h1>
 </div>
 <div class="row">
+  <div  class="table-wrapper-scroll-y my-custom-scrollbar col-md-2 offset-md-1">
+    <h3>Mercado: </h3>
+      <table class="table table-bordered table-striped mb-0">
+          <thead>
+            <tr>
+              <th scope="col">Monto</th>
+              <th scope="col">Tarifa</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of solicitud">
+            <tr>
+              <td>{{item.monto}} $</td>
+              <td>{{item.tarifa}} Bs.</td>
+            </tr>
+          </tbody>
+        </table>
+  </div>
 
-  <div class="col-md-4 offset-md-2" *ngIf="auth.user$ | async as useru">
+  <div class="col-md-3" *ngIf="auth.user$ | async as useru">
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
       <input type="hidden" class="form-control" formControlName="usuario" value={{useru.email}} readonly="readonly">
       <div class ="form-group">

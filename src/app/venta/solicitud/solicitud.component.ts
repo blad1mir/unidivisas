@@ -17,6 +17,7 @@ export class SolicitudComponent implements OnInit {
   ListaZelle = [];
   BancosPersonales= [];
   ZellePersonal= [];
+  solicitud = [];
 
   // Crear servicio de Auth que devuelva el usuario actual, estado si esta logged in o no , etc. (Ivernon)
 
@@ -33,6 +34,7 @@ export class SolicitudComponent implements OnInit {
     this.buildForm(); 
     this.obtenerListaBanco();
     this.obtenerListaZelle();
+    this.obtenerSolicitudes();
   }
 
    buildForm() {
@@ -105,6 +107,16 @@ export class SolicitudComponent implements OnInit {
       })
     
     })
+
+}
+
+obtenerSolicitudes(){
+  this.firebaseService.obtenerSolicitudes()
+  .subscribe( solicitud =>{
+    this.solicitud = solicitud;
+    console.log(solicitud);
+
+  })
 
 }
 
