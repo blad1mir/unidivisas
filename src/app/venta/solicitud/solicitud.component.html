@@ -57,8 +57,29 @@
 
 
 
-
-      <button type="submit"  class="btn btn-primary">Enviar solicitud</button>
+     <!-- <h2>Debug</h2>
+      <ul>
+        <li>Is my form  valid? {{formGroup.valid}}</li>
+        <li><pre>{{formGroup.controls.monto.errors| json}}</pre></li>
+        <li><pre>{{formGroup.controls.tarifa.errors| json}}</pre></li>
+        <li><pre>{{formGroup.controls.banco.errors| json}}</pre></li>
+        <li><pre>{{formGroup.controls.pago.errors| json}}</pre></li>
+        <li><pre>{{formGroup.controls.usuario.errors| json}}</pre></li>
+      </ul>
+      -->
+      <div *ngIf="BancosPersonales?.length > 0 && ZellePersonal?.length > 0">
+      <div *ngFor="let banco of BancosPersonales"  > 
+      </div>
+      <div *ngFor="let zelle of ZellePersonal"  > 
+        </div>
+      <button type="submit" [disabled]="!formGroup.valid" class="btn btn-primary">Enviar solicitud</button>
+    </div>
+    <div *ngIf="BancosPersonales?.length === 0 || ZellePersonal?.length === 0">
+        
+          <button type="button" [routerLink]="['/perfil']" class="btn btn-primary">Añadir Zelle/Banco</button>
+        
+      </div>
+    
     </form>
     
   </div>

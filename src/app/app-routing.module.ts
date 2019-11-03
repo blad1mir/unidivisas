@@ -18,7 +18,7 @@ const routes: Routes = [
     {path: 'venta', component: SolicitudComponent,  canActivate: [AuthGuard]},
     {path: 'transaccion/:id', component: TransaccionComponent,  canActivate: [AuthGuard]},
     {path: 'compra', component: CompraComponent, canActivate: [AuthGuard]},
-    {path: 'ajustes', component: UsuarioComponent, canActivate: [AuthGuard]},
+    {path: 'perfil', component: UsuarioComponent, canActivate: [AuthGuard]},
     {path: 'inicio', component: InicioComponent, canActivate: [AuthGuard]},
     {path: 'login', component: LoginComponent}
     ],
