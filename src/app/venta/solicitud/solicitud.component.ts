@@ -56,16 +56,21 @@ this.formGroup.get('tarifa').valueChanges
     console.log("Verifica esto: "+this.user); 
 
     
-    function minLength(minimum) {
+    function longitudMinima(minimum) {
       return function(input) {
         return input.value.length >= minimum ? null : { minLength: true };
+      };
+    }
+    function nega(mi) {
+      return function(input) {
+        return input.value >= mi ? null : { mi: true };
       };
     }
 
          this.formGroup = this.formBuilder.group({
            ref: [''],
-           monto: new FormControl('', Validators.required),
-           tarifa: new FormControl('', [Validators.required]),
+           monto: new FormControl('', [Validators.required,nega(1)]),
+           tarifa: new FormControl('', [Validators.required,nega(1)]),
            banco:  new FormControl('', Validators.required),
            pago:  new FormControl(''),
            usuario: new FormControl(this.user),

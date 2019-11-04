@@ -55,14 +55,14 @@
 
       <div class="form-group">
         <label for="numeroCuenta">Número de cuenta completo: </label>
-        <input type="number" class="form-group" required="required"  formControlName="numeroCuenta"
-          placeholder="00000000000000000000" maxlength="16">
+        <input type="text" class="form-group" required="required"  formControlName="numeroCuenta"
+          placeholder="00000000000000000000" maxlength="20" >
         <small id="NCuentaHelp" class="form-text text-muted">Coloque su numero de cuenta completa</small>
       </div>
 
       <div class="form-group">
         <label for="Cedula">Cédula de identidad : </label>
-        <input type="text" class="form-control" required="required"  placeholder="E/V 00000000" formControlName="cedula">
+        <input type="text" class="form-control" maxlength="8"required="required"  placeholder="00000000" formControlName="cedula">
       </div>
 
       <div class="form-group">
@@ -70,8 +70,18 @@
           <input type="text" class="form-control" formControlName="aliasBanco">
         </div>
 
-      <button type="submit" class="btn btn-primary">Agregar </button>
+      <button type="submit" [disabled]="!formGroupBanco.valid" class="btn btn-primary">Agregar </button>
     </form>
+   <!--
+    <ul>
+      <li>Is my form  valid? {{formGroupBanco.valid}}</li>
+      <li><pre>{{formGroupBanco.controls.nombreBanco.errors| json}}</pre></li>
+        <li><pre>{{formGroupBanco.controls.numeroCuenta.errors| json}}</pre></li>
+        <li><pre>{{formGroupBanco.controls.nombreCliente.errors| json}}</pre></li>
+        <li><pre>{{formGroupBanco.controls.cedula.errors| json}}</pre></li>
+        <li><pre>{{formGroupBanco.controls.aliasBanco.errors| json}}</pre></li>
+    </ul>
+  -->
   </div>
   <div class="col-md-4 offset-md-2">
       <br>
@@ -134,9 +144,16 @@
           <input type="text" class="form-control" required="required" id="NameUser" formControlName="alias">
         </div>
 
-      <button type="submit" class="btn btn-primary">Agregar </button>
+      <button type="submit" [disabled]="!formGroupZelle.valid" class="btn btn-primary">Agregar </button>
     </form>
-
+<!--
+    <ul>
+      <li>Is my form  valid? {{formGroupZelle.valid}}</li>
+      <li><pre>{{formGroupZelle.controls.correoZelle.errors| json}}</pre></li>
+        <li><pre>{{formGroupZelle.controls.nombreZelle.errors| json}}</pre></li>
+        <li><pre>{{formGroupZelle.controls.alias.errors| json}}</pre></li>
+    </ul>
+-->
   </div>
 
   <div class="col-md-4 offset-md-2">
