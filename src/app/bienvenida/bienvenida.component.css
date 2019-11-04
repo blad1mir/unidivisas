@@ -221,8 +221,8 @@
   -webkit-flex-direction: row; /* Safari 6.1+ */
   display: flex;
   flex-direction: row;
-  text-align: center;
-  margin: 30px;
+  text-align: center; 
+  margin: 70px;
 }
 
 .dots span{
@@ -232,4 +232,8 @@
     background: #26A9E0;
     margin: 0 1px;
     display: inline-block;
+}
+
+.testimonios img{
+  width: 1323px;
 }
