@@ -140,7 +140,7 @@
         <td>{{item.comprador}}</td>
         <td>{{item.montoDolar}} $</td>
         <td *ngIf="item.refbanco === 0 ; else recibido"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2r1r8SA-qohcO8QzsxLVuaUbY4QAY-TkOkMwhxSlWKMPwUTk9Lw&s" width="30" height="30"></td>
-        <td><button type="button" class="btn btn-primary" (click)="EliminarTransferencias(item)">Pagar</button></td>
+        <td><button type="button" class="btn btn-primary" routerLink="/seguimiento">Pagar</button></td>
       
         
       </tr>

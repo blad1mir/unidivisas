@@ -23,13 +23,16 @@ export interface Filtro1 {
     filtro2?: boolean;
   }
 export interface Transfer { 
-   
     comprador?: string;
     vendedor?: string;
     refbanco?: number;
     montoDolar?: number;
     idventa?: string;
-    pagado?:boolean;
+    pagadoVendedor?:boolean;
+    pagadoComprador?:boolean;
+    tasa?: number;
+    montoBolivar?: number;
+    idSolicitud?: string;
 }
 
 export interface Banco { 

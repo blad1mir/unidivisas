@@ -48,7 +48,6 @@ export class TransaccionComponent implements OnInit {
       ListaBanco.forEach(elemento => {
         if(elemento.usuario==this.solicitud.usuario && elemento.nombreBanco==this.solicitud.banco){
           console.log(elemento.usuario)
-          console.log(this.user)
           this.BancosPersonales.push(elemento);
         }
       })
@@ -59,7 +58,7 @@ export class TransaccionComponent implements OnInit {
   transferencia(numeroRef){
      console.log(numeroRef)
     this.Transfers[0].refbanco=numeroRef;
-    this.Transfers[0].pagado=true;
+    this.Transfers[0].pagadoComprador=true;
 
     this.firestore.updateTransfer(this.Transfers[0].idventa, this.Transfers[0]);
     const idSolicitud = this.route.snapshot.params['id'];
@@ -72,8 +71,10 @@ export class TransaccionComponent implements OnInit {
   confirmartransaccion(){
     if(confirm('Seguro que quieres realizar esta transacción, no podra cancelar despues de este punto.')){
       var x = document.getElementById("aparecer"); 
-      this.firestore.transferneciaBancaria(this.afAuth.auth.currentUser.email,this.solicitud.usuario,0,this.solicitud.id, this.solicitud.monto);
+      const idSolicitud = this.route.snapshot.params['id'];
+      this.firestore.transferneciaBancaria(this.afAuth.auth.currentUser.email,this.solicitud.usuario,0,this.solicitud.id, this.solicitud.monto,this.solicitud.monto* this.solicitud.tarifa,  this.solicitud.tarifa,idSolicitud);
       this.obtenerListaTransferencia();
+      this.router.navigate(['/seguimiento']);
       //const idSolicitud = this.route.snapshot.params['id'];
       //this.firestore.deleteSolicitudes(idSolicitud);
     if (x.style.display === "none") {
@@ -100,10 +101,10 @@ export class TransaccionComponent implements OnInit {
       .subscribe((transSnap) => {
         this.Transfers = [];
         transSnap.forEach(elemento => {
-          if((elemento.comprador==this.afAuth.auth.currentUser.email) && (elemento.vendedor==this.solicitud.usuario)&& (elemento.montoDolar==this.solicitud.monto) && (elemento.pagado==false)){
+          if((elemento.comprador==this.afAuth.auth.currentUser.email) && (elemento.vendedor==this.solicitud.usuario)&& (elemento.montoDolar==this.solicitud.monto) && (elemento.pagadoComprador==false)){
            
             this.Transfers.push(elemento);
-            console.log("Transferencia"+this.Transfers[0].idventa)
+           
           }
         })
       })

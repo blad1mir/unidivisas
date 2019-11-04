@@ -9,6 +9,7 @@ import { SolicitudComponent } from './venta/solicitud/solicitud.component';
 
 import { UsuarioComponent } from './usuario/usuario.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { SeguimientoTransaccionComponent } from './seguimiento-transaccion/seguimiento-transaccion.component';
 
 const routes: Routes = [
   {
@@ -20,11 +21,11 @@ const routes: Routes = [
     {path: 'compra', component: CompraComponent, canActivate: [AuthGuard]},
     {path: 'perfil', component: UsuarioComponent, canActivate: [AuthGuard]},
     {path: 'inicio', component: InicioComponent, canActivate: [AuthGuard]},
+    {path: 'seguimiento', component: SeguimientoTransaccionComponent, canActivate: [AuthGuard]},
     {path: 'login', component: LoginComponent}
     ],
     },
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
