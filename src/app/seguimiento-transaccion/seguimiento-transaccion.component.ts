@@ -19,7 +19,6 @@ export class SeguimientoTransaccionComponent implements OnInit {
   ZellesPersonales= [];
   ListaBanco = [];
   ListaZelle = [];
- 
   public totalPago;
 
   ngOnInit() {
@@ -73,7 +72,7 @@ export class SeguimientoTransaccionComponent implements OnInit {
   datosVendedor(){
     this.Transferencias.forEach( transferencia => {
       this.ListaZelle.forEach(zelle => {
-        if(transferencia.vendedor==zelle.usuario){
+        if(transferencia.comprador==zelle.usuario){
           this.ZellesPersonales.push(zelle);
         }
       })
