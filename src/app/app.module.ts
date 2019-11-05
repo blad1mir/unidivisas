@@ -18,7 +18,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { InicioComponent } from './inicio/inicio.component';
 import { FooterComponent } from './footer/footer.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
+//import { ServiceWorkerModule } from '@angular/service-worker';
 
 const config = {
   apiKey: "AIzaSyCTBMwIbR_erD_braA5rWhoIVI3MMev6VY",
@@ -55,7 +55,7 @@ const config = {
     AngularFireModule.initializeApp(config),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    //ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
 
   ],
   providers: [AngularFirestoreModule],

@@ -20,6 +20,8 @@ export class UsuarioComponent implements OnInit {
     auth.user$.forEach(usuario => { this.usuario=usuario.email;  });
   }
 
+  a=10;
+
   ngOnInit() {
     this.buildFormZelle();
     this.buildFormBanco();
@@ -54,20 +56,34 @@ export class UsuarioComponent implements OnInit {
       this.ListaZelle = ListaZelle;
     
     })
-
-}
-
-obtenerListaBanco(){
-  this.firebaseService.obtenerListaDeBanco()
-  .subscribe( ListaBanco =>{
-    this.ListaBanco = ListaBanco;
-    ListaBanco.forEach(elemento => {
-      console.log(elemento)
+    
+  }
+  
+  obtenerListaBanco(){
+    this.firebaseService.obtenerListaDeBanco().subscribe( ListaBanco =>{
+      this.ListaBanco = ListaBanco.slice(0,this.a);
+      ListaBanco.forEach(elemento => {
+        console.log(elemento)
+      })
     })
-  })
-
-}
-
+    
+  }
+  
+  mas(){
+    this.firebaseService.obtenerListaDeBanco().subscribe(ListaBanco =>{
+      this.ListaBanco = ListaBanco.slice(0,);
+      /*ListaBanco.forEach(elemento =>{
+        console.log(elemento)
+      })*/
+    })
+    var x = document.getElementById("cargador");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+  
 
   RegistrarNuevoZelle(value: { correoZelle: string; nombreZelle: string; usuario: string; }) {
     value.usuario = (this.usuario);
@@ -114,6 +130,7 @@ obtenerListaBanco(){
       NombreZelle: new FormControl('', Validators.required)
     });
   }
+
 
 }
 
