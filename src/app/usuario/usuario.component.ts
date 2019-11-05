@@ -20,7 +20,7 @@ export class UsuarioComponent implements OnInit {
     auth.user$.forEach(usuario => { this.usuario=usuario.email;  });
   }
 
-  a=10;
+  //a=10;
 
   ngOnInit() {
     this.buildFormZelle();
@@ -61,7 +61,8 @@ export class UsuarioComponent implements OnInit {
   
   obtenerListaBanco(){
     this.firebaseService.obtenerListaDeBanco().subscribe( ListaBanco =>{
-      this.ListaBanco = ListaBanco.slice(0,this.a);
+      //this.ListaBanco = ListaBanco.slice(0,this.a);
+      this.ListaBanco = ListaBanco;
       ListaBanco.forEach(elemento => {
         console.log(elemento)
       })
@@ -69,20 +70,20 @@ export class UsuarioComponent implements OnInit {
     
   }
   
-  mas(){
-    this.firebaseService.obtenerListaDeBanco().subscribe(ListaBanco =>{
-      this.ListaBanco = ListaBanco.slice(0,);
+  //mas(){
+    //this.firebaseService.obtenerListaDeBanco().subscribe(ListaBanco =>{
+      //this.ListaBanco = ListaBanco.slice(0,);
       /*ListaBanco.forEach(elemento =>{
         console.log(elemento)
       })*/
-    })
-    var x = document.getElementById("cargador");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-  }
+    //})
+    //var x = document.getElementById("cargador");
+    //if (x.style.display === "none") {
+      //x.style.display = "block";
+    //} else {
+      //x.style.display = "none";
+    //}
+  //}
   
 
   RegistrarNuevoZelle(value: { correoZelle: string; nombreZelle: string; usuario: string; }) {

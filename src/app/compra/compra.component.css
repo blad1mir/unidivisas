@@ -1,35 +1,33 @@
 .custab{
-    width: 60%;
-    border: 1px solid #ccc;
-    padding: 5px;
-    box-shadow: 3px 3px 2px #ccc;
-    transition: 0.5s;
-    }
-  .custab:hover{
-    box-shadow: 3px 3px 0px transparent;
-    transition: 0.5s;
-    }
-    .filtros{
-      margin: 2%;
-      width: 20%;
-      float: left;
-      color: white;
-      background-color: #0aaaf0;
-  }
-  
+  width: 60%;
+  border: 1px solid #ccc;
+  padding: 5px;
+  box-shadow: 3px 3px 2px #ccc;
+  transition: 0.5s;
+}
+.custab:hover{
+  box-shadow: 3px 3px 0px transparent;
+  transition: 0.5s;
+}
+.filtros{
+  margin: 2%;
+  width: 20%;
+  float: left;
+  color: white;
+  background-color: #0aaaf0;
+} 
+.filtros input{
+  width: 90%;
+}
+@media screen and (max-width:500px){
+  .filtros{
+    margin: 2%;
+    width: 100%;
+    float: left;
+    color: white;
+    background-color: #0aaaf0;
+  }  
   .filtros input{
-      width: 90%;
+    width: 90%;
   }
-  @media screen and (max-width:500px){
-    .filtros{
-      margin: 2%;
-      width: 100%;
-      float: left;
-      color: white;
-      background-color: #0aaaf0;
-  }
-  
-  .filtros input{
-      width: 90%;
-  }
-  }
+}
