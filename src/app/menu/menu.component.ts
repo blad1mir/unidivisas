@@ -12,10 +12,7 @@ export class MenuComponent implements OnInit {
   user ="";
   bgClass = '';
 
-  constructor(
-    public firebaseService: FirestoreService, 
-    public auth: AuthService,
-    private router: Router) { 
+  constructor(public firebaseService: FirestoreService, public auth: AuthService, private router: Router) { 
     // subscribe to router navigation
     this.router.events.subscribe(event => {
       // filter `NavigationEnd` events
@@ -27,10 +24,13 @@ export class MenuComponent implements OnInit {
         this.bgClass = currentRoute;
       }
     });
-
+//$.getJSON("https://s3.amazonaws.com/dolartoday/data.json", function(data) {
+//    $("#texto").html('Transferencia: '+data.USD.transferncia+ '<br> Sicad: '+data.USD.sicad2);
+//    $("#al").html('DolarToday al: '+data._timestamp.fecha);
+//  });
     }
 
   ngOnInit() {
-  }
+}
 
 }
