@@ -20,6 +20,8 @@ import { InicioComponent } from './inicio/inicio.component';
 import { FooterComponent } from './footer/footer.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { BienvenidaComponent } from './bienvenida/bienvenida.component';
+import { MenuBComponent } from './menu-b/menu-b.component';
+import { PreguntasComponent } from './preguntas/preguntas.component';
 
 const config = {
   apiKey: "AIzaSyCTBMwIbR_erD_braA5rWhoIVI3MMev6VY",
@@ -44,7 +46,9 @@ const config = {
     SolicitudComponent,
     InicioComponent,
     FooterComponent,
-    BienvenidaComponent
+    BienvenidaComponent,
+    MenuBComponent,
+    PreguntasComponent
 
   ],
   imports: [

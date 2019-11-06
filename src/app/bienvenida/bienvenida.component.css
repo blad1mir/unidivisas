@@ -1,4 +1,7 @@
 #carouselExampleIndicators{position:relative; z-index:1; background:url(http://www.esteticgrup.com/medicina-cirugia-estetica/wp-content/uploads/2013/09/slide1-0.jpg) center center no-repeat; background-size:cover; }
+
+#carouselTestimonios{position:relative; z-index:1; background:url(https://s03.s3c.es/imag/_v0/700x420/0/c/a/telefono-chica-istock.jpg) center center no-repeat; background-size:cover; }
+
 .carousel_caption h1 {
   color: #ffffff;
   letter-spacing: 1px;
@@ -13,6 +16,13 @@
   font-family: Oswald;
   font-weight: 200;
 }
+.carousel_caption h3 {
+  color: #ffffff;
+  letter-spacing: 1px;
+  font-family: Oswald;
+  font-weight: 200;
+}
+
 .carousel_caption p {
   color: #ffffff;
   font-family: Poppins;
@@ -234,6 +244,6 @@
     display: inline-block;
 }
 
-.testimonios img{
-  width: 1323px;
+.efectoUnidivisas{
+  color: #26A9E0;
 }

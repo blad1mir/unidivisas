@@ -1,0 +1,16 @@
+.navbar{
+    color: #ffffff !important;
+    background-color: #0aaaf0 !important;
+    text-align: right;
+    position: fixed;
+    z-index: 1000;
+    top:0;
+    width: 100%;
+}
+li {
+margin-left: 30%;
+padding-left: 10%;
+}
+a {
+color: #ffffff !important;
+}
