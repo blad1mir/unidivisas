@@ -80,22 +80,34 @@ export class SeguimientoTransaccionComponent implements OnInit {
 
   }
 
-  pagoZelle(){
-    this.Transferencias[0].pagadoVendedor=true;
- 
-    this.firestore.updateTransfer(this.Transferencias[0].idventa, this.Transferencias[0]);
-
+  transferirComprador(usuario){
+    for (let index = 0; index <  this.Transferencias.length; index++) {
+      if (this.Transferencias[index].comprador==usuario && this.Transferencias[index].pagadoVendedor==false) {
+        this.Transferencias[index].pagadoVendedor=true;
+        this.firestore.updateTransfer(this.Transferencias[index].idventa, this.Transferencias[index]);
+       index= this.Transferencias.length;
+      }
+       
+     }
+     alert("Su transferencia fue realizada con exito");
   }
 
-  transferencia(numeroRef){
+  transferirVendedor(numeroRef, usuario){
     console.log(numeroRef)
-   this.Transferencias[0].refbanco=numeroRef;
-   this.Transferencias[0].pagadoComprador=true;
-
-   this.firestore.updateTransfer(this.Transferencias[0].idventa, this.Transferencias[0]);
-   //this.firestore.deleteSolicitudes(idSolicitud);
+    for (let index = 0; index <  this.Transferencias.length; index++) {
+     if ( this.Transferencias[index].vendedor==usuario && this.Transferencias[index].pagadoComprador==false) {
+      this.Transferencias[index].refbanco=numeroRef;
+      this.Transferencias[index].pagadoComprador=true;
+      this.firestore.updateTransfer(this.Transferencias[index].idventa, this.Transferencias[index]);
+      this.firestore.deleteSolicitudes(this.Transferencias[index].idSolicitud);
+      index= this.Transferencias.length;
+     }
+      
+    }
+   
+  
    alert("Su transferencia fue realizada con exito");
-   //this.router.navigate(['/compra']);
+
  }
 
 

@@ -152,7 +152,8 @@ createSolicitud(value){
     tarifa: value.tarifa,
     banco: value.banco,
     pago: value.pago,
-    usuario: value.usuario
+    usuario: value.usuario,
+    aceptada: false
   });
 }
 obtenerf1(){

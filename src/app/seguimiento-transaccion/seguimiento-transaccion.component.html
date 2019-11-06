@@ -14,7 +14,7 @@
     </thead>
     
     <tbody *ngFor="let transferencia of Transferencias">
-      <tr *ngIf="transferencia.comprador === usuario.email || transferencia.vendedor === usuario.email; else nodatos">
+      <tr *ngIf="transferencia.comprador === usuario.email || transferencia.vendedor === usuario.email">
         <td align=center>{{transferencia.comprador}} </td>
         <td *ngIf="transferencia.pagadoComprador === false ; else comprador"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2r1r8SA-qohcO8QzsxLVuaUbY4QAY-TkOkMwhxSlWKMPwUTk9Lw&s" width="30" height="30"></td>
         <td align=center>{{transferencia.vendedor}} </td>
@@ -87,7 +87,7 @@
                                         <input  type="number" [(ngModel)]="numeroRef" class="form-control" placeholder="" value=""/>
                                         <br>
                                     <div class="col">
-                                        <button class="btn btn-success btn-sm btn-block" (click)="transferencia(numeroRef)">Pagado </button>
+                                        <button class="btn btn-success btn-sm btn-block" (click)="transferirVendedor(numeroRef,banco.usuario)" data-dismiss="modal">Pagado </button>
                                     </div>
                                 </div>     
                             </div>
@@ -126,7 +126,7 @@
                                             <br>
                                     <div class="row" >
                                         <div class="col">
-                                            <button class="btn btn-success btn-sm btn-block"  (click)="pagoZelle()">Pagado </button>
+                                            <button class="btn btn-success btn-sm btn-block"  (click)="transferirComprador(zelle.usuario)" data-dismiss="modal">Pagado </button>
                                         </div>
                                     </div>  
                                 
@@ -139,4 +139,5 @@
           </div>
         </div>
       </div>
+      <br><br>
    
