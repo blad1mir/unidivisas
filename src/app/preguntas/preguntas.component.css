@@ -1,0 +1,30 @@
+.container{
+    margin-top: 50px;
+}
+
+.linea-subrayado{
+    width: 3rem;
+}
+
+.efectoH1{
+    text-align: center;
+    font-weight: bold;
+}
+
+.efectoH6{
+    text-align: center;
+}
+
+.correo{
+    color: #26A9E0;
+}
+
+.form-control-borderless {
+    border: none;
+}
+
+.form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}

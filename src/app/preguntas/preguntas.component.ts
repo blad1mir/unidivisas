@@ -10,6 +10,6 @@ export class PreguntasComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  }
 
+  }
 }

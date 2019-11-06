@@ -2,10 +2,10 @@
     color: #ffffff !important;
     background-color: #0aaaf0 !important;
     text-align: right;
-    position: fixed;
+    /*position: fixed;
     z-index: 1000;
     top:0;
-    width: 100%;
+    width: 100%;*/
 }
 li {
 margin-left: 30%;

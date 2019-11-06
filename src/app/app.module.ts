@@ -48,7 +48,7 @@ const config = {
     FooterComponent,
     BienvenidaComponent,
     MenuBComponent,
-    PreguntasComponent
+    PreguntasComponent,
 
   ],
   imports: [
