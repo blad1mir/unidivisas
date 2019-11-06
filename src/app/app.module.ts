@@ -18,6 +18,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { InicioComponent } from './inicio/inicio.component';
 import { FooterComponent } from './footer/footer.component';
+
 //import { ServiceWorkerModule } from '@angular/service-worker';
 
 const config = {

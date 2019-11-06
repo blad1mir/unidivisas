@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { FirestoreService } from '../Servicios/firestore.service';4
 import { NavigationEnd, Router } from '@angular/router';
+import { DolartodayService } from "../Servicios/dolartoday.service";
 
 @Component({
   selector: 'app-menu',
@@ -12,7 +13,8 @@ export class MenuComponent implements OnInit {
   user ="";
   bgClass = '';
 
-  constructor(public firebaseService: FirestoreService, public auth: AuthService, private router: Router) { 
+  public monto: Number
+  constructor(private dolartodayService: DolartodayService, public firebaseService: FirestoreService, public auth: AuthService, private router: Router) { 
     // subscribe to router navigation
     this.router.events.subscribe(event => {
       // filter `NavigationEnd` events
@@ -24,13 +26,20 @@ export class MenuComponent implements OnInit {
         this.bgClass = currentRoute;
       }
     });
-//$.getJSON("https://s3.amazonaws.com/dolartoday/data.json", function(data) {
-//    $("#texto").html('Transferencia: '+data.USD.transferncia+ '<br> Sicad: '+data.USD.sicad2);
-//    $("#al").html('DolarToday al: '+data._timestamp.fecha);
-//  });
+
     }
 
   ngOnInit() {
+    // Aquí es donde el html hace el llamado y se le da la orden de la funcion que extrae la información del API
+    this.dolartodayService.getDolarToday().subscribe((data: any[])=>{
+      // @ts-ignore
+      console.log(data.USD.dolartoday);
+      // @ts-ignore 
+      this.monto = Number(data.USD.dolartoday)
+
+    })  
+
+
 }
 
 }
