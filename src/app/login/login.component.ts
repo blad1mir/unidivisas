@@ -25,9 +25,9 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit() {
-    this.buildForm(); 
+    //this.buildForm(); 
   }
-
+/*
   buildForm() {
     //await delay(3000);
 
@@ -50,7 +50,28 @@ export class LoginComponent implements OnInit {
           telf:  new FormControl('', Validators.required)
         });
     }
+    */
+
+    checkeo(){
+     if( this.name.length >= 3 && this.telf.length > 10 && this.email.endsWith("unimet.edu.ve")){
+      this.onAddUser()
+     }else if(this.name.length < 3 ){
+      alert("Error: Debe ingresar un nombre valido")
+     }else if(this.telf.length < 11 ){
+      alert("Error: Debe ingresar un telefono valido")
+     }else {
+      alert("Error: El correo debe pertenecer a la universidad metropolitana")
+     }
+    }
+    checkeo2(){
+      if(this.email.endsWith("unimet.edu.ve")){
+       this.onlogin()
+      }else {
+       alert("Error: El correo debe pertenecer a la universidad metropolitana")
+      }
+     }
   onAddUser(){
+    
     this.auth.registerEmail(this.email, this.password, this.name, this.telf, this.admin)
     .then((res)=> {
       this.router.navigate(['/inicio']);

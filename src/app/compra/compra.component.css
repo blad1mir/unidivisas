@@ -20,3 +20,12 @@
   .filtros input{
       width: 90%;
   }
+  
+  @media screen and (max-width:650px) {
+    .filtros{
+      width: 90%;
+    }
+    .compra{
+      font-size: 0.95rem;
+    }
+  }

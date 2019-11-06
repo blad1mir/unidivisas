@@ -1,4 +1,5 @@
 <app-menu></app-menu>
+<div class="compra">
 <div>
   <h1 align=center>Opciones a compra:</h1>
 </div>
@@ -12,14 +13,14 @@
                 (click)="QuitarFiltro('monto')">
                   X
               </button>
-      <input type="number"
+ <!--    <input type="number"
             [(ngModel)]="monto2" placeholder="Hasta"
             (change)="filtrarMenor('monto', monto2)">
 
           <button *ngIf="monto"
-            (click)="QuitarFiltro('monto')">
+            (click)="QuitarFiltro2('monto')">
               X
-          </button>
+          </button>--> 
           <hr>
 
           <p>Tarifa en Bs.:</p>
@@ -32,14 +33,14 @@
                   X
               </button>
               
-      <input type="number"
+     <!--   <input type="number"
             [(ngModel)]="tarifa2" placeholder="Hasta"
             (change)="filtrarMenor('tarifa', tarifa2)">
 
           <button *ngIf="tarifa"
-            (click)="QuitarFiltro('tarifa')">
+            (click)="QuitarFiltro2('tarifa')">
               X
-          </button>
+          </button> -->
           <hr>
 </div>
 
@@ -67,3 +68,5 @@
   <br>
   <button id="cargador" style="display: block; margin: auto;" class="btn btn-primary btn-sm" (click)="mas()">Cargar todo</button>
    
+<br><br>
+</div>
