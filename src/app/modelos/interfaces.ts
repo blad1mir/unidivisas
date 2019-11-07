@@ -34,6 +34,9 @@ export interface Transfer {
     tasa?: number;
     montoBolivar?: number;
     idSolicitud?: string;
+    fecha?: string;
+    historial?: boolean;
+    canUsuariosConfirmaron?: number;
 }
 
 export interface Banco { 

@@ -4,6 +4,7 @@ import { FirestoreService } from '../Servicios/firestore.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from '../auth.service';
 import { Solicitud } from '../modelos/interfaces';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-seguimiento-transaccion',
@@ -14,21 +15,29 @@ export class SeguimientoTransaccionComponent implements OnInit {
 
   constructor(private router: Router,private firestore: FirestoreService, private afAuth: AngularFireAuth, private route: ActivatedRoute, public auth: AuthService) { }
   public solicitud: Solicitud = {};
+  public totalPago;
+  confirmar=0;
   Transferencias= [];
   BancosPersonales= [];
   ZellesPersonales= [];
   ListaBanco = [];
   ListaZelle = [];
-  public totalPago;
+  transaccion=[];
+  fechaActual = Date.now().toLocaleString();
+ 
+  
 
   ngOnInit() {
 
     this.obtenerListaTransferencia();
     this.obtenerZelle();
+ 
     
   }
 
   obtenerListaTransferencia(){
+ 
+
     this.firestore.obtenerListaDeTransferencia()
     .subscribe(elemento => {
         this.Transferencias =elemento;
@@ -37,6 +46,7 @@ export class SeguimientoTransaccionComponent implements OnInit {
   }
 
   ObtenerDatosVendedor(idSolicitud: string){
+    console.log("entraaa")
     this.firestore.getOneSolicitud(idSolicitud).subscribe(solicitud => {
       this.solicitud = solicitud;
       this.obtenerListaBanco(); 
@@ -54,6 +64,7 @@ export class SeguimientoTransaccionComponent implements OnInit {
       ListaBanco.forEach(elemento => {
         if(elemento.usuario==this.solicitud.usuario && elemento.nombreBanco==this.solicitud.banco){
           this.BancosPersonales.push(elemento);
+         
         }
       })
     })
@@ -81,6 +92,9 @@ export class SeguimientoTransaccionComponent implements OnInit {
   }
 
   transferirComprador(usuario){
+    var x = document.getElementById("aparecer2"); 
+    x.style.display = "none";
+  
     for (let index = 0; index <  this.Transferencias.length; index++) {
       if (this.Transferencias[index].comprador==usuario && this.Transferencias[index].pagadoVendedor==false) {
         this.Transferencias[index].pagadoVendedor=true;
@@ -93,6 +107,8 @@ export class SeguimientoTransaccionComponent implements OnInit {
   }
 
   transferirVendedor(numeroRef, usuario){
+    var x = document.getElementById("aparecer"); 
+    x.style.display = "none";
     console.log(numeroRef)
     for (let index = 0; index <  this.Transferencias.length; index++) {
      if ( this.Transferencias[index].vendedor==usuario && this.Transferencias[index].pagadoComprador==false) {
@@ -109,6 +125,25 @@ export class SeguimientoTransaccionComponent implements OnInit {
    alert("Su transferencia fue realizada con exito");
 
  }
+  confirmarTransaccion(transaccion){
+    this.transaccion=transaccion;
+  }
+
+  calificarTransaccion(){
+   
+    this.transaccion['canUsuariosConfirmaron']=this.transaccion['canUsuariosConfirmaron']+1;
+    this.firestore.updateTransfer(this.transaccion['idventa'],this.transaccion);
+    if(this.transaccion['canUsuariosConfirmaron']==2){
+      this.transaccion['historial']=true;
+      this.transaccion['fecha']=new Date().toISOString();
+      this.firestore.updateTransfer(this.transaccion['idventa'],this.transaccion);
+    }
+    
+    this.router.navigate(['/inicio']);
+   
+  }
+
+
 
 
 }

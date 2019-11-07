@@ -187,7 +187,7 @@ agregarNuevoZelle(value){
     usuario: value.usuario
   });
 }
-transferneciaBancaria(compra, vende, trans, id, montoDolar, montoBolivar, tasa, idSolicitud ){
+transferneciaBancaria(compra, vende, trans, id, montoDolar, montoBolivar, tasa, idSolicitud){
   return this.db.collection('Transferencia').add({
     comprador: compra,
     vendedor: vende,
@@ -198,7 +198,10 @@ transferneciaBancaria(compra, vende, trans, id, montoDolar, montoBolivar, tasa, 
     pagadoComprador: false,
     tasa: tasa,
     montoBolivar: montoBolivar,
-    idSolicitud: idSolicitud
+    idSolicitud: idSolicitud,
+    historial: false,
+    fecha: '0',
+    canUsuariosConfirmaron: 0
    
   });
 }
