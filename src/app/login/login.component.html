@@ -40,7 +40,7 @@
                                             <input type="email" [(ngModel)]="email" class="form-control" placeholder="Email" value="" />
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" [(ngModel)]="telf"  minlength="11" maxlength="11" name="txtEmpPhone" class="form-control" placeholder="Telefono" value="" (keyup.enter)="onAddUser()"/>
+                                            <input type="text" [(ngModel)]="telf"  minlength="11" maxlength="11" name="txtEmpPhone" class="form-control" placeholder="Telefono" value="" (keyup.enter)="checkeo()"/>
                                         </div>
                                         <br>
                                         <div *ngIf="auth.user$ | async; then authenticated else guest">
@@ -70,7 +70,7 @@
                                             <input type="email" [(ngModel)]="email" class="form-control" placeholder="Email" value="" />
                                         </div>
                                         <div class="form-group">
-                                          <input type="password" [(ngModel)]="password" class="form-control" placeholder="Contraseña" value="" (keyup.enter)="onlogin()"/>
+                                          <input type="password" [(ngModel)]="password" class="form-control" placeholder="Contraseña" value="" (keyup.enter)="checkeo2()"/>
                                       </div>
                                     </div>
                                     <div class="col-md-6">

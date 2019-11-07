@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="auth.user$ | async as user">
   <a class="navbar-brand" [routerLink]="['/inicio']">
     <img src="https://i-love-png.com/images/25426-1-green-dollar-symbol.png" width="60" height="60" class="d-inline-block align-top" alt="">
   </a>
