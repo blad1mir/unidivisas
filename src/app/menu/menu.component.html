@@ -34,3 +34,34 @@
     </ul>
   </div>
 </nav>
+<div class="card-group">
+  <div class="card text-center">
+    <img *ngIf="(bgClass === 'inicio')" src="../../assets/imgs/Unimet_DT.png" class="card-img-top" alt="Unimet_DT">
+    <div class="card-body">
+      <h5 class="card-title">DollarToday</h5>
+      <p class="card-text">{{monto}}</p> <!--Aquí se esta llamando a la funcion del ts que se trae la info de la API-->
+     
+    </div>
+  </div>
+  <div class="card text-center">
+    <img  *ngIf="(bgClass === 'inicio')" src="../../assets/imgs/Unimet_cucuta.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">DolarCucuta</h5>
+      <p class="card-text">22.150,00 BsS</p>
+    </div>
+  </div>
+  <div class="card text-center">
+    <img  *ngIf="(bgClass === 'inicio')" src="../../assets/imgs/Unimet_TATM.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">TheAirTM</h5>
+      <p class="card-text">22.300,00 BsS</p>
+    </div>
+  </div>
+  <div class="card text-center">
+    <img  *ngIf="(bgClass === 'inicio')" src="../../assets/imgs/Unimet_Monitor.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">MonitorDolarVzla</h5>
+      <p class="card-text">22.250,00 BsS</p>
+    </div>
+  </div>
+</div>

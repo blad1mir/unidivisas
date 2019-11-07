@@ -1,31 +1,54 @@
 .custab{
-    width: 60%;
-    border: 1px solid #ccc;
-    padding: 5px;
-    box-shadow: 3px 3px 2px #ccc;
-    transition: 0.5s;
-    }
-  .custab:hover{
-    box-shadow: 3px 3px 0px transparent;
-    transition: 0.5s;
-    }
-    .filtros{
-      margin: 2%;
-      width: 20%;
-      float: left;
-      color: white;
-      background-color: #0aaaf0;
-  }
-  
+  width: 60%;
+  border: 1px solid #ccc;
+  padding: 5px;
+  box-shadow: 3px 3px 2px #ccc;
+  transition: 0.5s;
+}
+.custab:hover{
+  box-shadow: 3px 3px 0px transparent;
+  transition: 0.5s;
+}
+.filtros{
+  margin: 2%;
+  width: 20%;
+  float: left;
+  color: white;
+  background-color: #0aaaf0;
+} 
+.filtros input{
+  width: 90%;
+}
+@media screen and (max-width:675px){
+  .filtros{
+    margin: 2%;
+    width: 100%;
+    float: left;
+    color: white;
+    background-color: #0aaaf0;
+  }  
   .filtros input{
       width: 90%;
   }
-  
-  @media screen and (max-width:650px) {
-    .filtros{
-      width: 90%;
-    }
-    .compra{
-      font-size: 0.95rem;
-    }
+
+}
+@media screen and (max-width:1000px){
+  .my-custom-scrollbar {
+    min-width: 500px;
   }
+}
+
+.my-custom-scrollbar {
+
+  position: relative;
+
+  height: 550px;
+  overflow: auto;
+
+}
+
+.table-wrapper-scroll-y {
+
+  display: block;
+
+}

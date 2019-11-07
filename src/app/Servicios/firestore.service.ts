@@ -12,8 +12,23 @@ import { map } from 'rxjs/operators';
 })
 export class FirestoreService {
 
-  
-  constructor(private db: AngularFirestore) { 
+  //Declaraciones:
+  options: any;
+  headers: any;
+
+  constructor(private db: AngularFirestore, /*private http: Http*/) { 
+
+  /*this.headers = new Headers({
+      'Content-Type': 'aplication/json',
+      'Accept': 'application/json',
+      'Users-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3'
+    });
+    
+    this.options = new RequestOptions({
+      method: RequestMethod.Get,
+      headers: this.headers
+    });*/
+
     this.SolicitudesCollection = db.collection<Solicitud>('Solicitud'); //Setear nuestra collección
     this.Solicitudes = this.SolicitudesCollection.valueChanges();
 
@@ -29,6 +44,10 @@ export class FirestoreService {
    
   }
   
+  /*// PRODUCT  
+  public getProduct(slug?: any) {
+    return this.http.get('/GetProducts/' + slug + '.json').toPromise().then((res: Response) => { return res.json(); });
+  }*/
  
   private SolicitudesCollection: AngularFirestoreCollection <Solicitud>; //Aqui se creo la propiedad de colleccion de las solicitudes
   private Solicitudes: Observable<Solicitud[]>;

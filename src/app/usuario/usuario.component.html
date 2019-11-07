@@ -1,18 +1,18 @@
-<div class="offset-md-2 row">
+<div class="offset-md-1 row">
   <br>
   <div class="col-md-4">
-      <br> 
-      <br>
+    <br><br>
     <form [formGroup]="formGroupBanco" (ngSubmit)="RegistrarNuevoBanco(formGroupBanco.value)">
       <h3>Datos bancarios: </h3>
+
       <div class="form-group">
         <label for="nombreUsuario">Nombre Completo</label>
-        <input type="text" class="form-control" required="required" formControlName="nombreCliente"
-          placeholder="Nombre Apellido">
+        <input type="text" class="form-control" required="required" formControlName="nombreCliente" placeholder="Nombre Apellido">
       </div>
+
       <div class="form-group">
         <label for="nombreBanco">Banco : </label>
-        <select name="banco" formControlName="nombreBanco">
+        <select name="banco" class="form-control" formControlName="nombreBanco">
           <option value="100%BANCO">100%BANCO</option>
           <option value="ABN AMRO BANK">ABN AMRO BANK</option>
           <option value="BANCAMIGA BANCO MICROFINANCIERO, C.A.">BANCAMIGA BANCO MICROFINANCIERO, C.A.</option>
@@ -52,14 +52,13 @@
 
       <div class="form-group">
         <label for="numeroCuenta">Número de cuenta completo: </label>
-        <input type="text" class="form-group" required="required"  formControlName="numeroCuenta"
-          placeholder="00000000000000000000" maxlength="20" >
-        <small id="NCuentaHelp" class="form-text text-muted">Coloque su numero de cuenta completa</small>
+        <input type="text" class="form-control" required="required"  formControlName="numeroCuenta" maxlength="20" >
+        <small id="NCuentaHelp" class="form-text text-muted">Coloque su numero de cuenta completa (20 digitos)</small>
       </div>
 
       <div class="form-group">
         <label for="Cedula">Cédula de identidad : </label>
-        <input type="text" class="form-control" maxlength="8"required="required"  placeholder="00000000" formControlName="cedula">
+        <input type="text" class="form-control" maxlength="8"required="required"   formControlName="cedula">
       </div>
 
       <div class="form-group">
@@ -80,49 +79,38 @@
     </ul>
   -->
   </div>
-  <div class="col-md-4 offset-md-2">
-      <br>
-      <br>
-      <h3>Listado de sus datos de bancarios: </h3>
-    <table class="table " *ngIf="auth.user$ | async as usuario">
+
+  <div class="col-md-6 offset-md-1">
+    <br><br>
+    <h3>Listado de sus datos de bancarios: </h3>
+    <table class="table table-sm table-striped table-wrapper-scroll-y my-custom-scrollbar" *ngIf="auth.user$ | async as usuario">
       <thead>
         <tr>
-
           <th scope="col">Banco</th>
           <th scope="col">Cuenta</th>
           <th scope="col">Cedula</th>
           <th scope="col">Nombre</th>
           <th scope="col">Alias</th>
           <th scope="col">Eliminar</th>
-
-
         </tr>
       </thead>
       <tbody *ngFor="let banco of ListaBanco">
-        <!-- <div *ngFor="let comentario of comentarios ">
-                <div *ngIf="comentario.ProductoId == detalle.id"> -->
         <tr *ngIf="banco.usuario === usuario.email">
-
           <td>{{banco.nombreBanco}}</td>
           <td>{{banco.numeroCuenta}}</td>
           <td>{{banco.cedula}}</td>
           <td>{{banco.nombreCliente}}</td>
-          <td>{{banco.aliasBanco}}</td>
-         
+          <td>{{banco.aliasBanco}}</td>       
           <td><button type="button" class="btn btn-danger" (click)="eliminarBanco(banco)">Eliminar</button></td>
         </tr>
-
       </tbody>
     </table>
   </div>
-
-
-
 </div>
 <br>
 <br>
 
-<div class="offset-md-2 row" >
+<div class="offset-md-1 row" >
   <div class="col-md-4">
     <br>
     <form [formGroup]="formGroupZelle" (ngSubmit)="RegistrarNuevoZelle(formGroupZelle.value)">
@@ -153,34 +141,28 @@
 -->
   </div>
 
-  <div class="col-md-4 offset-md-2">
-      <br>
-      <h3>Listado de sus datos de zelle: </h3>
-      <table class="table" *ngIf="auth.user$ | async as usuario">
-        <thead>
-          <tr>
-      
-            <th scope="col">Correo </th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Alias</th>
-            <th scope="col">Eliminar</th>
-      
-      
-          </tr>
-        </thead>
-        <tbody *ngFor="let zelle of ListaZelle">
-          <tr *ngIf="zelle.usuario === usuario.email">
-      
-            <td>{{zelle.correoZelle}}</td>
-            <td>{{zelle.nombreZelle}}</td>
-            <td>{{zelle.alias}}</td>
-            <td><button type="button" class="btn btn-danger" (click)="eliminarZelle(zelle)">Eliminar</button></td>
-          </tr>
-      
-        </tbody>
-      </table>
-    </div>
-
+  <div class="col-md-6 offset-md-2">
+    <br>
+    <h3>Listado de sus datos de zelle: </h3>
+    <table class="table table-sm  table-wrapper-scroll-y my-custom-scrollbar esto-2" *ngIf="auth.user$ | async as usuario">
+      <thead>
+        <tr>
+          <th scope="col">Correo </th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Alias</th>
+          <th scope="col">Eliminar</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let zelle of ListaZelle">
+        <tr *ngIf="zelle.usuario === usuario.email">
+          <td>{{zelle.correoZelle}}</td>
+          <td>{{zelle.nombreZelle}}</td>
+          <td>{{zelle.alias}}</td>
+          <td><button type="button" class="btn btn-danger" (click)="eliminarZelle(zelle)">Eliminar</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 

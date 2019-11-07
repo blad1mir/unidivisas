@@ -58,7 +58,7 @@ export class VentaComponent implements OnInit {
   
     })
   
-}
+  }
 
   colocarID(item){
    this.idColeccionActual=item.id;
