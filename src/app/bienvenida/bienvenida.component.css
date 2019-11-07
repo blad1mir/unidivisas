@@ -227,12 +227,12 @@
 }
 
 .lista{
-  display: -webkit-flex; /* Safari */
-  -webkit-flex-direction: row; /* Safari 6.1+ */
+  display: -webkit-flex;
+  -webkit-flex-direction: row;
   display: flex;
   flex-direction: row;
-  text-align: center; 
-  margin: 70px;
+  text-align: center;
+  justify-content: center;
 }
 
 .dots span{
@@ -242,8 +242,23 @@
     background: #26A9E0;
     margin: 0 1px;
     display: inline-block;
+    margin-top: 50px;
 }
 
 .efectoUnidivisas{
   color: #26A9E0;
+}
+
+.comisiones h2{
+  color: #26A9E0;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.kolonat-hom{
+  display:flex;
+}
+.ikonat-home{
+  margin-right:15px;
+  font-size:32px;
 }
