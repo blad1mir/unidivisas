@@ -12,7 +12,7 @@
             </tr>
           </thead>
           <tbody *ngFor="let item of solicitud">
-            <tr>
+              <tr  *ngIf="item.aceptada === false">
               <td>{{item.monto}} $</td>
               <td>{{item.tarifa}} Bs.</td>
             </tr>
