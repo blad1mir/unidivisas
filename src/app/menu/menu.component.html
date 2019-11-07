@@ -1,15 +1,33 @@
-<nav  class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="auth.user$ | async as user">
- 
-  <ul  class="navbar-nav mr-auto mt-0 mt-lg-0">
-  <li class="nav-item"> <a class="navbar-brand">
-      <img src="https://i-love-png.com/images/25426-1-green-dollar-symbol.png" width="60" height="60" class="d-inline-block align-top" alt="">
-    </a></li>
-  
-  </ul>
-  <a class="nav-link" [routerLink]="['/inicio']">Inicio</a>
-  <a class="nav-link" [routerLink]="['/venta']">Vender</a>
-  <a class="nav-link" [routerLink]="['/compra']">Comprar</a>
-  <a class="nav-link" [routerLink]="['/perfil']">Perfil</a>
-  <button (click)="auth.signOut()" class="btn btn-light  btn-outline" type="button">Logout</button>
-</nav>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" [routerLink]="['/inicio']">
+    <img src="https://i-love-png.com/images/25426-1-green-dollar-symbol.png" width="60" height="60" class="d-inline-block align-top" alt="">
+  </a>
 
+  <button class="navbar-toggler" type="button"
+          (click)="toggleNavbar()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
+    <ul class="navbar-nav ml-auto">
+      
+      <li class="nav-item" >
+        <a class="nav-link" [routerLink]="['/inicio']">Inicio</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/venta']">Vender</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/compra']">Comprar</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/perfil']">Perfil</a>
+      </li>
+      <li class="nav-item" style="margin-right: 180px;">
+        <button (click)="auth.signOut()" class="btn btn-light  btn-outline" type="button">Cerrar Sesión</button>
+      </li>
+     
+    </ul>
+  </div>
+</nav>

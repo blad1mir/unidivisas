@@ -8,11 +8,17 @@ import { FirestoreService } from '../Servicios/firestore.service';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  user ="";
+  user =""; 
+  navbarOpen = false;
+
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
+  }
 
   constructor(public firebaseService: FirestoreService, public auth: AuthService) { }
 
   ngOnInit() {
+    
   }
 
 }
