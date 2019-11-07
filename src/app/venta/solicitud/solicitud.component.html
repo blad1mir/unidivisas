@@ -21,7 +21,7 @@
         </table>
   </div>
 
-  <div class="col-md-3" *ngIf="auth.user$ | async as useru">
+  <div class="col-md-4" *ngIf="auth.user$ | async as useru">
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
       <input type="hidden" class="form-control" formControlName="usuario" value={{useru.email}} readonly="readonly">
       <div class ="form-group">
@@ -54,18 +54,11 @@
             <option *ngFor="let zelle of ZellePersonal" [value]="zelle.correoZelle">Zelle {{zelle.alias}} - {{zelle.correoZelle}}</option></select>
         </div>
       </div> -->
-
-
-
-
-      <button type="submit"  class="btn btn-primary">Enviar solicitud</button>
+      <button type="submit"  class="btn btn-primary btn-block">Enviar solicitud</button>
     </form>
-    
   </div>
 
-
-
-  <div class="col-md-6">
+  <div class="col-md-4">
     <app-venta></app-venta>
   </div>
 

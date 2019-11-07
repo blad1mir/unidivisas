@@ -2,7 +2,7 @@
 <div>
   <h1 align=center>Opciones a compra:</h1>
 </div>
-  <div class="filtros col-sm-6">
+    <div class="filtros col-sm-6">
           <p>Cantidad en $:</p>
           <input type="number"
                 [(ngModel)]="monto" placeholder="Desde"
@@ -41,9 +41,8 @@
               X
           </button>
           <hr>
-        
-</div>
-<table class="table col-sm-6">
+    </div>
+  <table class="table table-wrapper-scroll-y my-custom-scrollbar col-sm-6">
     <thead align=center>
       <tr>
         <th  scope="col" >Monto ($)</th>
@@ -65,5 +64,3 @@
     </tbody>
   </table>
   <br>
-  <button id="cargador" style="display: block; margin: auto;" class="btn btn-primary btn-sm" (click)="mas()">Cargar todo</button>
-   

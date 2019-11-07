@@ -6,8 +6,8 @@
 .table-wrapper-scroll-y {
     display: block;
 }
-.esto-2{
+.esto2{
     position: relative;
-    height: 350px;
+    height: 300px;
     overflow: auto;
 }

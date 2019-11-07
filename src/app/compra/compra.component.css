@@ -19,7 +19,7 @@
 .filtros input{
   width: 90%;
 }
-@media screen and (max-width:500px){
+@media screen and (max-width:574px){
   .filtros{
     margin: 2%;
     width: 100%;
@@ -30,4 +30,12 @@
   .filtros input{
     width: 90%;
   }
+}
+.my-custom-scrollbar {
+  position: relative;
+  height: 550px;
+  overflow: auto;
+}
+.table-wrapper-scroll-y {
+  display: block;
 }

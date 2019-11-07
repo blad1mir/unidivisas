@@ -75,7 +75,7 @@
   <div class="col-md-6 offset-md-1">
     <br><br>
     <h3>Listado de sus datos de bancarios: </h3>
-    <table class="table table-sm table-striped table-wrapper-scroll-y my-custom-scrollbar" *ngIf="auth.user$ | async as usuario">
+    <table class="table table-sm table-wrapper-scroll-y my-custom-scrollbar" *ngIf="auth.user$ | async as usuario">
       <thead>
         <tr>
           <th scope="col">Banco</th>
@@ -129,21 +129,21 @@
   <div class="col-md-6 offset-md-1">
     <br>
     <h3>Listado de sus datos de zelle: </h3>
-    <table class="table table-sm table-striped table-wrapper-scroll-y my-custom-scrollbar esto-2" *ngIf="auth.user$ | async as usuario">
+    <table class="table table-sm table-wrapper-scroll-y my-custom-scrollbar esto2" *ngIf="auth.user$ | async as usuario">
       <thead>
         <tr>
-          <th scope="col">Correo </th>
-          <th scope="col">Nombre</th>
-          <th scope="col">Alias</th>
-          <th scope="col">Eliminar</th>
+          <th class="col-sx-3">Correo </th>
+          <th class="col-sx-3">Nombre</th>
+          <th class="col-md-3">Alias</th>
+          <th class="col-sx-3">Eliminar</th>
         </tr>
       </thead>
       <tbody *ngFor="let zelle of ListaZelle">
         <tr *ngIf="zelle.usuario === usuario.email">
-          <td>{{zelle.correoZelle}}</td>
-          <td>{{zelle.nombreZelle}}</td>
-          <td>{{zelle.alias}}</td>
-          <td><button type="button" class="btn btn-danger" (click)="eliminarZelle(zelle)">Eliminar</button></td>
+          <td class="col-sx-3">{{zelle.correoZelle}}</td>
+          <td class="col-sx-1">{{zelle.nombreZelle}}</td>
+          <td class="col-md-3">{{zelle.alias}}</td>
+          <td class="col-sx-3"><button type="button" class="btn btn-danger" (click)="eliminarZelle(zelle)">Eliminar</button></td>
         </tr>
       </tbody>
     </table>
