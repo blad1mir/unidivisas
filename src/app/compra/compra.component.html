@@ -56,8 +56,8 @@
       </tr>
     </thead>
     
-    <tbody>
-      <tr *ngFor="let solicitud of ventasFiltradas">
+    <tbody *ngFor="let solicitud of ventasFiltradas">
+      <tr  *ngIf="solicitud.aceptada === false">
         <td align=center>{{solicitud.monto}} $</td>
         <td align=center>{{solicitud.tarifa}} Bs.</td>
         <td align=center>{{solicitud.banco}}</td>

@@ -7,6 +7,7 @@ export interface Solicitud { //interfaces utilizadas en todo el codigo
     tarifa?: number;
     banco?: string;
     pago?: string;
+    aceptada?: boolean;
 }
 
 export interface Zelle { 
@@ -23,13 +24,19 @@ export interface Filtro1 {
     filtro2?: boolean;
   }
 export interface Transfer { 
-   
     comprador?: string;
     vendedor?: string;
     refbanco?: number;
     montoDolar?: number;
     idventa?: string;
-    pagado?:boolean;
+    pagadoVendedor?:boolean;
+    pagadoComprador?:boolean;
+    tasa?: number;
+    montoBolivar?: number;
+    idSolicitud?: string;
+    fecha?: string;
+    historial?: boolean;
+    canUsuariosConfirmaron?: number;
 }
 
 export interface Banco { 

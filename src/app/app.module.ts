@@ -22,6 +22,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { BienvenidaComponent } from './bienvenida/bienvenida.component';
 import { MenuBComponent } from './menu-b/menu-b.component';
 import { PreguntasComponent } from './preguntas/preguntas.component';
+import { SeguimientoTransaccionComponent } from './seguimiento-transaccion/seguimiento-transaccion.component';
 
 const config = {
   apiKey: "AIzaSyCTBMwIbR_erD_braA5rWhoIVI3MMev6VY",
@@ -49,6 +50,7 @@ const config = {
     BienvenidaComponent,
     MenuBComponent,
     PreguntasComponent,
+    SeguimientoTransaccionComponent
 
   ],
   imports: [

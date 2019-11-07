@@ -10,6 +10,7 @@ import { UsuarioComponent } from './usuario/usuario.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { BienvenidaComponent } from './bienvenida/bienvenida.component';
 import { PreguntasComponent } from './preguntas/preguntas.component';
+import { SeguimientoTransaccionComponent } from './seguimiento-transaccion/seguimiento-transaccion.component';
 
 const routes: Routes = [
   {
@@ -23,11 +24,12 @@ const routes: Routes = [
     {path: 'inicio', component: InicioComponent, canActivate: [AuthGuard]},
     {path: 'login', component: LoginComponent},
     {path: 'bienvenida', component: BienvenidaComponent},
-    {path: 'preguntas-frecuentes', component: PreguntasComponent}
+    {path: 'preguntas-frecuentes', component: PreguntasComponent},
+    {path: 'transferencias', component: SeguimientoTransaccionComponent, canActivate: [AuthGuard]}
+    
     ],
     },
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
