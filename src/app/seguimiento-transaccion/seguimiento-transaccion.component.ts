@@ -13,7 +13,9 @@ import { DatePipe } from '@angular/common';
 })
 export class SeguimientoTransaccionComponent implements OnInit {
 
-  constructor(private router: Router,private firestore: FirestoreService, private afAuth: AngularFireAuth, private route: ActivatedRoute, public auth: AuthService) { }
+  constructor(private router: Router,private firestore: FirestoreService, private afAuth: AngularFireAuth, private route: ActivatedRoute, public auth: AuthService) { 
+    auth.user$.forEach(u => { this.usuario=u.email});
+  }
   public solicitud: Solicitud = {};
   public totalPago;
   confirmar=0;
@@ -24,6 +26,7 @@ export class SeguimientoTransaccionComponent implements OnInit {
   ListaZelle = [];
   transaccion=[];
   fechaActual = Date.now().toLocaleString();
+  usuario="";
  
   
 
@@ -81,11 +84,14 @@ export class SeguimientoTransaccionComponent implements OnInit {
   }
 
   datosVendedor(){
+    this.ZellesPersonales=[];
     this.Transferencias.forEach( transferencia => {
       this.ListaZelle.forEach(zelle => {
-        if(transferencia.comprador==zelle.usuario){
-          this.ZellesPersonales.push(zelle);
-        }
+          if ((transferencia.vendedor === this.usuario)) {
+            if(transferencia.comprador==zelle.usuario){
+              this.ZellesPersonales.push(zelle);
+            }
+          } 
       })
     })
 

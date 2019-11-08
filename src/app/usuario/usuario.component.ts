@@ -125,8 +125,13 @@ export class UsuarioComponent implements OnInit {
   //}
   
 
-  RegistrarNuevoZelle(value: { correoZelle: string; nombreZelle: string; usuario: string; }) {
+  RegistrarNuevoZelle(value: { correoZelle: string; nombreZelle: string; usuario: string; principal: boolean; }) {
     value.usuario = (this.usuario);
+    if(this.ListaZelle.length==0){
+      value.principal=true;
+    }else if(this.ListaZelle.length>0){
+      value.principal=false;
+    }
     console.log(value)
     this.firebaseService.agregarNuevoZelle(value)
     .then(
@@ -169,6 +174,18 @@ export class UsuarioComponent implements OnInit {
       CorreoZelle: new FormControl('', Validators.required),
       NombreZelle: new FormControl('', Validators.required)
     });
+  }
+
+  SeleccionarComoPrincipal(zelle){
+    this.ListaZelle.forEach(elemento => {
+      elemento.principal=false;
+      this.firebaseService.ActualizarZelle(elemento.id, elemento);
+    })
+
+    zelle.principal=true;
+    this.firebaseService.ActualizarZelle(zelle.id, zelle);
+
+
   }
 
 

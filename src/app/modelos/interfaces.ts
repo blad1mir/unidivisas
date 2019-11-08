@@ -16,6 +16,7 @@ export interface Zelle {
     correoZelle?: string;
     nombreZelle?: string;
     usuario?: string; 
+    principal?: boolean;
 }
 export interface Filtro1 {
     filtro1?: boolean;

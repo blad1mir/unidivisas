@@ -150,20 +150,29 @@
           <th scope="col">Correo </th>
           <th scope="col">Nombre</th>
           <th scope="col">Alias</th>
+          <th scope="col">Principal</th>
           <th scope="col">Eliminar</th>
         </tr>
       </thead>
-      <tbody *ngFor="let zelle of ListaZelle">
+      <tbody *ngFor="let zelle of ListaZelle" >
         <tr *ngIf="zelle.usuario === usuario.email">
           <td>{{zelle.correoZelle}}</td>
           <td>{{zelle.nombreZelle}}</td>
           <td>{{zelle.alias}}</td>
+          <td  *ngIf="zelle.principal != true; else principal"><button type="button" class="btn btn-warning" (click)="SeleccionarComoPrincipal(zelle)" >Seleccionar &nbsp; &nbsp;</button></td>
           <td><button type="button" class="btn btn-danger" (click)="eliminarZelle(zelle)">Eliminar</button></td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+
+<ng-template #principal>
+     <td><button type="button" class="btn btn-success" >Seleccionado </button></td> 
+   
+     
+    </ng-template>
 
 
 <br><br>

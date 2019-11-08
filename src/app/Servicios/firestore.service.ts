@@ -163,6 +163,10 @@ updateTransfer(Key,value){
   return this.db.collection('Transferencia').doc(Key).set(value);
 }
 
+ActualizarZelle(Key, value){
+  return this.db.collection('DatosZelle').doc(Key).set(value);
+}
+
 createSolicitud(value){
   console.log(value); 
   return this.db.collection('Solicitud').add({
@@ -203,7 +207,8 @@ agregarNuevoZelle(value){
     alias: value.alias,
     correoZelle: value.correoZelle,
     nombreZelle: value.nombreZelle,
-    usuario: value.usuario
+    usuario: value.usuario,
+    principal: value.principal
   });
 }
 transferneciaBancaria(compra, vende, trans, id, montoDolar, montoBolivar, tasa, idSolicitud){
