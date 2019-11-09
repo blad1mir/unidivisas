@@ -36,6 +36,7 @@ export interface Transfer {
     montoBolivar?: number;
     idSolicitud?: string;
     fecha?: string;
+    hora?: string;
     historial?: boolean;
     canUsuariosConfirmaron?: number;
 }

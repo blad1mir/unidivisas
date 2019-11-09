@@ -225,6 +225,7 @@ transferneciaBancaria(compra, vende, trans, id, montoDolar, montoBolivar, tasa, 
     idSolicitud: idSolicitud,
     historial: false,
     fecha: '0',
+    hora: '0',
     canUsuariosConfirmaron: 0
    
   });
