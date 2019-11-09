@@ -12,6 +12,9 @@ li {
     margin-left: 5%;
     padding-left: 5%;
 }
+negra {
+    color: #000000 !important;
+}
 a {
     color: #ffffff !important;
 }

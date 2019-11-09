@@ -25,8 +25,10 @@ export class SeguimientoTransaccionComponent implements OnInit {
   ListaBanco = [];
   ListaZelle = [];
   transaccion=[];
-  fechaActual = Date.now().toLocaleString();
   usuario="";
+  fechafull = new Date();
+  formatoFecha = require('dateformat');
+ 
  
   
 
@@ -39,13 +41,10 @@ export class SeguimientoTransaccionComponent implements OnInit {
   }
 
   obtenerListaTransferencia(){
- 
-
     this.firestore.obtenerListaDeTransferencia()
     .subscribe(elemento => {
         this.Transferencias =elemento;
     })
-  
   }
 
   ObtenerDatosVendedor(idSolicitud: string){
@@ -141,7 +140,8 @@ export class SeguimientoTransaccionComponent implements OnInit {
     this.firestore.updateTransfer(this.transaccion['idventa'],this.transaccion);
     if(this.transaccion['canUsuariosConfirmaron']==2){
       this.transaccion['historial']=true;
-      this.transaccion['fecha']=new Date().toISOString();
+      this.transaccion['fecha']=this.formatoFecha(this.fechafull, "mediumDate");
+      this.transaccion['hora']=this.formatoFecha(this.fechafull, "shortTime");
       this.firestore.updateTransfer(this.transaccion['idventa'],this.transaccion);
     }
     
