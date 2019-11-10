@@ -1,6 +1,6 @@
 .my-custom-scrollbar {
     position: relative;
-    height: 450px;
+    height: 500px;
     overflow: auto;
 }
 .table-wrapper-scroll-y {
@@ -8,6 +8,10 @@
 }
 .esto-2{
     position: relative;
-    height: 350px;
+    height: 300px;
     overflow: auto;
 }
+.custab{
+    box-shadow: 4px 4px 3px #ccc;
+    transition: 0.5s;
+    }
