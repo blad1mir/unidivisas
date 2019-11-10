@@ -18,8 +18,11 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { InicioComponent } from './inicio/inicio.component';
 import { FooterComponent } from './footer/footer.component';
-
-//import { ServiceWorkerModule } from '@angular/service-worker';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { BienvenidaComponent } from './bienvenida/bienvenida.component';
+import { MenuBComponent } from './menu-b/menu-b.component';
+import { PreguntasComponent } from './preguntas/preguntas.component';
+import { SeguimientoTransaccionComponent } from './seguimiento-transaccion/seguimiento-transaccion.component';
 
 const config = {
   apiKey: "AIzaSyCTBMwIbR_erD_braA5rWhoIVI3MMev6VY",
@@ -43,7 +46,11 @@ const config = {
     TransaccionComponent,
     SolicitudComponent,
     InicioComponent,
-    FooterComponent
+    FooterComponent,
+    BienvenidaComponent,
+    MenuBComponent,
+    PreguntasComponent,
+    SeguimientoTransaccionComponent
 
   ],
   imports: [

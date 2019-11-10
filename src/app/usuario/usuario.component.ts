@@ -29,24 +29,63 @@ export class UsuarioComponent implements OnInit {
     this.obtenerListaBanco();
 
   }
-
-  buildFormZelle() {
-    this.formGroupZelle = this.formBuilder.group({
-      correoZelle: new FormControl('', Validators.required),
-      nombreZelle: new FormControl('', Validators.required),
-      alias: new FormControl('', Validators.required),
-      usuario: new FormControl('', Validators.required)
-    });
+  tieneNegativo(input: FormControl) {
+    const tieneneg = input.value.indexOf('-') >= 0;
+    return tieneneg ? null : { necesitaneg: true };
   }
 
+  buildFormZelle() {
+    function LongitudMinima(minimum) {
+      return function(input) {
+        return input.value.length >= minimum ? null : { minLength: true };
+      };
+    }
+    function tieneArroba(input: FormControl) {
+      const hasExclamation = input.value.indexOf('@') >= 0;
+      return hasExclamation ? null : { needsExclamation: true };
+    }
+    function tienecom(input: FormControl) {
+      const hasExclamation = input.value.indexOf('.com') >= 0;
+      return hasExclamation ? null : { needsExclamation: true };
+    }
+
+    this.formGroupZelle = this.formBuilder.group({
+      correoZelle: new FormControl('', [Validators.required,LongitudMinima(6),tieneArroba,tienecom]),
+      nombreZelle: new FormControl('', [Validators.required,LongitudMinima(2)]),
+      alias: new FormControl('', [Validators.required,LongitudMinima(2)]),
+      usuario: new FormControl('')
+    });
+  }
   buildFormBanco() {
+    function LongitudMinima(minimum) {
+      return function(input) {
+        return input.value.length >= minimum ? null : { minLength: true };
+      };
+    }
+    function Longitud(long) {
+      return function(input) {
+        return input.value.length == long ? null : { longi: true };
+      };
+    }
+    
+    function tieneneg(input: FormControl) {
+      const hasExclamation = input.value.indexOf('-') == 0;
+      return hasExclamation ? null : { nega: true };
+    }
+
+    function nega(mi) {
+      return function(input) {
+        return input.value >= mi ? null : { mi: true };
+      };
+    }
+
     this.formGroupBanco = this.formBuilder.group({
       nombreBanco: new FormControl('', Validators.required),
-      numeroCuenta: new FormControl('', Validators.required),
-      nombreCliente: new FormControl('', Validators.required),
-      cedula: new FormControl('', Validators.required),
-      aliasBanco: new FormControl('', Validators.required),
-      usuario: new FormControl('', Validators.required)
+      numeroCuenta: new FormControl('', [Validators.required,Longitud(20),nega(1)]),
+      nombreCliente: new FormControl('', [Validators.required,LongitudMinima(5)]),
+      cedula: new FormControl('', [Validators.required,LongitudMinima(4),nega(1)]),
+      aliasBanco: new FormControl('', [Validators.required,LongitudMinima(2)]),
+      usuario: new FormControl('')
     });
   }
 

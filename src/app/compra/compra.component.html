@@ -1,8 +1,9 @@
-<app-menu></app-menu>
+
+<div class="compra">
 <div>
   <h1 align=center>Opciones a compra:</h1>
 </div>
-    <div class="filtros col-sm-6">
+  <div class="filtros col-sm-6">
           <p>Cantidad en $:</p>
           <input type="number"
                 [(ngModel)]="monto" placeholder="Desde"
@@ -12,14 +13,14 @@
                 (click)="QuitarFiltro('monto')">
                   X
               </button>
-      <input type="number"
+ <!--    <input type="number"
             [(ngModel)]="monto2" placeholder="Hasta"
             (change)="filtrarMenor('monto', monto2)">
 
           <button *ngIf="monto"
-            (click)="QuitarFiltro('monto')">
+            (click)="QuitarFiltro2('monto')">
               X
-          </button>
+          </button>--> 
           <hr>
 
           <p>Tasa en Bs.:</p>
@@ -32,17 +33,18 @@
                   X
               </button>
               
-      <input type="number"
+     <!--   <input type="number"
             [(ngModel)]="tarifa2" placeholder="Hasta"
             (change)="filtrarMenor('tarifa', tarifa2)">
 
           <button *ngIf="tarifa"
-            (click)="QuitarFiltro('tarifa')">
+            (click)="QuitarFiltro2('tarifa')">
               X
-          </button>
+          </button> -->
           <hr>
-    </div>
-  <table class="table table-wrapper-scroll-y my-custom-scrollbar col-sm-6">
+        
+</div>
+<table class="table table-wrapper-scroll-y my-custom-scrollbar col-sm-8">
     <thead align=center>
       <tr>
         <th  scope="col" >Monto ($)</th>
@@ -53,8 +55,8 @@
       </tr>
     </thead>
     
-    <tbody>
-      <tr *ngFor="let solicitud of ventasFiltradas">
+    <tbody *ngFor="let solicitud of ventasFiltradas">
+      <tr  *ngIf="solicitud.aceptada === false">
         <td align=center>{{solicitud.monto}} $</td>
         <td align=center>{{solicitud.tarifa}} Bs.</td>
         <td align=center>{{solicitud.tarifa * solicitud.monto }} Bs.</td>
@@ -63,4 +65,4 @@
       </tr>
     </tbody>
   </table>
-  <br>
+</div>

@@ -1,6 +1,4 @@
-<app-menu></app-menu>
-
-<div class="offset-md-2 row">
+<div class="offset-md-1 row">
   <br>
   <div class="col-md-4">
     <br><br>
@@ -14,7 +12,7 @@
 
       <div class="form-group">
         <label for="nombreBanco">Banco : </label>
-        <select name="banco" formControlName="nombreBanco">
+        <select name="banco" class="form-control" formControlName="nombreBanco">
           <option value="100%BANCO">100%BANCO</option>
           <option value="ABN AMRO BANK">ABN AMRO BANK</option>
           <option value="BANCAMIGA BANCO MICROFINANCIERO, C.A.">BANCAMIGA BANCO MICROFINANCIERO, C.A.</option>
@@ -54,13 +52,13 @@
 
       <div class="form-group">
         <label for="numeroCuenta">Número de cuenta completo: </label>
-        <input type="number" class="form-group" required="required"  formControlName="numeroCuenta" placeholder="00000000000000000000" maxlength="16">
-        <small id="NCuentaHelp" class="form-text text-muted">Coloque su numero de cuenta completa</small>
+        <input type="text" class="form-control" required="required"  formControlName="numeroCuenta" maxlength="20" >
+        <small id="NCuentaHelp" class="form-text text-muted">Coloque su numero de cuenta completa (20 digitos)</small>
       </div>
 
       <div class="form-group">
         <label for="Cedula">Cédula de identidad : </label>
-        <input type="text" class="form-control" required="required"  placeholder="E/V 00000000" formControlName="cedula">
+        <input type="text" class="form-control" maxlength="8"required="required"   formControlName="cedula">
       </div>
 
       <div class="form-group">
@@ -68,14 +66,24 @@
           <input type="text" class="form-control" formControlName="aliasBanco">
         </div>
 
-      <button type="submit" class="btn btn-primary">Agregar </button>
+      <button type="submit" [disabled]="!formGroupBanco.valid" class="btn btn-primary">Agregar </button>
     </form>
+   <!--
+    <ul>
+      <li>Is my form  valid? {{formGroupBanco.valid}}</li>
+      <li><pre>{{formGroupBanco.controls.nombreBanco.errors| json}}</pre></li>
+        <li><pre>{{formGroupBanco.controls.numeroCuenta.errors| json}}</pre></li>
+        <li><pre>{{formGroupBanco.controls.nombreCliente.errors| json}}</pre></li>
+        <li><pre>{{formGroupBanco.controls.cedula.errors| json}}</pre></li>
+        <li><pre>{{formGroupBanco.controls.aliasBanco.errors| json}}</pre></li>
+    </ul>
+  -->
   </div>
-
+  
   <div class="col-md-6 offset-md-1">
     <br><br>
     <h3>Listado de sus datos de bancarios: </h3>
-    <table class="table table-sm table-wrapper-scroll-y my-custom-scrollbar" *ngIf="auth.user$ | async as usuario">
+    <table class="table table-sm table-striped table-wrapper-scroll-y my-custom-scrollbar custab" *ngIf="auth.user$ | async as usuario">
       <thead>
         <tr>
           <th scope="col">Banco</th>
@@ -102,7 +110,7 @@
 <br>
 <br>
 
-<div class="offset-md-2 row" >
+<div class="offset-md-1 row" >
   <div class="col-md-4">
     <br>
     <form [formGroup]="formGroupZelle" (ngSubmit)="RegistrarNuevoZelle(formGroupZelle.value)">
@@ -121,29 +129,36 @@
           <input type="text" class="form-control" required="required" id="NameUser" formControlName="alias">
         </div>
 
-      <button type="submit" class="btn btn-primary">Agregar </button>
+      <button type="submit" [disabled]="!formGroupZelle.valid" class="btn btn-primary">Agregar </button>
     </form>
-
+<!--
+    <ul>
+      <li>Is my form  valid? {{formGroupZelle.valid}}</li>
+      <li><pre>{{formGroupZelle.controls.correoZelle.errors| json}}</pre></li>
+        <li><pre>{{formGroupZelle.controls.nombreZelle.errors| json}}</pre></li>
+        <li><pre>{{formGroupZelle.controls.alias.errors| json}}</pre></li>
+    </ul>
+-->
   </div>
 
   <div class="col-md-6 offset-md-1">
     <br>
     <h3>Listado de sus datos de zelle: </h3>
-    <table class="table table-sm table-wrapper-scroll-y my-custom-scrollbar esto2" *ngIf="auth.user$ | async as usuario">
+    <table class="table table-sm table-striped table-wrapper-scroll-y my-custom-scrollbar esto-2 custab" *ngIf="auth.user$ | async as usuario">
       <thead>
         <tr>
-          <th class="col-sx-3">Correo </th>
-          <th class="col-sx-3">Nombre</th>
-          <th class="col-md-3">Alias</th>
-          <th class="col-sx-3">Eliminar</th>
+          <th scope="col">Correo </th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Alias</th>
+          <th scope="col">Eliminar</th>
         </tr>
       </thead>
       <tbody *ngFor="let zelle of ListaZelle">
         <tr *ngIf="zelle.usuario === usuario.email">
-          <td class="col-sx-3">{{zelle.correoZelle}}</td>
-          <td class="col-sx-1">{{zelle.nombreZelle}}</td>
-          <td class="col-md-3">{{zelle.alias}}</td>
-          <td class="col-sx-3"><button type="button" class="btn btn-danger" (click)="eliminarZelle(zelle)">Eliminar</button></td>
+          <td>{{zelle.correoZelle}}</td>
+          <td>{{zelle.nombreZelle}}</td>
+          <td>{{zelle.alias}}</td>
+          <td><button type="button" class="btn btn-danger" (click)="eliminarZelle(zelle)">Eliminar</button></td>
         </tr>
       </tbody>
     </table>
@@ -151,3 +166,4 @@
 </div>
 
 
+<br><br>  

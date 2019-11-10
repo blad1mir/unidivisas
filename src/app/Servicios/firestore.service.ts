@@ -171,7 +171,8 @@ createSolicitud(value){
     tarifa: value.tarifa,
     banco: value.banco,
     pago: value.pago,
-    usuario: value.usuario
+    usuario: value.usuario,
+    aceptada: false
   });
 }
 obtenerf1(){
@@ -205,14 +206,22 @@ agregarNuevoZelle(value){
     usuario: value.usuario
   });
 }
-transferneciaBancaria(compra, vende, trans, id, monto){
+transferneciaBancaria(compra, vende, trans, id, montoDolar, montoBolivar, tasa, idSolicitud){
   return this.db.collection('Transferencia').add({
     comprador: compra,
     vendedor: vende,
     refbanco: trans,
     idventa: id,
-    montoDolar: monto,
-    pagado: false
+    montoDolar: montoDolar,
+    pagadoVendedor: false,
+    pagadoComprador: false,
+    tasa: tasa,
+    montoBolivar: montoBolivar,
+    idSolicitud: idSolicitud,
+    historial: false,
+    fecha: '0',
+    canUsuariosConfirmaron: 0
+   
   });
 }
 

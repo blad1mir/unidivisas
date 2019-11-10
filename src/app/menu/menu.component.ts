@@ -10,10 +10,18 @@ import { DolartodayService } from "../Servicios/dolartoday.service";
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  user ="";
+  user =""; 
+  navbarOpen = false;
   bgClass = '';
+  
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
+  }
 
-  public monto: Number
+  public montoDT: Number
+  public montoDC: Number
+  public montoDS: Number
+  public fecha: String
   constructor(private dolartodayService: DolartodayService, public firebaseService: FirestoreService, public auth: AuthService, private router: Router) { 
     // subscribe to router navigation
     this.router.events.subscribe(event => {
@@ -32,10 +40,19 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     // Aquí es donde el html hace el llamado y se le da la orden de la funcion que extrae la información del API
     this.dolartodayService.getDolarToday().subscribe((data: any[])=>{
+      //si quieres ver a cuanto está el Dolar Today quita el comentario del siguiente console.log
       // @ts-ignore
-      console.log(data.USD.dolartoday);
+      //console.log(data.USD.dolartoday);
+      //si se quiere ver toda la data que se trae del json quitar la nota del siguiente console.log de abajo
+      //console.log(data);
       // @ts-ignore 
-      this.monto = Number(data.USD.dolartoday)
+      this.montoDT = Number(data.USD.dolartoday)
+      //@ts-ignore
+      this.montoDC=Number(data.USD.efectivo_cucuta)
+      //@ts-ignore
+      this.montoDS= Number(data.USD.sicad1)
+      //@ts-ignore
+      this.fecha= String(data._timestamp.fecha)
 
     })  
 

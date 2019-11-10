@@ -53,6 +53,10 @@ export class CompraComponent implements OnInit {
 
   private AplicarFiltro() {
     this.ventasFiltradas = _.filter(this.solicitudes, _.conforms(this.filtros) )
+   
+  }
+  private AplicarFiltro2() {
+    this.ventasFiltradas = _.filter(this.solicitudes, _.conforms(this.filtros) )
   }
  /// filter property by equality to rule
   filtrarExacto(property: string, rule: any) {
@@ -74,7 +78,7 @@ export class CompraComponent implements OnInit {
   }
   filtrarMenor(property: string, rule: number) {
     this.filtros[property] = val => val <= rule
-    this.AplicarFiltro()
+    this.AplicarFiltro2()
   }
    /// filter properties that resolve to true
    filtrarBoolean(property: string, rule: boolean) {
@@ -88,6 +92,11 @@ export class CompraComponent implements OnInit {
     delete this.filtros[property]
     this[property] = null
     this.AplicarFiltro()
+  }
+  QuitarFiltro2(property: string) {
+    delete this.filtros[property]
+    this[property] = null
+    this.AplicarFiltro2()
   }
 
   //getData(){

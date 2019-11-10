@@ -1,0 +1,209 @@
+<br>
+<div  *ngIf="auth.user$ | async as usuario"  align=center>
+<table class="table col-sm-6">
+    <thead align=center>
+      <tr>
+        <th  scope="col" >Comprador</th>
+        <th  scope="col" >Estatus</th>
+        <th  scope="col" >Vendedor</th>
+        <th  scope="col" >Estatus</th>
+        <th  scope="col" >Monto en dólares</th>
+        <th  scope="col" >Tasa de cambio</th>
+        <th  scope="col" >Monto en Bolivares</th>
+      </tr>
+    </thead>
+    
+    <tbody *ngFor="let transferencia of Transferencias">
+      <tr *ngIf="(transferencia.comprador === usuario.email || transferencia.vendedor === usuario.email) &&  transferencia.historial === false">
+        <td align=center>{{transferencia.comprador}} </td>
+        <td *ngIf="transferencia.pagadoComprador === false ; else comprador"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2r1r8SA-qohcO8QzsxLVuaUbY4QAY-TkOkMwhxSlWKMPwUTk9Lw&s" width="30" height="30"></td>
+        <td align=center>{{transferencia.vendedor}} </td>
+        <td *ngIf="transferencia.pagadoVendedor === false ; else vendedor"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2r1r8SA-qohcO8QzsxLVuaUbY4QAY-TkOkMwhxSlWKMPwUTk9Lw&s" width="30" height="30"></td>
+        <td align=center>{{transferencia.montoDolar}} </td>
+        <td align=center>{{transferencia.tasa}} </td>
+        <td align=center>{{transferencia.montoBolivar}} </td>
+        <td align=center *ngIf="transferencia.vendedor != usuario.email; else botoncomprador " id="aparecer"><button name ="" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#informacionVendedor"  (click)="ObtenerDatosVendedor(transferencia.idSolicitud)">Ver datos del vendedor</button></td>
+        <td *ngIf="transferencia.pagadoComprador === true && transferencia.pagadoVendedor === true"><button name ="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#confirmoRecibido" (click)="confirmarTransaccion(transferencia)" >Confirmo que he recibido el dinero  </button></td> 
+      </tr>
+    </tbody>
+  </table>
+  <br>
+</div>
+  <ng-template #comprador>
+    <td ><img src="data:image/png;base64,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" width="30" height="30"></td>
+  </ng-template>
+
+  
+  <ng-template #vendedor>
+    <td ><img src="data:image/png;base64,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" width="30" height="30"></td>
+  </ng-template>
+
+  <ng-template #botoncomprador>
+    <td align=center  id="aparecer2"><button name ="" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#informacionComprador">Ver datos del comprador</button></td>
+  </ng-template>
+
+  <ng-template #nodatos>
+    <br>
+    <br>
+     <td><h3  align=right>No</h3></td> 
+     <td><h3  align=center> tienes </h3></td>  
+     <td> <h3  align=center> solicitudes </h3></td> 
+     <td> <h3  align=left> en  proceso </h3></td> 
+     <td><h3  align=center> </h3></td> 
+     
+    </ng-template>
+
+
+
+  <div class="modal" id="informacionVendedor" tabindex="-1" role="dialog" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Datos del vendedor: </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+                <div class="col-med-3"  >
+                        <div class="card" style="width: 30rem;">
+                            <div class="card-body" align=left *ngFor="let banco of BancosPersonales">
+                                <h3 class="card-title" align=center>Detalles del Vendedor</h3>
+                                    <p align=center>Los siguientes datos son bancarios</p>
+                                    <strong>NOMBRE:</strong>
+                                        <p>  {{banco.nombreCliente}}</p>
+                                        <strong>NUMERO DE CUENTA:</strong>
+                                        <p>  {{banco.numeroCuenta}}</p>
+                                        <strong>BANCO:</strong>
+                                        <p>  {{banco.nombreBanco}}</p>
+                                        <strong>CEDULA:</strong>
+                                        <p>  {{banco.cedula}}</p>
+                                        <strong>MONTO A TRANSFERIR:</strong>
+                                        <p>  {{this.totalPago}} Bs.</p>
+                                        
+                                        <br>
+                                <div class="row" >
+                                        <strong>NUMERO DE REFERENCIA:</strong>
+                                        <input  type="number" [(ngModel)]="numeroRef" class="form-control" placeholder="" value=""/>
+                                        <br>
+                                    <div class="col">
+                                        <button class="btn btn-success btn-sm btn-block" (click)="transferirVendedor(numeroRef,banco.usuario)" data-dismiss="modal">Pagado </button>
+                                    </div>
+                                </div>     
+                            </div>
+                        </div>     
+                    </div>      
+        
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="informacionComprador" tabindex="-1" role="dialog" >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Datos del comprador: </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <div class="col-med-3"  >
+                            <div class="card" style="width: 30rem;">
+                             
+                                 <div *ngFor="let zelle of ZellesPersonales">
+                                <div class="card-body" align=left>
+                                
+                                    <h3 class="card-title" align=center>Detalles del Comprador</h3>
+                                        <p align=center>Los siguientes datos son de ZELLE</p>
+                                        <strong>NOMBRE:</strong>
+                                            <p>  {{zelle.nombreZelle}}</p>
+                                            <strong>Correo Zelle:</strong>
+                                            <p>  {{zelle.correoZelle}}</p>
+        
+                                            
+                                            <br>
+                                    <div class="row" >
+                                        <div class="col">
+                                            <button class="btn btn-success btn-sm btn-block"  (click)="transferirComprador(zelle.usuario)" data-dismiss="modal">Pagado </button>
+                                        </div>
+                                    </div>  
+                                
+                                </div>
+                                
+                            </div>     
+                        </div>      
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+      <div class="modal" id="confirmoRecibido" tabindex="-1" role="dialog" >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Datos del comprador: </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <div class="col-med-3"  >
+                            <div class="card" style="width: 30rem;">
+                             
+                                <div class="card-body" align=left>
+                                
+                                    <h3 class="card-title" align=center>Experiencia de la transacción</h3>
+                                        <p align=center>Esta transacción me hizo sentir: </p>
+                                        <div class="row">
+                                        <div class="form-check col-sm-2">
+                                          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                                          <label class="form-check-label" for="exampleRadios1"><h1>😡</h1></label>
+                                        </div>
+                                        <div class="form-check col-sm-2">
+                                          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                                          <label class="form-check-label" for="exampleRadios1"><h1>😤</h1></label>
+                                        </div>
+                                        <div class="form-check col-sm-2">
+                                          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                                          <label class="form-check-label" for="exampleRadios1"> <h1>😅</h1></label>
+                                        </div>
+                                        <div class="form-check col-sm-2">
+                                          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                                          <label class="form-check-label" for="exampleRadios1"><h1>😃</h1></label>
+                                        </div>
+                                        <div class="form-check col-sm-2">
+                                          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                                          <label class="form-check-label" for="exampleRadios1"> <h1>😊</h1></label>
+                                        </div>
+                                         
+                                         </div>  
+                                          
+                                           
+                                           
+                                    <div class="row" >
+                                        <div class="col">
+                                            <button class="btn btn-success btn-sm btn-block"  (click)="calificarTransaccion()" data-dismiss="modal">Confirmar </button>
+                                        </div>
+                                    </div>  
+                                
+                                </div>
+                                
+                               
+                        </div>      
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+     
+  
+  
+
+   
+<br><br>

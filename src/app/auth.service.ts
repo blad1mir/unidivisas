@@ -37,7 +37,7 @@ export class AuthService {
       const credential = await this.afAuth.auth.createUserWithEmailAndPassword(email, pass)
       return this.updateUserData(credential.user).then((success)=>{
         this.router.navigate(['/venta']); 
-        this.updateUserData2(credential.user, displayName);
+        this.updateUserData3(credential.user.uid, displayName,email, tel, adm);
         });
     }
     private updateUserData2(user, name: string) {
@@ -45,12 +45,11 @@ export class AuthService {
         displayName: name
       })
     }
-    async updateUserData3(id, name: string, dir: string, corr: string, tele: string, ad: number) {
+    async updateUserData3(id, name: string, corr: string, tele: string, ad: number) {
 
       this.afs.collection('users').doc(id).update({
         displayName: name,
         email: corr,
-        direccion: dir,
         telf: tele,
         admim: ad
       })
@@ -83,8 +82,7 @@ export class AuthService {
       const data = { 
         uid: user.uid, 
         email: user.email, 
-        displayName: user.displayName,
-        photoURL: user.photoURL
+        displayName: user.displayName
 
       } 
   
