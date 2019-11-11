@@ -161,33 +161,34 @@
       <div class="modal-body">
         <div class="col-med-3">
           <div class="card" style="width: 30rem;">
+            <form [formGroup]="formEnviarExpreriencia" (ngSubmit)="enviarExperiencia(formEnviarExpreriencia.value)"> 
                   <h3 class="card-title" align=center>Experiencia de la transacción</h3>
                   <p align=center>Esta transacción me hizo sentir: </p>
 
                 <div class="btn-group" data-toggle="buttons">
 
                   <label class="btn btn-danger active">
-                    <input type="radio" name="options" id="option2" autocomplete="off" chacked>
+                    <input type="radio" name="options" id="1" autocomplete="off" formControlName="reaccion" value="1">
                     <label class="form-check-label" for="exampleRadios1"><h1>😡</h1></label>
                   </label>
 
                   <label class="btn btn-warning">
-                    <input type="radio" name="options" id="option1" autocomplete="off">
+                    <input type="radio" name="options" id="2" autocomplete="off" formControlName="reaccion"  value="2">
                     <label class="form-check-label" for="exampleRadios1"><h1>😤</h1></label>
                   </label>
 
                   <label class="btn btn-info">
-                    <input type="radio" name="options" id="option2" autocomplete="off">
+                    <input type="radio" name="options" id="3" autocomplete="off" formControlName="reaccion"  value="3">
                     <label class="form-check-label" for="exampleRadios1"><h1>😅</h1></label>
                   </label>
 
                   <label class="btn btn-primary">
-                    <input type="radio" name="options" id="option2" autocomplete="off">
+                    <input type="radio" name="options" id="4" autocomplete="off" formControlName="reaccion"  value="4">
                     <label class="form-check-label" for="exampleRadios1"><h1>😃</h1></label>
                   </label>
 
                   <label class="btn btn-success">
-                    <input type="radio" name="options" id="option2" autocomplete="off">
+                    <input type="radio" name="options" id="5" autocomplete="off" formControlName="reaccion"  value="5">
                     <label class="form-check-label" for="exampleRadios1"><h1>😊</h1></label>
                   </label>
                 </div>
@@ -195,14 +196,13 @@
             <div class="card-body" align=left>
               <div class="row">
                 <div class="col">
-                  <button class="btn btn-success btn-sm btn-block" (click)="calificarTransaccion()"
-                    data-dismiss="modal">Confirmar </button>
+                  <button type="submit" class="btn btn-success btn-sm btn-block" data-dismiss="modal">Confirmar </button>
                 </div>
               </div>
 
             </div>
 
-
+          </form>
           </div>
 
         </div>
