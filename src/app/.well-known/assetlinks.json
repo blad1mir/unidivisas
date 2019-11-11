@@ -1,5 +1,9 @@
 [{
     "relation": ["delegate_permission/common.handle_all_urls"],
-    "target" : { "namespace": "android_app", "package_name": "Unidivisas",
-                 "sha256_cert_fingerprints": ["SHA256: 18:CF:D5:0D:B8:48:83:62:48:4E:CA:96:78:7F:98:F0:0C:F3:33:0B:1B:3B:5D:93:9E:D5:FE:C7:66:0F:3C:34"] }
+    "target": {
+      "namespace": "android_app",
+      "package_name": "unidivisas.app",
+      "sha256_cert_fingerprints":
+      ["B9:47:F9:37:5B:F9:0A:D3:40:B0:44:A7:D5:95:F3:F6:FD:E3:25:27:F3:2A:16:3A:D0:77:3C:9D:FC:19:22:9A"]
+    }
   }]
