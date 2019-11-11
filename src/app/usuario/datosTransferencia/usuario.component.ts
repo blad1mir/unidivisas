@@ -68,14 +68,15 @@ export class UsuarioComponent implements OnInit {
       };
     }
     
-    function tieneneg(input: FormControl) {
-      const hasExclamation = input.value.indexOf('-') == 0;
-      return hasExclamation ? null : { nega: true };
-    }
 
     function nega(mi) {
       return function(input) {
         return input.value >= mi ? null : { mi: true };
+      };
+    }
+    function nega2(mi) {
+      return function(input) {
+        return input.value = mi ? null : { mi: true };
       };
     }
 

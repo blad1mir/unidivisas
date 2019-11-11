@@ -5,12 +5,17 @@
     /*position: fixed;
     z-index: 1000;
     top:0;
-    width: 100%;*/
+    width: 100%;
+    */
 }
 li {
-margin-left: 30%;
-padding-left: 10%;
+margin-left: 5%;
+padding-left: 5%;
+}
+negra {
+color: #000000 !important;
 }
 a {
 color: #ffffff !important;
 }
+
