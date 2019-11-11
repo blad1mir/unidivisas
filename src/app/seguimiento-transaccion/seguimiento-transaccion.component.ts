@@ -5,6 +5,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from '../auth.service';
 import { Solicitud } from '../modelos/interfaces';
 import { DatePipe } from '@angular/common';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-seguimiento-transaccion',
@@ -16,6 +17,7 @@ export class SeguimientoTransaccionComponent implements OnInit {
   constructor(private router: Router,private firestore: FirestoreService, private afAuth: AngularFireAuth, private route: ActivatedRoute, public auth: AuthService) { 
     auth.user$.forEach(u => { this.usuario=u.email});
   }
+  public formEnviarExpreriencia: FormGroup;
   public solicitud: Solicitud = {};
   public totalPago;
   confirmar=0;
@@ -147,6 +149,11 @@ export class SeguimientoTransaccionComponent implements OnInit {
     
     this.router.navigate(['/inicio']);
    
+  }
+
+  enviarExperiencia(reaccion){
+console.log(reaccion)
+
   }
 
 

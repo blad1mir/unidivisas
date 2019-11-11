@@ -66,7 +66,7 @@
           <input type="text" class="form-control" formControlName="aliasBanco">
         </div>
 
-      <button type="submit" [disabled]="!formGroupBanco.valid" class="btn btn-primary">Agregar </button>
+      <button type="submit" [disabled]="!formGroupBanco.valid" class="btn btn-primary btn-block">Agregar </button>
     </form>
    <!--
     <ul>
@@ -79,11 +79,11 @@
     </ul>
   -->
   </div>
-
+  
   <div class="col-md-6 offset-md-1">
     <br><br>
     <h3>Listado de sus datos de bancarios: </h3>
-    <table class="table table-sm table-striped table-wrapper-scroll-y my-custom-scrollbar" *ngIf="auth.user$ | async as usuario">
+    <table class="table table-sm table-striped table-wrapper-scroll-y my-custom-scrollbar custab" *ngIf="auth.user$ | async as usuario">
       <thead>
         <tr>
           <th scope="col">Banco</th>
@@ -129,7 +129,7 @@
           <input type="text" class="form-control" required="required" id="NameUser" formControlName="alias">
         </div>
 
-      <button type="submit" [disabled]="!formGroupZelle.valid" class="btn btn-primary">Agregar </button>
+      <button type="submit" [disabled]="!formGroupZelle.valid" class="btn btn-primary btn-block">Agregar </button>
     </form>
 <!--
     <ul>
@@ -141,10 +141,10 @@
 -->
   </div>
 
-  <div class="col-md-6 offset-md-2">
+  <div class="col-md-6 offset-md-1">
     <br>
     <h3>Listado de sus datos de zelle: </h3>
-    <table class="table table-sm  table-wrapper-scroll-y my-custom-scrollbar esto-2" *ngIf="auth.user$ | async as usuario">
+    <table class="table table-sm table-striped table-wrapper-scroll-y my-custom-scrollbar esto-2 custab" *ngIf="auth.user$ | async as usuario">
       <thead>
         <tr>
           <th scope="col">Correo </th>

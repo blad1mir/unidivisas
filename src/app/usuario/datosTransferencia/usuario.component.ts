@@ -127,12 +127,21 @@ export class UsuarioComponent implements OnInit {
 
   RegistrarNuevoZelle(value: { correoZelle: string; nombreZelle: string; usuario: string; principal: boolean; }) {
     value.usuario = (this.usuario);
-    if(this.ListaZelle.length==0){
+    let conta=0;
+    this.ListaZelle.forEach(lista => {
+      if (lista.usuario==this.usuario) {
+        conta++;
+      }
+    })
+
+    if(conta==0){
       value.principal=true;
-    }else if(this.ListaZelle.length>0){
+      console.log(true)
+    }else{
       value.principal=false;
+      console.log(false)
     }
-    console.log(value)
+
     this.firebaseService.agregarNuevoZelle(value)
     .then(
       res => {
