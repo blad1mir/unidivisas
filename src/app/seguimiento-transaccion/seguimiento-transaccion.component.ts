@@ -13,13 +13,9 @@ import { DatePipe } from '@angular/common';
 })
 export class SeguimientoTransaccionComponent implements OnInit {
 
-<<<<<<< HEAD
   constructor(private router: Router,private firestore: FirestoreService, private afAuth: AngularFireAuth, private route: ActivatedRoute, public auth: AuthService) { 
     auth.user$.forEach(u => { this.usuario=u.email});
   }
-=======
-  constructor(private router: Router,private firestore: FirestoreService, private afAuth: AngularFireAuth, private route: ActivatedRoute, public auth: AuthService) { }
->>>>>>> sprint3-gabo
   public solicitud: Solicitud = {};
   public totalPago;
   confirmar=0;
@@ -29,14 +25,11 @@ export class SeguimientoTransaccionComponent implements OnInit {
   ListaBanco = [];
   ListaZelle = [];
   transaccion=[];
-<<<<<<< HEAD
   usuario="";
   fechafull = new Date();
   formatoFecha = require('dateformat');
  
-=======
   fechaActual = Date.now().toLocaleString();
->>>>>>> sprint3-gabo
  
   
 
@@ -49,19 +42,10 @@ export class SeguimientoTransaccionComponent implements OnInit {
   }
 
   obtenerListaTransferencia(){
-<<<<<<< HEAD
-=======
- 
-
->>>>>>> sprint3-gabo
     this.firestore.obtenerListaDeTransferencia()
     .subscribe(elemento => {
         this.Transferencias =elemento;
     })
-<<<<<<< HEAD
-=======
-  
->>>>>>> sprint3-gabo
   }
 
   ObtenerDatosVendedor(idSolicitud: string){
@@ -100,22 +84,11 @@ export class SeguimientoTransaccionComponent implements OnInit {
   }
 
   datosVendedor(){
-<<<<<<< HEAD
-    this.ZellesPersonales=[];
-    this.Transferencias.forEach( transferencia => {
-      this.ListaZelle.forEach(zelle => {
-          if ((transferencia.vendedor === this.usuario)) {
-            if(transferencia.comprador==zelle.usuario){
-              this.ZellesPersonales.push(zelle);
-            }
-          } 
-=======
     this.Transferencias.forEach( transferencia => {
       this.ListaZelle.forEach(zelle => {
         if(transferencia.comprador==zelle.usuario){
           this.ZellesPersonales.push(zelle);
         }
->>>>>>> sprint3-gabo
       })
     })
 
@@ -165,12 +138,7 @@ export class SeguimientoTransaccionComponent implements OnInit {
     this.firestore.updateTransfer(this.transaccion['idventa'],this.transaccion);
     if(this.transaccion['canUsuariosConfirmaron']==2){
       this.transaccion['historial']=true;
-<<<<<<< HEAD
-      this.transaccion['fecha']=this.formatoFecha(this.fechafull, "mediumDate");
-      this.transaccion['hora']=this.formatoFecha(this.fechafull, "shortTime");
-=======
       this.transaccion['fecha']=new Date().toISOString();
->>>>>>> sprint3-gabo
       this.firestore.updateTransfer(this.transaccion['idventa'],this.transaccion);
     }
     
