@@ -1,0 +1,30 @@
+<br>
+
+<div *ngIf="auth.user$ | async as usuario" class="container justify-content-md-center">
+    <h3 align=center>Historial de transacciones: </h3>
+    <table class="table  table-responsive">
+        <thead align=center>
+            <tr>
+                <th>Comprador</th>
+                <th>Vendedor</th>
+                <th>Monto en dólares</th>
+                <th>Tasa de cambio</th>
+                <th>Monto en Bolivares</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+
+        <tbody *ngFor="let transferencia of Transferencias">
+            <tr
+                *ngIf="(transferencia.comprador === usuario.email || transferencia.vendedor === usuario.email) &&  transferencia.historial === true">
+                <td align=center>{{transferencia.comprador}} </td>
+                <td align=center>{{transferencia.vendedor}} </td>
+                <td align=center>{{transferencia.montoDolar}} $ </td>
+                <td align=center>{{transferencia.tasa}} BsS / $ </td>
+                <td align=center>{{transferencia.montoBolivar}} BsS</td>
+                <td>{{transferencia.fecha}} </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+</div>

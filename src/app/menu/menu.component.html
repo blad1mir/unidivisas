@@ -1,18 +1,81 @@
-<nav  class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="auth.user$ | async as user">
- 
-  <ul  class="navbar-nav mr-auto mt-0 mt-lg-0">
-  <li class="nav-item"> <a class="navbar-brand">
-      <img src="https://i-love-png.com/images/25426-1-green-dollar-symbol.png" width="60" height="60" class="d-inline-block align-top" alt="">
-    </a></li>
-  
-  </ul>
-  <a class="nav-link" [routerLink]="['/inicio']">Inicio</a>
-  <a class="nav-link" [routerLink]="['/venta']">Vender</a>
-  <a class="nav-link" [routerLink]="['/compra']">Comprar</a>
-  <a class="nav-link" [routerLink]="['/ajustes']">Ajustes</a>
-  <button (click)="auth.signOut()" class="btn btn-light  btn-outline" type="button">Logout</button>
-  
- 
- 
-</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="auth.user$ | async as user">
+  <a class="navbar-brand" [routerLink]="['/inicio']">
+    <img src="https://i-love-png.com/images/25426-1-green-dollar-symbol.png" width="60" height="60"
+      class="d-inline-block align-top" alt="">
+  </a>
 
+  <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
+    <ul class="navbar-nav ml-auto">
+
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/inicio']">Inicio</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/venta']">Vender</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/compra']">Comprar</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/transferencias']">Transferencias</a>
+      </li>
+     
+
+      <li class="dropdown nav-item">
+          <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="cursor:pointer;" > Perfil <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+              <li><p class="dropdown-item negra" [routerLink]="['/datos-transferencia']" style="cursor:pointer;">Datos de transferencias</p></li>
+              <li><p class="dropdown-item negra"  [routerLink]="['/historial']" style="cursor:pointer;">Historial</p></li>
+              <li><p class="dropdown-item negra" [routerLink]="['/datos-personales']" style="cursor:pointer;">Datos personales</p></li>
+             
+          </ul>
+      </li>
+
+      <li class="nav-item" style="margin-right: 180px;">
+        <button (click)="auth.signOut()" class="btn btn-light  btn-outline" type="button">Cerrar Sesión</button>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+<div class="card-group">
+  <div class="card text-center">
+    <img *ngIf="(bgClass === 'inicio' || bgClass === 'bienvenida' || bgClass === 'preguntas-frecuentes' )"
+      src="../../assets/imgs/Unimet_DT.png" class="card-img-top" alt="Unimet_DT">
+    <div class="card-body">
+      <h5 class="card-title">DollarToday</h5>
+      <p class="card-text">{{monto}}</p>
+      <!--Aquí se esta llamando a la funcion del ts que se trae la info de la API-->
+
+    </div>
+  </div>
+  <div class="card text-center">
+    <img *ngIf="(bgClass === 'inicio' || bgClass === 'bienvenida' || bgClass === 'preguntas-frecuentes' )"
+      src="../../assets/imgs/Unimet_cucuta.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">DolarCucuta</h5>
+      <p class="card-text">22.150,00 BsS</p>
+    </div>
+  </div>
+  <div class="card text-center">
+    <img *ngIf="(bgClass === 'inicio' || bgClass === 'bienvenida' || bgClass === 'preguntas-frecuentes' )"
+      src="../../assets/imgs/Unimet_TATM.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">TheAirTM</h5>
+      <p class="card-text">22.300,00 BsS</p>
+    </div>
+  </div>
+  <div class="card text-center">
+    <img *ngIf="(bgClass === 'inicio' || bgClass === 'bienvenida' || bgClass === 'preguntas-frecuentes' )"
+      src="../../assets/imgs/Unimet_Monitor.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">MonitorDolarVzla</h5>
+      <p class="card-text">22.250,00 BsS</p>
+    </div>
+  </div>
+</div>

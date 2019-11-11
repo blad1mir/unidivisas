@@ -1,0 +1,13 @@
+.my-custom-scrollbar {
+    position: relative;
+    height: 450px;
+    overflow: auto;
+}
+.table-wrapper-scroll-y {
+    display: block;
+}
+.esto-2{
+    position: relative;
+    height: 350px;
+    overflow: auto;
+}

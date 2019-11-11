@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { VentaComponent } from './venta/lista/venta.component';
 import { MenuComponent } from './menu/menu.component';
-import { UsuarioComponent } from './usuario/usuario.component';
+import { UsuarioComponent } from './usuario/datosTransferencia/usuario.component';
 import { HttpClientModule} from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
@@ -17,8 +17,14 @@ import { SolicitudComponent } from './venta/solicitud/solicitud.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { InicioComponent } from './inicio/inicio.component';
-
-
+import { FooterComponent } from './footer/footer.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { BienvenidaComponent } from './bienvenida/bienvenida.component';
+import { MenuBComponent } from './menu-b/menu-b.component';
+import { PreguntasComponent } from './preguntas/preguntas.component';
+import { SeguimientoTransaccionComponent } from './seguimiento-transaccion/seguimiento-transaccion.component';
+import { HistorialComponent } from './usuario/historial/historial.component';
+import { DatosPersonalesComponent } from './usuario/datos-personales/datos-personales.component';
 
 const config = {
   apiKey: "AIzaSyCTBMwIbR_erD_braA5rWhoIVI3MMev6VY",
@@ -41,19 +47,27 @@ const config = {
     CompraComponent,
     TransaccionComponent,
     SolicitudComponent,
-
+    InicioComponent,
+    FooterComponent,
+    BienvenidaComponent,
+    MenuBComponent,
+    PreguntasComponent,
+    SeguimientoTransaccionComponent,
+    HistorialComponent,
+    DatosPersonalesComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment),
     ReactiveFormsModule,
     FormsModule,
     AngularFireModule.initializeApp(config),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    //ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
 
   ],
   providers: [AngularFirestoreModule],

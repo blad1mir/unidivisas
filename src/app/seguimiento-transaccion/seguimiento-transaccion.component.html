@@ -1,0 +1,199 @@
+<br>
+<div  *ngIf="auth.user$ | async as usuario"  align=center>
+<table class="table col-sm-6">
+    <thead align=center>
+      <tr>
+        <th  scope="col" >Comprador</th>
+        <th  scope="col" >Estatus</th>
+        <th  scope="col" >Vendedor</th>
+        <th  scope="col" >Estatus</th>
+        <th  scope="col" >Monto en dólares</th>
+        <th  scope="col" >Tasa de cambio</th>
+        <th  scope="col" >Monto en Bolivares</th>
+      </tr>
+    </thead>
+    
+    <tbody *ngFor="let transferencia of Transferencias">
+      <tr *ngIf="(transferencia.comprador === usuario.email || transferencia.vendedor === usuario.email) &&  transferencia.historial === false">
+        <td align=center>{{transferencia.comprador}} </td>
+        <td *ngIf="transferencia.pagadoComprador === false ; else comprador"><img src="../../assets/imgs/puntoAmarillo.jpg" width="30" height="30"></td>
+        <td align=center>{{transferencia.vendedor}} </td>
+        <td *ngIf="transferencia.pagadoVendedor === false ; else vendedor"><img src="../../assets/imgs/puntoAmarillo.jpg" width="30" height="30"></td>
+        <td align=center>{{transferencia.montoDolar}} </td>
+        <td align=center>{{transferencia.tasa}} </td>
+        <td align=center>{{transferencia.montoBolivar}} </td>
+        <td align=center *ngIf="(transferencia.vendedor != usuario.email) && transferencia.pagadoComprador === false" id="aparecer"><button name ="" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#informacionVendedor"  (click)="ObtenerDatosVendedor(transferencia.idSolicitud)">Ver datos del vendedor</button></td>
+        <td align=center *ngIf="(transferencia.vendedor === usuario.email) && transferencia.pagadoVendedor === false"  id="aparecer2" ><button name ="" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#informacionComprador">Ver datos del comprador</button></td>
+        <td *ngIf="transferencia.pagadoComprador === true && transferencia.pagadoVendedor === true"><button name ="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#confirmoRecibido" (click)="confirmarTransaccion(transferencia)" >Confirmo que he recibido el dinero  </button></td> 
+        <td align=center *ngIf="(transferencia.vendedor != usuario.email) &&  (transferencia.pagadoVendedor === false && transferencia.pagadoComprador === true)" >Por favor espere...</td>
+        <td align=center *ngIf="(transferencia.vendedor === usuario.email) &&  (transferencia.pagadoVendedor === true && transferencia.pagadoComprador === false)" >Por favor espere...</td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+</div>
+  <ng-template #comprador>
+    <td ><img src="../../assets/imgs/puntoVerde.png" width="30" height="30"></td>
+  </ng-template>
+
+  
+  <ng-template #vendedor>
+    <td ><img src="../../assets/imgs/puntoVerde.png" width="30" height="30"></td>
+  </ng-template>
+
+  <ng-template #botoncomprador>
+    <td align=center  id="aparecer2" ><button name ="" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#informacionComprador">Ver datos del comprador</button></td>
+  </ng-template>
+
+  <div class="modal" id="informacionVendedor" tabindex="-1" role="dialog" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Datos del vendedor: </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+                <div class="col-med-3"  >
+                        <div class="card" style="width: 30rem;">
+                            <div class="card-body" align=left *ngFor="let banco of BancosPersonales">
+                                <h3 class="card-title" align=center>Detalles del Vendedor</h3>
+                                    <p align=center>Los siguientes datos son bancarios</p>
+                                    <strong>NOMBRE:</strong>
+                                        <p>  {{banco.nombreCliente}}</p>
+                                        <strong>NUMERO DE CUENTA:</strong>
+                                        <p>  {{banco.numeroCuenta}}</p>
+                                        <strong>BANCO:</strong>
+                                        <p>  {{banco.nombreBanco}}</p>
+                                        <strong>CEDULA:</strong>
+                                        <p>  {{banco.cedula}}</p>
+                                        <strong>MONTO A TRANSFERIR:</strong>
+                                        <p>  {{this.totalPago}} Bs.</p>
+                                        
+                                        <br>
+                                <div class="row" >
+                                        <strong>NUMERO DE REFERENCIA:</strong>
+                                        <input  type="number" [(ngModel)]="numeroRef" class="form-control" placeholder="" value=""/>
+                                        <br>
+                                    <div class="col">
+                                        <button class="btn btn-success btn-sm btn-block" (click)="transferirVendedor(numeroRef,banco.usuario)" data-dismiss="modal">Pagado </button>
+                                    </div>
+                                </div>     
+                            </div>
+                        </div>     
+                    </div>      
+        
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="informacionComprador" tabindex="-1" role="dialog" >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Datos del comprador: </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <div class="col-med-3"  >
+                            <div class="card" style="width: 30rem;">
+                             
+                                 <div *ngFor="let zelle of ZellesPersonales">
+                                <div class="card-body" align=left *ngIf="zelle.principal===true">
+                                
+                                    <h3 class="card-title" align=center>Detalles del Comprador</h3>
+                                        <p align=center>Los siguientes datos son de ZELLE</p>
+                                        <strong>NOMBRE:</strong>
+                                            <p>  {{zelle.nombreZelle}}</p>
+                                            <strong>Correo Zelle:</strong>
+                                            <p>  {{zelle.correoZelle}}</p>
+        
+                                            
+                                            <br>
+                                    <div class="row" >
+                                        <div class="col">
+                                            <button class="btn btn-success btn-sm btn-block"  (click)="transferirComprador(zelle.usuario)" data-dismiss="modal">Pagado </button>
+                                        </div>
+                                    </div>  
+                                
+                                </div>
+                                
+                            </div>     
+                        </div>      
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+      <div class="modal" id="confirmoRecibido" tabindex="-1" role="dialog" >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Datos del comprador: </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <div class="col-med-3"  >
+                            <div class="card" style="width: 30rem;">
+                             
+                                <div class="card-body" align=left>
+                                
+                                    <h3 class="card-title" align=center>Experiencia de la transacción</h3>
+                                        <p align=center>Esta transacción me hizo sentir: </p>
+                                        <div class="row">
+                                        <div class="form-check col-sm-2">
+                                          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                                          <label class="form-check-label" for="exampleRadios1"><h1>😡</h1></label>
+                                        </div>
+                                        <div class="form-check col-sm-2">
+                                          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                                          <label class="form-check-label" for="exampleRadios1"><h1>😤</h1></label>
+                                        </div>
+                                        <div class="form-check col-sm-2">
+                                          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                                          <label class="form-check-label" for="exampleRadios1"> <h1>😅</h1></label>
+                                        </div>
+                                        <div class="form-check col-sm-2">
+                                          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                                          <label class="form-check-label" for="exampleRadios1"><h1>😃</h1></label>
+                                        </div>
+                                        <div class="form-check col-sm-2">
+                                          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                                          <label class="form-check-label" for="exampleRadios1"> <h1>😊</h1></label>
+                                        </div>
+                                         
+                                         </div>  
+                                          
+                                           
+                                           
+                                    <div class="row" >
+                                        <div class="col">
+                                            <button class="btn btn-success btn-sm btn-block"  (click)="calificarTransaccion()" data-dismiss="modal">Confirmar </button>
+                                        </div>
+                                    </div>  
+                                
+                                </div>
+                                
+                               
+                        </div>      
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+     
+  
+  
+
+   
+<br><br>

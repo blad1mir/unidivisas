@@ -88,7 +88,7 @@
     </div>
   </div>
   
-  
+  <br>
   <table class="table col-md-6  offset-md-3" *ngIf="auth.user$ | async as usere">
     <thead>
       <tr>
@@ -107,16 +107,52 @@
             <div *ngIf="comentario.ProductoId == detalle.id"> -->
       <tr *ngIf="item.usuario === usere.email">
   
-        <td>{{item.monto}}</td>
-        <td>{{item.tarifa}}</td>
+        <td>{{item.monto}} $</td>
+        <td>{{item.tarifa}} Bs.</td>
         <td>{{item.banco}}</td>
         <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal"
             (click)="setId(item)">Editar</button>
         </td>
-        <td><button type="button" class="btn btn-danger" (click)="Delete(item)">Eliminar</button></td>
+        <td><button type="button" class="btn btn-danger" (click)="EliminarSolicitudes(item)">Eliminar</button></td>
+      </tr>
+  
+    </tbody>
+  </table>
+
+
+  <br>
+ <span  class="table col-md-6  offset-md-3">Lista de transacciones por pagar: </span>
+  <table class="table col-md-6  offset-md-3" *ngIf="auth.user$ | async as usuario">
+    
+    <thead>
+       
+      <tr>
+  
+        <th scope="col">Zelle</th>
+        <th scope="col">Monto</th>
+        <th scope="col">Estatus</th>
+        <th scope="col">Pagar</th>
+  
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of Transferencias">
+      <!-- <div *ngFor="let comentario of comentarios ">
+            <div *ngIf="comentario.ProductoId == detalle.id"> -->
+        
+        <tr *ngIf="(item.vendedor === usuario.email) &&  item.historial === false">
+        <td>{{item.comprador}}</td>
+        <td>{{item.montoDolar}} $</td>
+        <td *ngIf="item.refbanco === 0 ; else recibido"><img src="../../assets/imgs/puntoAmarillo.jpg" width="30" height="30"></td>
+        <td><button type="button" class="btn btn-primary" [routerLink]="['/transferencias']" >Pagar</button></td>
+      
+        
       </tr>
   
     </tbody>
   </table>
   
   </div>
+
+  <ng-template #recibido>
+    <td ><img src="../../assets/imgs/puntoVerde.png" width="30" height="30"></td>
+  </ng-template>

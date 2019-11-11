@@ -1,3 +1,4 @@
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from '../../Servicios/firestore.service';
 import { Router } from '@angular/router';
@@ -16,23 +17,23 @@ import { AuthService } from 'src/app/auth.service';
 })
 
 export class VentaComponent implements OnInit {
-  items: Array<any>;
   solicitud = [];
-  solActual = [];
-  val = 0;
-  id;
-  user="";
+  solicitudActual = [];
+  idColeccionActual;
+  usuario="";
+  Transferencias= [];
   public formGroup: FormGroup;
-  constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder, private router: Router, public auth: AuthService) {
+  constructor(public firebaseService: FirestoreService,private afAuth: AngularFireAuth, private formBuilder: FormBuilder, private router: Router, public auth: AuthService) {
     // Transformarlo en un servicio.! 
-    auth.user$.forEach(u => { this.user=u.email;  console.log("usuario A: "+this.user)});
+    auth.user$.forEach(u => { this.usuario=u.email;  console.log("usuario A: "+this.usuario)});
   }
 
   ngOnInit() {
     //this.getData();
 
-    this.getAll();
-    this. buildForm();
+    this.obtenerSolicitudes();
+    this.buildForm();
+    this.obtenerListaTransferencia();
   }
 
    buildForm() {
@@ -48,73 +49,51 @@ export class VentaComponent implements OnInit {
         });
     }
 
-  // getData() {
-  //   this.firebaseService.getSolicitudes()
-  //     .subscribe(result => {
-  //       this.items = result;
-  //       this.items.forEach(element => {
-  //         if (element.ref >= this.firebaseService.ide) {
-  //           this.firebaseService.ide = element.ref + 1;
-  //           console.log('before: ' +this.firebaseService.ide);
-  //         }
-  //         //console.log('before: '+ this.val);
-  //       });
-  //     }
-  //     );
-  //   //   // await delay(5000);
-  //   //   // this.wait(this.val);
-  // }
 
-  getAll(){
-   
-    let conta=0;
-    this.firebaseService.getSolicitudes()
+  obtenerSolicitudes(){
+    this.firebaseService.obtenerSolicitudes()
     .subscribe( solicitud =>{
       this.solicitud = solicitud;
       console.log(solicitud);
-      // solicitud.forEach(element => {
-      //   if(element.usuario==this.user){
-      //     conta++;
-      //     element.ref=conta;
-      //     this.solActual.push(element);
-      //   } 
-      //  })
+  
     })
   
-}
-
-  setId(item){
-   this.id=item.id;
-   this.solActual=item;
-   //console.log("Colección: "+item.id+' '+item.ref+' '+item.banco+' '+item.monto+' '+item.tarifa);
-  
-   console.log("ID item: "+ this.id);
   }
 
-  // Update(value){
-  //   console.log("Inicio ")
-  //   console.log(this.id+ " ")
-  //   console.log(value.banco+ " ")
-  //   console.log(value.usuario+" ")
-  //   console.log("Fin")
-  
+  colocarID(item){
+   this.idColeccionActual=item.id;
+   this.solicitudActual=item;
+   //console.log("Colección: "+item.id+' '+item.ref+' '+item.banco+' '+item.monto+' '+item.tarifa);
+  }
 
-  //   this.firebaseService.updateSolicitudes(this.id,value);
-  // }
 
        
-  Update(value: { usuario: string; banco: string; pago: string; }){
-    console.log("USUARIOOO: "+this.user)
+  ActualizarSolicitudes(value: { usuario: string; banco: string; pago: string; }){
+    console.log("USUARIOOO: "+this.usuario)
     console.log(value.banco +''+value.pago)
-    value.usuario = (this.user);
+    value.usuario = (this.usuario);
     console.log(this.formGroup.controls)
-    this.firebaseService.updateSolicitudes(this.id,value)
+    this.firebaseService.ActualizarSolicitudes(this.idColeccionActual,value)
     .then(
       res => {
         this.resetForm();
         //this.router.navigate(['/venta']);
       }
     )
+  }
+
+  obtenerListaTransferencia(){
+    this.Transferencias= [];
+    this.firebaseService.obtenerListaDeTransferencia()
+    .subscribe((transSnap) => {
+      this.Transferencias = [];
+      transSnap.forEach(elemento => {
+        if(elemento.vendedor==this.afAuth.auth.currentUser.email){
+          this.Transferencias.push(elemento);
+        }
+      })
+    })
+  
   }
 
   resetForm() {
@@ -124,14 +103,23 @@ export class VentaComponent implements OnInit {
       tarifa: new FormControl('', Validators.required),
       banco:  new FormControl('', Validators.required),
       pago:  new FormControl('', Validators.required),
-      usuario: [this.user, Validators.required ]
+      usuario: [this.usuario, Validators.required ]
     });
   }
 
 
-  Delete(item){
+  EliminarSolicitudes(item){
     console.log(item.id);
     this.firebaseService.deleteSolicitudes(item.id);
+  }
+
+  EliminarTransferencias(item){
+    console.log(item);
+    this.firebaseService.eliminarTransferencias(item.idventa);
+  }
+  aceptar(item){
+    console.log(item.id);
+    //this.firebaseService.updateTransfer(item.id);
   }
 
   //   async wait(valor){
@@ -140,4 +128,4 @@ export class VentaComponent implements OnInit {
   //   console.log("Waited 5s");
   // };
 
-
+}

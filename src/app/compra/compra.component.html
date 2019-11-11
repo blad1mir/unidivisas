@@ -1,27 +1,72 @@
-<app-menu></app-menu>
+
+<div class="compra">
 <div>
   <h1 align=center>Opciones a compra:</h1>
 </div>
+  <div class="filtros col-sm-6">
+          <p>Cantidad en $:</p>
+          <input type="number"
+                [(ngModel)]="monto" placeholder="Desde"
+                (change)="filtrarMayor('monto', monto)">
 
-  <table class="table col-md-6  offset-md-3">
+              <button *ngIf="monto"
+                (click)="QuitarFiltro('monto')">
+                  X
+              </button>
+ <!--    <input type="number"
+            [(ngModel)]="monto2" placeholder="Hasta"
+            (change)="filtrarMenor('monto', monto2)">
 
+          <button *ngIf="monto"
+            (click)="QuitarFiltro2('monto')">
+              X
+          </button>--> 
+          <hr>
+
+          <p>Tasa en Bs.:</p>
+          <input type="number"
+                [(ngModel)]="tarifa" placeholder="Desde"
+                (change)="filtrarMayor('tarifa', tarifa)">
+
+              <button *ngIf="tarifa"
+                (click)="QuitarFiltro('tarifa')">
+                  X
+              </button>
+              
+     <!--   <input type="number"
+            [(ngModel)]="tarifa2" placeholder="Hasta"
+            (change)="filtrarMenor('tarifa', tarifa2)">
+
+          <button *ngIf="tarifa"
+            (click)="QuitarFiltro2('tarifa')">
+              X
+          </button> -->
+          <hr>
+        
+</div>
+<table class="table table-wrapper-scroll-y my-custom-scrollbar col-sm-6">
     <thead align=center>
       <tr>
-        <th  scope="col" >ID</th>
-        <th  scope="col" >Monto</th>
-        <th  scope="col" >Tarifa</th>
+        <th  scope="col" >Monto ($)</th>
+        <th  scope="col" >Tasa de cambio</th>
+        <th  scope="col" >Monto a pagar (Bs)</th>
         <th  scope="col" >Banco</th>
         <th  scope="col" >Información</th>
-
       </tr>
     </thead>
     
-    <tbody>
-      <tr *ngFor="let solicitud of solicitudes">
-        <th scope="row">{{solicitud.ref}}</th>
-        <td align=center>{{solicitud.monto}}</td>
-        <td align=center>{{solicitud.tarifa}}</td>
+    <tbody *ngFor="let solicitud of ventasFiltradas">
+      <tr  *ngIf="solicitud.aceptada === false">
+        <td align=center>{{solicitud.monto}} $</td>
+        <td align=center>{{solicitud.tarifa}} Bs.</td>
+        <td align=center>{{solicitud.tarifa * solicitud.monto }} Bs.</td>
         <td align=center>{{solicitud.banco}}</td>
         <td align=center><button name ="" class="btn btn-primary btn-sm" routerLink="/transaccion/{{solicitud.id}}">Ver más</button></td>
-
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <button id="cargador" style="display: block; margin: auto;" class="btn btn-primary btn-sm" (click)="mas()">Cargar todo</button>
    
+<br><br>
+</div>

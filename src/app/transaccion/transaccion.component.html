@@ -1,21 +1,20 @@
-<app-menu></app-menu>
-
 <h1 align="center">Detalles de la transacción:</h1>
 
-<div class="row">
-    <div class="col-med-3 offset-md-2">
+<div class="row" >
+    <div class="col-med-3 offset-md-2" *ngIf="solicitud">
         <div class="card" style="width: 30rem;">
             <div class="card-body" align=left>
                 <h3 class="card-title" align=center>Información</h3>
-                    <p align=center>Aquí podrás ver a detalle la información de la transacción</p>
-                    <strong>PROPIETARIO:</strong>
-                        <p>  {{solicitud.usuario}}</p>
+                    <p align=center >Aquí podrás ver a detalle la información de la transacción</p>
+                    
                     <strong>BANCO A TRANSFERIR:</strong>
                         <p>  {{solicitud.banco}}</p>
                     <strong>MONTO DEL INTERCAMBIO:</strong>
-                        <p>  {{solicitud.monto}}</p>
+                        <p>  {{solicitud.monto}} $</p>
                     <strong>TARIFA DE LA TRANSACCIÓN:</strong>
-                        <p>  {{solicitud.tarifa}}</p>
+                        <p>  {{solicitud.tarifa}} Bs.</p>
+                    <strong>TOTAL EN BOLIVARES:</strong>
+                        <p>{{this.sumaa}} Bs.</p>
                 <div class="row">
                     <div class="col">
                         <button class="btn btn-success btn-sm btn-block" (click)="confirmartransaccion()">Aceptar </button>
@@ -27,25 +26,33 @@
             </div>
         </div>     
     </div>
-    <div class="col-med-3 offset-md-2">
+<!-- 
+    <div class="col-med-3 offset-md-1"  >
         <div class="card" style="width: 30rem;" id="aparecer">
-            <div class="card-body" align=left>
+            <div class="card-body" align=left *ngFor="let banco of BancosPersonales">
                 <h3 class="card-title" align=center>Detalles del Vendedor</h3>
                     <p align=center>Los siguientes datos son de ZELLE, se proporcionan a continuación los datos pertenentes</p>
-                    <strong>CORREO:</strong>
-                        <p> </p>
-                    <strong>NOMBRE DE USUARIO:</strong>
-                        <p> </p>
-
-                <div class="row">
+                    <strong>NOMBRE:</strong>
+                        <p>  {{banco.nombreCliente}}</p>
+                        <strong>NUMERO DE CUENTA:</strong>
+                        <p>  {{banco.numeroCuenta}}</p>
+                        <strong>BANCO:</strong>
+                        <p>  {{banco.nombreBanco}}</p>
+                        <strong>CEDULA:</strong>
+                        <p>  {{banco.cedula}}</p>
+                        <strong>MONTO A TRANSFERIR:</strong>
+                        <p>  {{this.sumaa}} Bs.</p>
+                        
+                        <br>
+                <div class="row" >
+                        <strong>NUMERO DE REFERENCIA:</strong>
+                        <input  type="number" [(ngModel)]="numeroRef" class="form-control" placeholder="" value=""/>
+                        <br>
                     <div class="col">
-                        <button class="btn btn-success btn-sm btn-block" (click)='block'>Aceptar </button>
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-secondary btn-sm btn-block">Volver </button>
+                        <button class="btn btn-success btn-sm btn-block" (click)="transferencia(numeroRef)">Aceptar </button>
                     </div>
                 </div>     
             </div>
         </div>     
-    </div>      
+    </div>       -->
 </div>  

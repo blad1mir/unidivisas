@@ -1,20 +1,36 @@
-<app-menu></app-menu>
 <div>
   <h1 align=center>Vender:</h1>
 </div>
 <div class="row">
+  <div  class="table-wrapper-scroll-y my-custom-scrollbar col-md-3">
+    <h3 align=center>Mercado: </h3>
+      <table class="table table-bordered table-striped mb-0">
+          <thead>
+            <tr>
+              <th scope="col">Monto</th>
+              <th scope="col">Tarifa</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of solicitud">
+              <tr  *ngIf="item.aceptada === false">
+              <td>{{item.monto}} $</td>
+              <td>{{item.tarifa}} Bs.</td>
+            </tr>
+          </tbody>
+        </table>
+  </div>
 
-  <div class="col-md-4 offset-md-2" *ngIf="auth.user$ | async as useru">
+  <div class="col-md-3" *ngIf="auth.user$ | async as useru">
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
       <input type="hidden" class="form-control" formControlName="usuario" value={{useru.email}} readonly="readonly">
       <div class ="form-group">
         <label for="exampleInputEmail1">Monto a vender ($):</label>
-        <input type="number" class="form-control" placeholder="00" formControlName="monto">
+        <input type="number" class="form-control" formControlName="monto">
         <small id="emailHelp" class="form-text text-muted">el monto está expresado en dólares</small>
       </div>  
       <div class="form-group">
         <label for="exampleInputPassword1">Tarifa (Bolívares por Dólar):</label>
-        <input type="number" class="form-control" placeholder="20.000" formControlName="tarifa">
+        <input type="number" class="form-control" formControlName="tarifa">
         <small id="emailHelp" class="form-text text-muted">tarifa en la que va a vender sus dólares</small>
       </div>
       <div class="form-group">
@@ -22,60 +38,47 @@
         <input type="text" class="form-control" placeholder="Banco" formControlName="banco"> -->
         <label for="exampleInputPassword1">Banco:</label>
         <div class="caja">
-          <select name="banco" formControlName="banco">
-            <option value="100%BANCO">100%BANCO</option>
-            <option value="ABN AMRO BANK">ABN AMRO BANK</option>
-            <option value="BANCAMIGA BANCO MICROFINANCIERO, C.A.">BANCAMIGA BANCO MICROFINANCIERO, C.A.</option>
-            <option value="BANCO ACTIVO BANCO COMERCIAL, C.A.">BANCO ACTIVO BANCO COMERCIAL, C.A.</option>
-            <option value="BANCO AGRICOLA">BANCO AGRICOLA</option>
-            <option value="BANCO BICENTENARIO">BANCO BICENTENARIO</option>
-            <option value="BANCO CARONI, C.A. BANCO UNIVERSAL">BANCO CARONI, C.A. BANCO UNIVERSAL</option>
-            <option value="BANCO DE DESARROLLO DEL MICROEMPRESARIO">BANCO DE DESARROLLO DEL MICROEMPRESARIO</option>
-            <option value="BANCO DE VENEZUELA S.A.I.C.A.">BANCO DE VENEZUELA S.A.I.C.A.</option>
-            <option value="BANCO DEL CARIBE C.A.">BANCO DEL CARIBE C.A.</option>
-            <option value="BANCO DEL PUEBLO SOBERANO C.A.">BANCO DEL PUEBLO SOBERANO C.A.</option>
-            <option value="BANCO DEL TESORO">BANCO DEL TESORO</option>
-            <option value="BANCO ESPIRITO SANTO, S.A.">BANCO ESPIRITO SANTO, S.A.</option>
-            <option value="BANCO EXTERIOR C.A.">BANCO EXTERIOR C.A.</option>
-            <option value="BANCO INDUSTRIAL DE VENEZUELA.">BANCO INDUSTRIAL DE VENEZUELA.</option>
-            <option value="BANCO INTERNACIONAL DE DESARROLLO, C.A.">BANCO INTERNACIONAL DE DESARROLLO, C.A.</option>
-            <option value="BANCO MERCANTIL C.A.">BANCO MERCANTIL C.A.</option>
-            <option value="BANCO NACIONAL DE CREDITO">BANCO NACIONAL DE CREDITO</option>
-            <option value="BANCO OCCIDENTAL DE DESCUENTO.">BANCO OCCIDENTAL DE DESCUENTO.</option>
-            <option value="BANCO PLAZA">BANCO PLAZA</option>
-            <option value="BANCO PROVINCIAL BBVA">BANCO PROVINCIAL BBVA</option>
-            <option value="BANCO VENEZOLANO DE CREDITO S.A.">BANCO VENEZOLANO DE CREDITO S.A.</option>
-            <option value="BANCRECER S.A. BANCO DE DESARROLLO">BANCRECER S.A. BANCO DE DESARROLLO</option>
-            <option value="BANESCO BANCO UNIVERSAL">BANESCO BANCO UNIVERSAL</option>  
-            <option value="BANFANB">BANFANB</option>
-            <option value="BANGENTE">BANGENTE</option>
-            <option value="BANPLUS BANCO COMERCIAL C.A">BANPLUS BANCO COMERCIAL C.A</option>
-            <option value="CITIBANK.">CITIBANK.</option>
-            <option value="CORP BANCA.">CORP BANCA.</option>
-            <option value="DELSUR BANCO UNIVERSAL">DELSUR BANCO UNIVERSAL</option>
-            <option value="FONDO COMUN">FONDO COMUN</option>
-            <option value="INSTITUTO MUNICIPAL DE CR&#201;DITO POPULAR">INSTITUTO MUNICIPAL DE CR&#201;DITO POPULAR</option>
-            <option value="MIBANCO BANCO DE DESARROLLO, C.A.">MIBANCO BANCO DE DESARROLLO, C.A.</option>
-            <option value="SOFITASA">SOFITASA</option>
+          <select  name="banco" formControlName="banco">
+            <option *ngFor="let banco of BancosPersonales"  [value]="banco.nombreBanco"> <li> {{banco.nombreBanco}} - {{banco.aliasBanco}}</li></option>
           </select>
         </div>
       </div>
 
-      <div class="form-group">
-        <!-- <label for="exampleInputPassword1">Banco:</label>
-        <input type="text" class="form-control" placeholder="Banco" formControlName="banco"> -->
+      <!-- <div class="form-group">
+       <label for="exampleInputPassword1">Banco:</label>
+        <input type="text" class="form-control" placeholder="Banco" formControlName="banco"> 
         <label for="exampleInputPassword1">Forma de pago:</label>
-        <div class="caja">
-          <select formControlName="pago">
-            <option value="Zelle" selected="selected">Zelle</option>
-          </select>
+        <div class="caja" >
+          <select formControlName="pago" >
+            <option *ngFor="let zelle of ZellePersonal" [value]="zelle.correoZelle">Zelle {{zelle.alias}} - {{zelle.correoZelle}}</option></select>
         </div>
+      </div> -->
+
+
+
+     <!-- <h2>Debug</h2>
+      <ul>
+        <li>Is my form  valid? {{formGroup.valid}}</li>
+        <li><pre>{{formGroup.controls.monto.errors| json}}</pre></li>
+        <li><pre>{{formGroup.controls.tarifa.errors| json}}</pre></li>
+        <li><pre>{{formGroup.controls.banco.errors| json}}</pre></li>
+        <li><pre>{{formGroup.controls.pago.errors| json}}</pre></li>
+        <li><pre>{{formGroup.controls.usuario.errors| json}}</pre></li>
+      </ul>
+      -->
+      <div *ngIf="BancosPersonales?.length > 0 && ZellePersonal?.length > 0">
+      <div *ngFor="let banco of BancosPersonales"  > 
       </div>
-
-
-
-
-      <button type="submit"  class="btn btn-primary">Enviar solicitud</button>
+      <div *ngFor="let zelle of ZellePersonal"  > 
+        </div>
+      <button type="submit" [disabled]="!formGroup.valid" class="btn btn-primary">Enviar solicitud</button>
+    </div>
+    <div *ngIf="BancosPersonales?.length === 0 || ZellePersonal?.length === 0">
+        
+          <button type="button" [routerLink]="['/perfil']" class="btn btn-primary">Añadir Zelle/Banco</button>
+        
+      </div>
+    
     </form>
     
   </div>
@@ -87,3 +90,6 @@
   </div>
 
 </div>
+
+<ng-template #other_content style="display: none">  </ng-template>
+<br><br>
