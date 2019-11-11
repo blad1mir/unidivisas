@@ -1,6 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <app-menu-b *ngIf="(bgClass === 'login' || bgClass === 'preguntas-frecuentes'|| bgClass === 'bienvenida')"></app-menu-b>
-<app-menu></app-menu>
+<app-menu  *ngIf="(bgClass === 'logout' || bgClass === 'inicio'|| bgClass === 'ajustes' || bgClass === 'venta'|| bgClass === 'compra'|| bgClass === 'transferencias'|| bgClass === 'datos-transferencia'|| bgClass === 'historial'|| bgClass === 'datos-personales')"></app-menu>
 
 <router-outlet></router-outlet>
 
