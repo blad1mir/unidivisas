@@ -22,24 +22,24 @@
         <a class="nav-link" [routerLink]="['/compra']">Comprar</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/transferencias']">Transferencias</a>
+        <a class="nav-link" [routerLink]="['/transferencias']">Transacciones Activas</a>
       </li>
      
 
       <li class="dropdown nav-item">
           <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="cursor:pointer;" > Perfil <span class="caret"></span></a>
           <ul class="dropdown-menu">
-              <li><p class="dropdown-item negra" [routerLink]="['/datos-transferencia']" style="cursor:pointer;">Datos de transferencias</p></li>
+              <li><p class="dropdown-item negra" [routerLink]="['/datos-transferencia']" style="cursor:pointer;">Datos Bancarios</p></li>
               <li><p class="dropdown-item negra"  [routerLink]="['/historial']" style="cursor:pointer;">Historial</p></li>
               <li><p class="dropdown-item negra" [routerLink]="['/datos-personales']" style="cursor:pointer;">Datos personales</p></li>
              
           </ul>
       </li>
 
-      <li class="nav-item" style="margin-right: 250px;">
+      <li class="nav-item aaa" style="margin-right: 250px;">
         <button (click)="auth.signOut()" class="btn btn-light  btn-outline" type="button">Cerrar Sesión</button>
       </li>
-
+    
     </ul>
   </div>
 </nav>

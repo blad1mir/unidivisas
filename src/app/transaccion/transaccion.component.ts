@@ -4,6 +4,7 @@ import { FirestoreService } from '../Servicios/firestore.service';
 import { Solicitud } from '../modelos/interfaces';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 
 @Component({
@@ -12,11 +13,19 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrls: ['./transaccion.component.css']
 })
 export class TransaccionComponent implements OnInit {
-  constructor(private router: Router,private firestore: FirestoreService, private afAuth: AngularFireAuth, private route: ActivatedRoute) { }
+  constructor(private router: Router,private firestore: FirestoreService, private afAuth: AngularFireAuth,public auth: AuthService, private route: ActivatedRoute) { 
+
+    auth.user$.subscribe( user => { // Reestructurar todo despues de Auth
+      this.user = user.email
+      console.log("usuario A: " + this.user);
+    })
+  }
   public solicitud: Solicitud = {};
   public sumaa;
   user="";
   ListaBanco = [];
+  ListaZelle = [];
+  ZellePersonal= [];
   BancosPersonales= [];
   Transferencia= [];
    
@@ -24,11 +33,9 @@ export class TransaccionComponent implements OnInit {
     const idSolicitud = this.route.snapshot.params['id'];
     this.getDetailsSolicitud(idSolicitud);
     this.obtenerListaBanco();
+    this.obtenerListaZelle();
 
-      var x = document.getElementById("aparecer");
-      x.style.display="none";
-      var y = document.getElementById("desaparecer");
-      y.style.display="block";
+      
   }
 
   
@@ -40,20 +47,37 @@ export class TransaccionComponent implements OnInit {
       this.sumaa=this.solicitud.monto*this.solicitud.tarifa;
     });
   }
+ 
   obtenerListaBanco(){
     this.BancosPersonales= [];
     this.firestore.obtenerListaDeBanco()
     .subscribe( ListaBanco =>{
       this.ListaBanco = ListaBanco;
       ListaBanco.forEach(elemento => {
-        if(elemento.usuario==this.solicitud.usuario && elemento.nombreBanco==this.solicitud.banco){
+        if(elemento.usuario==this.user){
           console.log(elemento.usuario)
+          console.log(this.user)
           this.BancosPersonales.push(elemento);
         }
       })
     })
   
   }
+  obtenerListaZelle(){
+    this.ZellePersonal = [];
+    this.firestore.obtenerListaDeZelle()
+    .subscribe( ListaZelle =>{
+      this.ListaZelle = ListaZelle;
+      ListaZelle.forEach(elemento => {
+        if(elemento.usuario==this.user){
+          this.ZellePersonal.push(elemento);
+        }
+      })
+    
+    })
+
+}
+
 
 
   confirmartransaccion(){
