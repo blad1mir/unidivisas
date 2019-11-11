@@ -1,0 +1,12 @@
+ input[type=radio]{ position: absolute;left: -1000em; }
+.carita input[type=radio]:checked + label { color: red; background-color: red;}
+
+.btn span.glyphicon {    			
+    opacity: 0;	
+    position: absolute;left: -1000em;			
+}
+.btn.active span.glyphicon {				
+    opacity: 1;		
+    position: absolute;left: -1000em;
+    		
+}
