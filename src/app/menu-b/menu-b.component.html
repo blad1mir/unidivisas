@@ -1,80 +1,112 @@
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light" >
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" [routerLink]="['/inicio']">
-    <img src="https://i-love-png.com/images/25426-1-green-dollar-symbol.png" width="60" height="60" class="d-inline-block align-top" alt="">
+    <img
+      src="https://i-love-png.com/images/25426-1-green-dollar-symbol.png"
+      width="60"
+      height="60"
+      class="d-inline-block align-top"
+      alt=""
+    />
   </a>
 
-  <button class="navbar-toggler" type="button"
-          (click)="toggleNavbar()">
+  <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
+  <div class="collapse navbar-collapse" [ngClass]="{ show: navbarOpen }">
     <ul class="navbar-nav ml-auto">
-      
-      <li class="nav-item" >
-        <a class="nav-link" [routerLink]="['/bienvenida']">¿Cómo Funciona?</a>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/bienvenida']" href="#howto"
+          >¿Cómo Funciona?</a
+        >
       </li>
 
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/bienvenida']">Comisiones</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/preguntas-frecuentes']">Preguntas Frecuentes</a>
+        <a class="nav-link" [routerLink]="['/preguntas-frecuentes']"
+          >Preguntas Frecuentes</a
+        >
       </li>
-      <div *ngIf="auth.user$ | async; then authenticated else guest"></div>
+      <div *ngIf="auth.user$ | async; then authenticated; else guest"></div>
       <ng-template #guest>
-      <li class="nav-item" >
-        <a class="nav-link" [routerLink]="['/login']">Login</a>
-      </li></ng-template>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/login']">Registro/Login</a>
+        </li></ng-template
+      >
       <ng-template #authenticated>
-      <li class="nav-item" >
-        <a class="nav-link" [routerLink]="['/inicio']">Inicio</a>
-      </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/inicio']">Inicio</a>
+        </li>
       </ng-template>
-
     </ul>
   </div>
 </nav>
 <div class="card-group">
   <div class="card text-center">
     <a href="https://dolartoday.com/" target="_blank">
-      <img *ngIf="(bgClass === 'inicio' || bgClass === 'bienvenida' || bgClass === 'preguntas-frecuentes' )"  src="../../assets/imgs/Unimet_DT.png" class="card-img-top" alt="Unimet_DT" >
-    </a> 
+      <img
+        *ngIf="bgClass === 'inicio'"
+        src="../../assets/imgs/Unimet_DT.png"
+        class="card-img-top"
+        alt="Unimet_DT"
+      />
+    </a>
     <div class="card-body">
-      <small>{{fecha}}</small>
-      <h5 class="card-title" >DollarToday</h5>
-      <p class="card-text">{{montoDT}} BsS</p> <!--Aquí se esta llamando a la funcion del ts que se trae la info de la API Dolar Today-->
-     
+      <small>{{ fecha }}</small>
+      <h5 class="card-title">DollarToday</h5>
+      <p class="card-text">{{ montoDT }} BsS</p>
+      <!--Aquí se esta llamando a la funcion del ts que se trae la info de la API Dolar Today-->
     </div>
   </div>
   <div class="card text-center">
     <a href="https://preciocucuta.com/dolar-hoy/" target="_blank">
-      <img  *ngIf="(bgClass === 'inicio' || bgClass === 'bienvenida' || bgClass === 'preguntas-frecuentes' )" src="../../assets/imgs/Unimet_cucuta.png" class="card-img-top" alt="...">
+      <img
+        *ngIf="bgClass === 'inicio'"
+        src="../../assets/imgs/Unimet_cucuta.png"
+        class="card-img-top"
+        alt="..."
+      />
     </a>
     <div class="card-body">
-      <small>{{fecha}}</small>
-      <h5 class="card-title">DolarCucuta</h5> 
-      <p class="card-text">{{montoDC}} BsS</p> <!--Aqui se está llamando a la función del ts que se trae la información de la API Cucuta-->
-    </div>
-  </div>
-  <div class="card text-center"> 
-    <a href="http://www.cencoex.gob.ve/convocatoria-sicad" target="_blank">
-      <img  *ngIf="(bgClass === 'inicio' || bgClass === 'bienvenida' || bgClass === 'preguntas-frecuentes' )"  src="../../assets/imgs/Unimet_Sicad.png" class="card-img-top" alt="...">
-    </a>
-    <div class="card-body">
-      <small>{{fecha}}</small>
-      <h5 class="card-title">SICAD</h5>
-      <p class="card-text">{{montoDS}} BsS</p>
+      <small>{{ fecha }}</small>
+      <h5 class="card-title">DolarCucuta</h5>
+      <p class="card-text">{{ montoDC }} BsS</p>
+      <!--Aqui se está llamando a la función del ts que se trae la información de la API Cucuta-->
     </div>
   </div>
   <div class="card text-center">
-    <a href="https://www.instagram.com/monitordolar.vzla/?hl=es-la" target="_blank">
-      <img  *ngIf="(bgClass === 'inicio' || bgClass === 'bienvenida' || bgClass === 'preguntas-frecuentes' )"  src="../../assets/imgs/Unimet_Monitor.png" class="card-img-top" alt="...">
+    <a href="http://www.cencoex.gob.ve/convocatoria-sicad" target="_blank">
+      <img
+        *ngIf="bgClass === 'inicio'"
+        src="../../assets/imgs/Unimet_Sicad.png"
+        class="card-img-top"
+        alt="..."
+      />
+    </a>
+    <div class="card-body">
+      <small>{{ fecha }}</small>
+      <h5 class="card-title">SICAD</h5>
+      <p class="card-text">{{ montoDS }} BsS</p>
+    </div>
+  </div>
+  <div class="card text-center">
+    <a
+      href="https://www.instagram.com/monitordolar.vzla/?hl=es-la"
+      target="_blank"
+    >
+      <img
+        *ngIf="bgClass === 'inicio'"
+        src="../../assets/imgs/Unimet_Monitor.png"
+        class="card-img-top"
+        alt="..."
+      />
     </a>
     <div class="card-body">
       <h5 class="card-title">MonitorDolarVzla</h5>
-      <p class="card-text">22.250,00 BsS</p> <!--Falta extraer esta inforacion de la página web-->
-    </div> 
+      <p class="card-text">22.250,00 BsS</p>
+      <!--Falta extraer esta inforacion de la página web-->
+    </div>
   </div>
 </div>
