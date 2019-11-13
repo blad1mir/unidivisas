@@ -13,6 +13,7 @@ import { PreguntasComponent } from './preguntas/preguntas.component';
 import { SeguimientoTransaccionComponent } from './seguimiento-transaccion/seguimiento-transaccion.component';
 import { HistorialComponent } from './usuario/historial/historial.component';
 import { DatosPersonalesComponent } from './usuario/datos-personales/datos-personales.component';
+import { NosotrosComponent } from './nosotros/nosotros.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
     {path: 'inicio', component: InicioComponent, canActivate: [AuthGuard]},
     {path: 'login', component: LoginComponent},
     {path: 'bienvenida', component: BienvenidaComponent},
+    {path: 'acerca-nosotros', component: NosotrosComponent},
     {path: 'preguntas-frecuentes', component: PreguntasComponent},
     {path: 'transferencias', component: SeguimientoTransaccionComponent, canActivate: [AuthGuard]},
     {path: 'historial', component: HistorialComponent, canActivate: [AuthGuard]},

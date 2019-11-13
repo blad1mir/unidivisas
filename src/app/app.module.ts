@@ -25,6 +25,7 @@ import { PreguntasComponent } from './preguntas/preguntas.component';
 import { SeguimientoTransaccionComponent } from './seguimiento-transaccion/seguimiento-transaccion.component';
 import { HistorialComponent } from './usuario/historial/historial.component';
 import { DatosPersonalesComponent } from './usuario/datos-personales/datos-personales.component';
+import { NosotrosComponent } from './nosotros/nosotros.component';
 
 const config = {
   apiKey: "AIzaSyCTBMwIbR_erD_braA5rWhoIVI3MMev6VY",
@@ -54,7 +55,8 @@ const config = {
     PreguntasComponent,
     SeguimientoTransaccionComponent,
     HistorialComponent,
-    DatosPersonalesComponent
+    DatosPersonalesComponent,
+    NosotrosComponent
 
   ],
   imports: [

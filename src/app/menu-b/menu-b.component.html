@@ -16,14 +16,24 @@
   <div class="collapse navbar-collapse" [ngClass]="{ show: navbarOpen }">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/bienvenida']" href="#howto"
+          <a class="nav-link" [routerLink]="['/bienvenida']"
+          >Inicio</a
+        >
+      </li>
+      <!--<li class="nav-item">
+        <a class="nav-link" href="#uno"
           >¿Cómo Funciona?</a
         >
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/bienvenida']">Comisiones</a>
-      </li>
+        <a class="nav-link" href="#dos">Comisiones</a>
+      </li>-->
+      <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/acerca-nosotros']"
+            >Acerca de Nosotros</a
+          >
+        </li>
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/preguntas-frecuentes']"
           >Preguntas Frecuentes</a
