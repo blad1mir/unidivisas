@@ -31,7 +31,7 @@
           <ul class="dropdown-menu">
               <li><p class="dropdown-item negra" [routerLink]="['/datos-transferencia']" style="cursor:pointer;">Datos Bancarios</p></li>
               <li><p class="dropdown-item negra"  [routerLink]="['/historial']" style="cursor:pointer;">Historial</p></li>
-              <li><p class="dropdown-item negra" [routerLink]="['/datos-personales']" style="cursor:pointer;">Datos personales</p></li>
+              <!-- <li><p class="dropdown-item negra" [routerLink]="['/datos-personales']" style="cursor:pointer;">Datos personales</p></li> -->
              
           </ul>
       </li>
@@ -51,7 +51,7 @@
     <div class="card-body">
       <small>{{fecha}}</small>
       <h5 class="card-title" >DollarToday</h5>
-      <p class="card-text">{{montoDT}} BsS</p> <!--Aquí se esta llamando a la funcion del ts que se trae la info de la API Dolar Today-->
+      <p class="card-text">{{montoDT | number: '3.1-2'}} BsS</p> <!--Aquí se esta llamando a la funcion del ts que se trae la info de la API Dolar Today-->
      
     </div>
   </div>
@@ -62,7 +62,7 @@
     <div class="card-body">
       <small>{{fecha}}</small>
       <h5 class="card-title">DolarCucuta</h5> 
-      <p class="card-text">{{montoDC}} BsS</p> <!--Aqui se está llamando a la función del ts que se trae la información de la API Cucuta-->
+      <p class="card-text">{{montoDC | number: '3.1-2'}} BsS</p> <!--Aqui se está llamando a la función del ts que se trae la información de la API Cucuta-->
     </div>
   </div>
   <div class="card text-center"> 
@@ -72,7 +72,7 @@
     <div class="card-body">
       <small>{{fecha}}</small>
       <h5 class="card-title">SICAD</h5>
-      <p class="card-text">{{montoDS}} BsS</p>
+      <p class="card-text">{{montoDS | number: '3.1-2'}} BsS</p>
     </div>
   </div>
   <div class="card text-center">
@@ -80,8 +80,9 @@
       <img  *ngIf="(bgClass === 'inicio' || bgClass === 'bienvenida' || bgClass === 'preguntas-frecuentes' )"  src="../../assets/imgs/Unimet_Monitor.png" class="card-img-top" alt="...">
     </a>
     <div class="card-body">
-      <h5 class="card-title">MonitorDolarVzla</h5>
-      <p class="card-text">22.250,00 BsS</p> <!--Falta extraer esta inforacion de la página web-->
+        <small>{{fecha}}</small>
+      <h5 class="card-title">Unidivisas</h5>
+      <p class="card-text">{{(montoDS+montoDC+montoDT)/3 | number: '3.1-2'}} BsS</p>
     </div> 
   </div>
 </div>

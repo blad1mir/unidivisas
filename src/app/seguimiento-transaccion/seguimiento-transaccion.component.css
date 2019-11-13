@@ -1,5 +1,8 @@
  input[type=radio]{ position: absolute;left: -1000em; }
-.carita input[type=radio]:checked + label { color: red; background-color: red;}
+ input[type="radio"]:checked { 
+    color: red;
+    background-color: red;
+}
 
 .btn span.glyphicon {    			
     opacity: 0;	
