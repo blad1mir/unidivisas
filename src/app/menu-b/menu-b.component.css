@@ -1,7 +1,7 @@
 .navbar{
     color: #ffffff !important;
     background-color: #0aaaf0 !important;
-    text-align: right;
+    text-align: right !important;
     /*position: fixed;
     z-index: 1000;
     top:0;
@@ -9,8 +9,8 @@
     */
 }
 li {
-margin-left: 5%;
-padding-left: 5%;
+margin-left: 5% !important;
+padding-left: 5% !important;
 }
 negra {
 color: #000000 !important;
