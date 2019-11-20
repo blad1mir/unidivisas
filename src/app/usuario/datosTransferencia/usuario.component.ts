@@ -83,7 +83,7 @@ export class UsuarioComponent implements OnInit {
     this.formGroupBanco = this.formBuilder.group({
       nombreBanco: new FormControl('', Validators.required),
       numeroCuenta: new FormControl('', [Validators.required,Longitud(20),nega(1)]),
-      nombreCliente: new FormControl('', [Validators.required,LongitudMinima(5)]),
+      nombreCliente: new FormControl('', [Validators.required,LongitudMinima(7)]),
       cedula: new FormControl('', [Validators.required,LongitudMinima(4),nega(1)]),
       aliasBanco: new FormControl('', [Validators.required,LongitudMinima(2)]),
       usuario: new FormControl('')

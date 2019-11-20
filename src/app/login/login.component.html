@@ -153,8 +153,8 @@
                                             </button>-->
                 </ng-template>
                 <ng-template #authenticated>
-                  <div class="btnRegister" *ngIf="auth.user$ | async as user">
-                    <button routerLink="/inicio">Inicio</button>
+                  <div  *ngIf="auth.user$ | async as user">
+                    <button class="btnRegister" routerLink="/inicio">Inicio</button>
                   </div>
                 </ng-template>
                 <input type="submit" class="btnRegister"

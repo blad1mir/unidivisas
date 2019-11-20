@@ -44,6 +44,8 @@ export class AuthService {
       const credential = await this.afAuth.auth.createUserWithEmailAndPassword(email, pass)
       return this.updateUserData(credential.user).then((success)=>{
         this.SendVerificationMail();
+        window.alert('Por favor valida tu email antes de ingresar. Revisa tu buzón de entrada.');
+          this.signOut();
         this.updateUserData3(credential.user.uid, displayName,email, tel, adm);
         });
     }
@@ -67,6 +69,7 @@ export class AuthService {
         if (result.user.emailVerified !== true) {
           this.SendVerificationMail();
           window.alert('Por favor valida tu email antes de ingresar. Revisa tu buzón de entrada.');
+          this.signOut();
         } else {
           this.ngZone.run(() => {
             this.router.navigate(['/venta']);

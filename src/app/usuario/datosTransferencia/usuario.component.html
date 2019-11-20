@@ -8,6 +8,10 @@
       <div class="form-group">
         <label for="nombreUsuario">Nombre Completo</label>
         <input type="text" class="form-control"  required="required" formControlName="nombreCliente" placeholder="Nombre Apellido">
+        <div *ngIf="formGroupBanco.controls.nombreCliente.invalid && (formGroupBanco.controls.nombreCliente.dirty || formGroupBanco.controls.nombreCliente.touched)"
+      class="alert alert-danger">
+      Ingrese un nombre valido
+          </div>
       </div>
 
       <div class="form-group">
@@ -54,11 +58,33 @@
         <label for="numeroCuenta">Número de cuenta completo: </label>
         <input type="text" class="form-control" required="required"  formControlName="numeroCuenta" maxlength="20" >
         <small id="NCuentaHelp" class="form-text text-muted">Coloque su numero de cuenta completa (20 digitos)</small>
+        <div *ngIf="formGroupBanco.controls.numeroCuenta.invalid && (formGroupBanco.controls.numeroCuenta.dirty || formGroupBanco.controls.numeroCuenta.touched)">
+      <div *ngIf="formGroupBanco.controls.numeroCuenta.errors.required" class="alert alert-danger">
+          Debe ingresar un numero de cuenta
+        </div>
+          <div *ngIf="formGroupBanco.controls.numeroCuenta.errors.longi" class="alert alert-danger">
+            Debe ingresar su numero de cuenta completo
+          </div>
+          <div *ngIf="formGroupBanco.controls.numeroCuenta.errors.mi" class="alert alert-danger">
+              Debe ingresar un numero de cuenta valido
+            </div>
+          </div>
       </div>
 
       <div class="form-group">
         <label for="Cedula">Cédula de identidad : </label>
         <input type="text" class="form-control" maxlength="8"required="required"   formControlName="cedula">
+        <div *ngIf="formGroupBanco.controls.cedula.invalid && (formGroupBanco.controls.cedula.dirty || formGroupBanco.controls.cedula.touched)">
+            <div *ngIf="formGroupBanco.controls.cedula.errors.required" class="alert alert-danger">
+                Debe ingresar un numero de cedula
+              </div>
+              <div *ngIf="formGroupBanco.controls.cedula.errors.minLength" class="alert alert-danger">
+                  Debe ingresar un numero de cedula valido
+                </div>
+                <div *ngIf="formGroupBanco.controls.cedula.errors.mi" class="alert alert-danger">
+                    No puede ingresar negativos
+                  </div>
+                </div>
       </div>
 
       <div class="form-group">
@@ -118,15 +144,27 @@
       <div class="form-group">
         <label for="CorreoZelle">Correo electrónico: </label>
         <input type="email" class="form-control" required="required" id="Correo"  formControlName="correoZelle">
+        <div *ngIf="formGroupZelle.controls.correoZelle.invalid && (formGroupZelle.controls.correoZelle.dirty || formGroupZelle.controls.correoZelle.touched)"
+      class="alert alert-danger">
+      Ingrese un correo valido
+          </div>
       </div>
       <div class="form-group">
         <label for="NombreZelle">Nombre de usuario de su cuenta :</label>
         <input type="text" class="form-control" required="required" id="NameUser"  formControlName="nombreZelle">
+        <div *ngIf="formGroupZelle.controls.nombreZelle.invalid && (formGroupZelle.controls.nombreZelle.dirty || formGroupZelle.controls.nombreZelle.touched)"
+      class="alert alert-danger">
+      Ingrese un nombre valido
+          </div>
       </div>
 
       <div class="form-group">
           <label for="NombreZelle">Alias:</label>
           <input type="text" class="form-control" required="required" id="NameUser" formControlName="alias">
+          <div *ngIf="formGroupZelle.controls.alias.invalid && (formGroupZelle.controls.alias.dirty || formGroupZelle.controls.alias.touched)"
+      class="alert alert-danger">
+      Ingrese un Alias valido
+          </div>
         </div>
 
       <button type="submit" [disabled]="!formGroupZelle.valid" class="btn btn-primary btn-block">Agregar </button>
