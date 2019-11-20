@@ -15,3 +15,32 @@
    
     transition: 0.5s;
     }
+    
+.image-aboutus-banner {
+    background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url("https://www.cozmoslabs.com/wp-content/uploads/2011/04/PB-logo-featured.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    color: #fff;
+    padding-top: 60px;
+    padding-bottom:110px;
+  }
+  
+  .image-aboutus-sm-banner {
+    background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url("https://www.cozmoslabs.com/wp-content/uploads/2011/04/PB-logo-featured.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    color: #fff;
+    padding-top: 30px;
+    padding-bottom:30px;
+  }
+  .lg-text {
+    font-size:52px;
+    font-weight: 600;
+    text-transform: none;
+    color:#fff;
+  }
+  .image-aboutus-para {
+    color:#fff;
+  }
