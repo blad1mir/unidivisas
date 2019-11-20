@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from 'src/app/Servicios/firestore.service';
 import { FormBuilder, FormGroup, FormControl, Validators,AbstractControl  } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { delay } from 'q';
 import { AuthService } from 'src/app/auth.service';
 
@@ -86,20 +86,27 @@ this.formGroup.get('tarifa').valueChanges
     this.firebaseService.createSolicitud(value)
     .then(
       res => {
-        this.resetForm();
-        //this.router.navigate(['/venta']);
+        this.resetForm()
+        //window.location.reload()
+        
       }
     )
+    
   }
 
   resetForm() {
+    function nega(mi) {
+      return function(input) {
+        return input.value >= mi ? null : { mi: true };
+      };
+    }
     this.formGroup = this.formBuilder.group({
       ref: [''],
-      monto: new FormControl('', Validators.required),
-      tarifa: new FormControl('', Validators.required),
-      banco:  new FormControl('', Validators.required),
-      pago:  new FormControl('', Validators.required),
-      usuario: [this.user, Validators.required ]
+      monto: new FormControl('', [Validators.required,nega(1)]),
+           tarifa: new FormControl('', [Validators.required,nega(1)]),
+           banco:  new FormControl('', Validators.required),
+           pago:  new FormControl(''),
+           usuario: new FormControl(this.user),
     });
   }
 

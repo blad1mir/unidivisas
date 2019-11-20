@@ -146,7 +146,7 @@ export class UsuarioComponent implements OnInit {
     this.firebaseService.agregarNuevoZelle(value)
     .then(
       res => {
-        this.resetForm();
+        this.resetFormZelle();
         //this.router.navigate(['/venta']);
       }
     )
@@ -158,7 +158,7 @@ export class UsuarioComponent implements OnInit {
     this.firebaseService.agregarNuevoBanco(value)
     .then(
       res => {
-        this.resetForm();
+        this.resetFormBanco();
         //this.router.navigate(['/venta']);
       }
     )
@@ -175,14 +175,53 @@ export class UsuarioComponent implements OnInit {
     this.firebaseService.eliminarBanco(valor.id);
   }
 
-  resetForm() {
+  resetFormZelle() {
+    function LongitudMinima(minimum) {
+      return function(input) {
+        return input.value.length >= minimum ? null : { minLength: true };
+      };
+    }
+    function tieneArroba(input: FormControl) {
+      const hasExclamation = input.value.indexOf('@') >= 0;
+      return hasExclamation ? null : { needsExclamation: true };
+    }
+    function tienecom(input: FormControl) {
+      const hasExclamation = input.value.indexOf('.com') >= 0;
+      return hasExclamation ? null : { needsExclamation: true };
+    }
+
     this.formGroupZelle = this.formBuilder.group({
-      nombreUsuario: new FormControl('', Validators.required),
-      Banco: new FormControl('', Validators.required),
-      NumeroCuenta: new FormControl('', Validators.required),
-      Cedula: new FormControl('', Validators.required),
-      CorreoZelle: new FormControl('', Validators.required),
-      NombreZelle: new FormControl('', Validators.required)
+      correoZelle: new FormControl('', [Validators.required,LongitudMinima(6),tieneArroba,tienecom]),
+      nombreZelle: new FormControl('', [Validators.required,LongitudMinima(2)]),
+      alias: new FormControl('', [Validators.required,LongitudMinima(2)]),
+      usuario: new FormControl('')
+    });
+  }
+  resetFormBanco() {
+    function LongitudMinima(minimum) {
+      return function(input) {
+        return input.value.length >= minimum ? null : { minLength: true };
+      };
+    }
+    function Longitud(long) {
+      return function(input) {
+        return input.value.length == long ? null : { longi: true };
+      };
+    }
+    
+
+    function nega(mi) {
+      return function(input) {
+        return input.value >= mi ? null : { mi: true };
+      };
+    }
+    this.formGroupZelle = this.formBuilder.group({
+      nombreBanco: new FormControl('', Validators.required),
+      numeroCuenta: new FormControl('', [Validators.required,Longitud(20),nega(1)]),
+      nombreCliente: new FormControl('', [Validators.required,LongitudMinima(7)]),
+      cedula: new FormControl('', [Validators.required,LongitudMinima(4),nega(1)]),
+      aliasBanco: new FormControl('', [Validators.required,LongitudMinima(2)]),
+      usuario: new FormControl('')
     });
   }
 
