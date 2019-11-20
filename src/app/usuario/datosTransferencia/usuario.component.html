@@ -90,6 +90,10 @@
       <div class="form-group">
           <label for="nombreUsuario">Alias</label>
           <input type="text" class="form-control" formControlName="aliasBanco">
+          <div *ngIf="formGroupBanco.controls.aliasBanco.invalid && (formGroupBanco.controls.aliasBanco.dirty || formGroupBanco.controls.aliasBanco.touched)"
+      class="alert alert-danger">
+      Ingrese un Alias valido
+          </div>
         </div>
 
       <button type="submit" [disabled]="!formGroupBanco.valid" class="btn btn-primary btn-block">Agregar </button>
