@@ -1,9 +1,7 @@
 
-<div class="compra">
-<div>
-  <h1 align=center>Opciones a compra:</h1>
-</div>
-  <div class="filtros col-sm-6">
+<div class="row  offset-md-2" *ngIf="auth.user$ | async as usuario">
+
+  <div class="filtros col-sm-3">
           <p>Cantidad en $:</p>
           <input type="number"
                 [(ngModel)]="monto" placeholder="Desde"
@@ -44,7 +42,9 @@
           <hr>
         
 </div>
-<table class="table table-wrapper-scroll-y my-custom-scrollbar col-sm-8">
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+<table class="tabla table col-sm-4">
     <thead align=center>
       <tr>
         <th  scope="col" >Monto ($)</th>
@@ -61,12 +61,19 @@
         <td align=center>{{solicitud.tarifa}} Bs.</td>
         <td align=center>{{solicitud.tarifa * solicitud.monto }} Bs.</td>
         <td align=center>{{solicitud.banco}}</td>
-        <td align=center><button name ="" class="btn btn-primary btn-sm" routerLink="/transaccion/{{solicitud.id}}">Ver más</button></td>
+        <td align=center *ngIf="solicitud.usuario !== usuario.email; else tuya"><button name ="" class="btn btn-primary btn-sm" routerLink="/transaccion/{{solicitud.id}}">Ver más</button></td>
       </tr>
     </tbody>
   </table>
+</div>
   <br>
-  <button id="cargador" style="display: block; margin: auto;" class="btn btn-primary btn-sm" (click)="mas()">Cargar todo</button>
+  
    
 <br><br>
 </div>
+
+
+<ng-template #tuya>
+    <td align=center> <button name ="" class="btn btn-secondary btn-sm">Editar</button></td>
+   
+</ng-template>

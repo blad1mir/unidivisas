@@ -12,21 +12,21 @@ import { AuthService } from 'src/app/auth.service';
 })
 export class SolicitudComponent implements OnInit {
   public formGroup: FormGroup;
-  user="";
+  usuario="";
   ListaBanco = [];
   ListaZelle = [];
   BancosPersonales= [];
   ZellePersonal= [];
   solicitud = [];
+  solicitudActual = [];
+  idColeccionActual;
+  Banco;
 
   // Crear servicio de Auth que devuelva el usuario actual, estado si esta logged in o no , etc. (Ivernon)
 
   constructor(public firebaseService: FirestoreService, private formBuilder: FormBuilder,private router: Router, public auth: AuthService) {
     // Metodo async (Ivernon)
-    auth.user$.subscribe( user => { // Reestructurar todo despues de Auth
-      this.user = user.email
-      console.log("usuario A: " + this.user);
-    })
+    auth.user$.forEach(u => { this.usuario=u.email;  console.log("usuario A: "+this.usuario)});
     
    }
   
@@ -53,7 +53,7 @@ this.formGroup.get('tarifa').valueChanges
   }
    buildForm() {
      //await delay(3000);
-    console.log("Verifica esto: "+this.user); 
+    console.log("Verifica esto: "+this.usuario); 
 
     
     function longitudMinima(minimum) {
@@ -73,14 +73,14 @@ this.formGroup.get('tarifa').valueChanges
            tarifa: new FormControl('', [Validators.required,nega(1)]),
            banco:  new FormControl('', Validators.required),
            pago:  new FormControl(''),
-           usuario: new FormControl(this.user),
+           usuario: new FormControl(this.usuario),
          });
      }
      
   onSubmit(value: { usuario: string; banco: string; pago: string; }){
-    console.log("USUARIOOO: "+this.user)
+    console.log("USUARIOOO: "+this.usuario)
     console.log(value.banco +''+value.pago)
-    value.usuario = (this.user);
+    value.usuario = (this.usuario);
     console.log(this.formGroup.controls)
     
     this.firebaseService.createSolicitud(value)
@@ -99,7 +99,7 @@ this.formGroup.get('tarifa').valueChanges
       tarifa: new FormControl('', Validators.required),
       banco:  new FormControl('', Validators.required),
       pago:  new FormControl('', Validators.required),
-      usuario: [this.user, Validators.required ]
+      usuario: [this.usuario, Validators.required ]
     });
   }
 
@@ -109,9 +109,9 @@ this.formGroup.get('tarifa').valueChanges
     .subscribe( ListaBanco =>{
       this.ListaBanco = ListaBanco;
       ListaBanco.forEach(elemento => {
-        if(elemento.usuario==this.user){
+        if(elemento.usuario==this.usuario){
           console.log(elemento.usuario)
-          console.log(this.user)
+          console.log(this.usuario)
           this.BancosPersonales.push(elemento);
         }
       })
@@ -125,7 +125,7 @@ this.formGroup.get('tarifa').valueChanges
     .subscribe( ListaZelle =>{
       this.ListaZelle = ListaZelle;
       ListaZelle.forEach(elemento => {
-        if(elemento.usuario==this.user){
+        if(elemento.usuario==this.usuario){
           this.ZellePersonal.push(elemento);
         }
       })
@@ -138,10 +138,46 @@ obtenerSolicitudes(){
   this.firebaseService.obtenerSolicitudes()
   .subscribe( solicitud =>{
     this.solicitud = solicitud;
-    console.log(solicitud);
+    this.solicitud.forEach(elemento => {
+    
+      let tem= this.firebaseService.ObtenerUnBanco(elemento.banco)['nombreBanco'];
+      elemento.banco = tem; 
+      console.log(tem);
+    })
+   
 
   })
 
 }
+
+colocarID(item){
+  this.idColeccionActual=item.id;
+  this.solicitudActual=item;
+  //console.log("Colección: "+item.id+' '+item.ref+' '+item.banco+' '+item.monto+' '+item.tarifa);
+ }
+     
+ ActualizarSolicitudes(value: { usuario: string; banco: string; pago: string; }){
+   console.log("USUARIOOO: "+this.usuario)
+   console.log(value.banco +''+value.pago)
+   value.usuario = (this.usuario);
+   console.log(this.formGroup.controls)
+   this.firebaseService.ActualizarSolicitudes(this.idColeccionActual,value)
+   .then(
+     res => {
+       this.resetForm();
+       //this.router.navigate(['/venta']);
+     }
+   )
+ }
+
+ EliminarSolicitudes(item){
+  console.log(item.id);
+  this.firebaseService.deleteSolicitudes(item.id);
+}
+
+ObtenerUnBanco(id){
+  this.Banco=this.firebaseService.ObtenerUnBanco(id);
+}
+
 
 }

@@ -1,158 +1,90 @@
 <div *ngIf="auth.user$ | async as usu">
-  <div class="modal" id="exampleModal" tabindex="-1" role="dialog" >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Modifique su solicitud: </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form [formGroup]="formGroup" (ngSubmit)="Update(formGroup.value)">
-            <input type="hidden" class="form-control" formControlName="usuario" value={{usu.email}}>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Monto a vender ($):</label>
-              <input type="number" class="form-control" placeholder="00" formControlName="monto">
-              <small id="emailHelp" class="form-text text-muted">el monto está expresado en dólares</small>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Tarifa (Bolívares por Dólar):</label>
-              <input type="number" class="form-control" placeholder="20.000" formControlName="tarifa">
-              <small id="emailHelp" class="form-text text-muted">tarifa en la que va a vender sus dólares</small>
-            </div>
-            <div class="form-group">
-              <!-- <label for="exampleInputPassword1">Banco:</label>
-              <input type="text" class="form-control" placeholder="Banco" formControlName="banco"> -->
-              <label for="exampleInputPassword1">Banco:</label>
-              <div class="caja">
-                <select name="banco" formControlName="banco">
-                  <option value="100%BANCO">100%BANCO</option>
-                  <option value="ABN AMRO BANK">ABN AMRO BANK</option>
-                  <option value="BANCAMIGA BANCO MICROFINANCIERO, C.A.">BANCAMIGA BANCO MICROFINANCIERO, C.A.</option>
-                  <option value="BANCO ACTIVO BANCO COMERCIAL, C.A.">BANCO ACTIVO BANCO COMERCIAL, C.A.</option>
-                  <option value="BANCO AGRICOLA">BANCO AGRICOLA</option>
-                  <option value="BANCO BICENTENARIO">BANCO BICENTENARIO</option>
-                  <option value="BANCO CARONI, C.A. BANCO UNIVERSAL">BANCO CARONI, C.A. BANCO UNIVERSAL</option>
-                  <option value="BANCO DE DESARROLLO DEL MICROEMPRESARIO">BANCO DE DESARROLLO DEL MICROEMPRESARIO</option>
-                  <option value="BANCO DE VENEZUELA S.A.I.C.A.">BANCO DE VENEZUELA S.A.I.C.A.</option>
-                  <option value="BANCO DEL CARIBE C.A.">BANCO DEL CARIBE C.A.</option>
-                  <option value="BANCO DEL PUEBLO SOBERANO C.A.">BANCO DEL PUEBLO SOBERANO C.A.</option>
-                  <option value="BANCO DEL TESORO">BANCO DEL TESORO</option>
-                  <option value="BANCO ESPIRITO SANTO, S.A.">BANCO ESPIRITO SANTO, S.A.</option>
-                  <option value="BANCO EXTERIOR C.A.">BANCO EXTERIOR C.A.</option>
-                  <option value="BANCO INDUSTRIAL DE VENEZUELA.">BANCO INDUSTRIAL DE VENEZUELA.</option>
-                  <option value="BANCO INTERNACIONAL DE DESARROLLO, C.A.">BANCO INTERNACIONAL DE DESARROLLO, C.A.</option>
-                  <option value="BANCO MERCANTIL C.A.">BANCO MERCANTIL C.A.</option>
-                  <option value="BANCO NACIONAL DE CREDITO">BANCO NACIONAL DE CREDITO</option>
-                  <option value="BANCO OCCIDENTAL DE DESCUENTO.">BANCO OCCIDENTAL DE DESCUENTO.</option>
-                  <option value="BANCO PLAZA">BANCO PLAZA</option>
-                  <option value="BANCO PROVINCIAL BBVA">BANCO PROVINCIAL BBVA</option>
-                  <option value="BANCO VENEZOLANO DE CREDITO S.A.">BANCO VENEZOLANO DE CREDITO S.A.</option>
-                  <option value="BANCRECER S.A. BANCO DE DESARROLLO">BANCRECER S.A. BANCO DE DESARROLLO</option>
-                  <option value="BANESCO BANCO UNIVERSAL">BANESCO BANCO UNIVERSAL</option>  
-                  <option value="BANFANB">BANFANB</option>
-                  <option value="BANGENTE">BANGENTE</option>
-                  <option value="BANPLUS BANCO COMERCIAL C.A">BANPLUS BANCO COMERCIAL C.A</option>
-                  <option value="CITIBANK.">CITIBANK.</option>
-                  <option value="CORP BANCA.">CORP BANCA.</option>
-                  <option value="DELSUR BANCO UNIVERSAL">DELSUR BANCO UNIVERSAL</option>
-                  <option value="FONDO COMUN">FONDO COMUN</option>
-                  <option value="INSTITUTO MUNICIPAL DE CR&#201;DITO POPULAR">INSTITUTO MUNICIPAL DE CR&#201;DITO POPULAR</option>
-                  <option value="MIBANCO BANCO DE DESARROLLO, C.A.">MIBANCO BANCO DE DESARROLLO, C.A.</option>
-                  <option value="SOFITASA">SOFITASA</option>
-                </select>
-              </div>
-            </div>
-  
-            <div class="form-group">
-              <!-- <label for="exampleInputPassword1">Banco:</label>
-              <input type="text" class="form-control" placeholder="Banco" formControlName="banco"> -->
-              <label for="exampleInputPassword1">Forma de pago:</label>
-              <div class="caja">
-                <select formControlName="pago">
-                  <option value="Zelle" selected="selected">Zelle</option>
-                </select>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Guardar</button>
-            </div>
-  
-  
-  
-          </form>
-        </div>
+  <br>
+  <div class="row">
+
+
+    <table class="table col-md-6  offset-md-1" *ngIf="auth.user$ | async as usere">
+      <thead>
+        <tr>
+
+          <th scope="col">Monto</th>
+          <th scope="col">Tarifa</th>
+          <th scope="col">Banco</th>
+          <th scope="col">Editar</th>
+          <th scope="col">Eliminar</th>
+
+
+        </tr>
+      </thead>
+      <tbody *ngFor="let item of solicitud">
+        <!-- <div *ngFor="let comentario of comentarios ">
+            <div *ngIf="comentario.ProductoId == detalle.id"> -->
+        <tr *ngIf="item.usuario === usere.email">
+
+          <td>{{item.monto}} $</td>
+          <td>{{item.tarifa}} Bs.</td>
+          <td>{{item.banco}}</td>
+          <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal"
+              (click)="setId(item)">Editar</button>
+          </td>
+          <td><button type="button" class="btn btn-danger" (click)="EliminarSolicitudes(item)">Eliminar</button></td>
+        </tr>
+
+      </tbody>
+    </table>
+
+
+    <br>
+    <span class="table col-md-6  offset-md-1">Lista de transacciones por pagar: </span>
+    <table class="table col-md-6  offset-md-1" *ngIf="auth.user$ | async as usuario">
+
+      <thead>
+
+        <tr>
+
+          <th scope="col">Zelle</th>
+          <th scope="col">Monto</th>
+          <th scope="col">Estatus</th>
+          <th scope="col">Pagar</th>
+
+        </tr>
+      </thead>
+      <tbody *ngFor="let item of Transferencias">
+        <!-- <div *ngFor="let comentario of comentarios ">
+            <div *ngIf="comentario.ProductoId == detalle.id"> -->
+
+        <tr *ngIf="(item.vendedor === usuario.email) &&  item.historial === false">
+          <td>{{item.comprador}}</td>
+          <td>{{item.montoDolar}} $</td>
+          <td *ngIf="item.refbanco === 0 ; else recibido"><img src="../../assets/imgs/puntoAmarillo.jpg" width="30"
+              height="30"></td>
+          <td><button type="button" class="btn btn-primary" [routerLink]="['/transferencias']">Pagar</button></td>
+
+
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #recibido>
+  <td><img src="../../assets/imgs/puntoVerde.png" width="30" height="30"></td>
+</ng-template>
+
+
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modifique su solicitud: </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        aqui  va el modal
       </div>
     </div>
   </div>
-  
-  <br>
-  <table class="table col-md-6  offset-md-1" *ngIf="auth.user$ | async as usere">
-    <thead>
-      <tr>
-  
-        <th scope="col">Monto</th>
-        <th scope="col">Tarifa</th>
-        <th scope="col">Banco</th>
-        <th scope="col">Editar</th>
-        <th scope="col">Eliminar</th>
-  
-  
-      </tr>
-    </thead>
-    <tbody *ngFor="let item of solicitud">
-      <!-- <div *ngFor="let comentario of comentarios ">
-            <div *ngIf="comentario.ProductoId == detalle.id"> -->
-      <tr *ngIf="item.usuario === usere.email">
-  
-        <td>{{item.monto}} $</td>
-        <td>{{item.tarifa}} Bs.</td>
-        <td>{{item.banco}}</td>
-        <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal"
-            (click)="setId(item)">Editar</button>
-        </td>
-        <td><button type="button" class="btn btn-danger" (click)="EliminarSolicitudes(item)">Eliminar</button></td>
-      </tr>
-  
-    </tbody>
-  </table>
-
-
-  <br>
- <span  class="table col-md-6  offset-md-1">Lista de transacciones por pagar: </span>
-  <table class="table col-md-6  offset-md-1" *ngIf="auth.user$ | async as usuario">
-    
-    <thead>
-       
-      <tr>
-  
-        <th scope="col">Zelle</th>
-        <th scope="col">Monto</th>
-        <th scope="col">Estatus</th>
-        <th scope="col">Pagar</th>
-  
-      </tr>
-    </thead>
-    <tbody *ngFor="let item of Transferencias">
-      <!-- <div *ngFor="let comentario of comentarios ">
-            <div *ngIf="comentario.ProductoId == detalle.id"> -->
-        
-        <tr *ngIf="(item.vendedor === usuario.email) &&  item.historial === false">
-        <td>{{item.comprador}}</td>
-        <td>{{item.montoDolar}} $</td>
-        <td *ngIf="item.refbanco === 0 ; else recibido"><img src="../../assets/imgs/puntoAmarillo.jpg" width="30" height="30"></td>
-        <td><button type="button" class="btn btn-primary" [routerLink]="['/transferencias']" >Pagar</button></td>
-      
-        
-      </tr>
-  
-    </tbody>
-  </table>
-  
-  </div>
-
-  <ng-template #recibido>
-    <td ><img src="../../assets/imgs/puntoVerde.png" width="30" height="30"></td>
-  </ng-template>
+</div>

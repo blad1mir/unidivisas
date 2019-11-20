@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from '../Servicios/firestore.service';
 import * as _ from 'lodash';
+import { AuthService } from '../auth.service';
 
 
 @Component({
@@ -10,7 +11,7 @@ import * as _ from 'lodash';
 })
 export class CompraComponent implements OnInit {
 
-  constructor(private firebaseService: FirestoreService) { }
+  constructor(private firebaseService: FirestoreService, public auth: AuthService) { }
   //items: Array<any>;
   public solicitudes = [];
   public solicitud = '';

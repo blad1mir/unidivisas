@@ -139,6 +139,19 @@ export class FirestoreService {
     }));
   }
 
+  ObtenerUnBanco(idBanco: string){
+    this.ListaBancoDoc = this.db.doc<Banco>(`DatosBanco/${idBanco}`);
+      return this.Solicitud = this.SolicitudDoc.snapshotChanges().pipe(map(action => {
+        if(action.payload.exists == false) {
+          return null;
+        } else {
+          const data = action.payload.data() as Banco;
+          data.id = action.payload.id;
+          return data;
+        }
+      }));
+    }
+
 
 deleteSolicitudes(solkey){
   return this.db.collection('Solicitud').doc(solkey).delete();
