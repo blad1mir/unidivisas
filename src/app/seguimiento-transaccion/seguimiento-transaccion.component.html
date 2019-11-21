@@ -23,7 +23,8 @@
     </thead>
 
     <tbody *ngFor="let transferencia of Transferencias">
-      <tr *ngIf="(transferencia.comprador === usuario.email &&  transferencia.historial === false) || (transferencia.vendedor === usuario.email &&  transferencia.historial === false)">
+      <tr
+        *ngIf="(transferencia.comprador === usuario.email &&  transferencia.historial === false) || (transferencia.vendedor === usuario.email &&  transferencia.historial === false)">
         <td align=center>{{transferencia.comprador}} </td>
         <td *ngIf="transferencia.pagadoComprador === false ; else comprador"><img
             src="../../assets/imgs/puntoAmarillo.jpg" width="30" height="30"></td>
@@ -168,54 +169,33 @@
       </div>
       <div class="modal-body">
         <div class="col-med-3">
-          <div class="card" style="width: 30rem;"  align=center>
-            <form [formGroup]="formEnviarExpreriencia" (ngSubmit)="enviarExperiencia(formEnviarExpreriencia.value)"> 
-                  <h3 class="card-title" align=center>Experiencia de la transacción</h3>
-                  <p align=center>Esta transacción me hizo sentir: </p>
-
-                <div class="btn-group">
-
-                  <label class="btn btn-danger">
-                    <input type="radio" value="1" name="reaccion" formControlName="reaccion"> <h1>😡</h1>
-                  </label>
-
-                  <label class="btn btn-warning">
-                    <input type="radio" name="reaccion"  formControlName="reaccion"  value="2"><h1>😤</h1>
-                  </label>
-
-                  <label class="btn btn-info">
-                    <input type="radio" name="reaccion"  formControlName="reaccion"  value="3"><h1>😅</h1>
-                  </label>
-
-                  <label class="btn btn-primary">
-                    <input type="radio" name="reaccion"  formControlName="reaccion"  value="4"><h1>😃</h1>
-                  </label>
-
-                  <label class="btn btn-success">
-                    <input type="radio" name="reaccion"  formControlName="reaccion"  value="5"><h1>😊</h1>
-                  </label>
-                </div>
-
-                <div class="">
-                  <strong>Describa el motivo: </strong>
-                  <input type="text" class="form-control"  formControlName="descripcion"   />
-                  <br>
-                
-                </div>
-
-
-
-            <div class="card-body" align=left>
-              <div class="row">
-                <div class="col">
-                  <button type="submit" class="btn btn-success btn-sm btn-block">Confirmar </button>
-                </div>
-              </div>
-
-            </div>
-
-          </form>
-          <!-- <pre>{{formEnviarExpreriencia.value | json}}</pre>
+          <div class="card" style="width: 30rem;" align=center>
+              <form [formGroup]="formEnviarExpreriencia" (ngSubmit)="enviarExperiencia(formEnviarExpreriencia.value)">
+                <h3>Califique esta transacción</h3>
+                <p class="clasificacion">
+                  <input id="radio1" type="radio" name="estrellas" value="5">
+                  <!--
+                      --><label for="radio1">★</label>
+                  <!--
+                      --><input id="radio2" type="radio" name="estrellas" value="4" formControlName="reaccion">
+                  <!--
+                      --><label for="radio2">★</label>
+                  <!--
+                      --><input id="radio3" type="radio" name="estrellas" value="3" formControlName="reaccion">
+                  <!--
+                      --><label for="radio3">★</label>
+                  <!--
+                      --><input id="radio4" type="radio" name="estrellas" value="2" formControlName="reaccion">
+                  <!--
+                      --><label for="radio4">★</label>
+                  <!--
+                      --><input id="radio5" type="radio" name="estrellas" value="1" formControlName="reaccion">
+                  <!--
+                      --><label for="radio5">★</label>
+                </p>
+                <button type="submit"  [routerLink]="['/venta']"class="btn btn-primary btn-block">Enviar</button>
+            </form>
+            <!-- <pre>{{formEnviarExpreriencia.value | json}}</pre>
           <pre>{{formEnviarExpreriencia.reaccion}}</pre> -->
           </div>
 

@@ -6,6 +6,7 @@ export interface Solicitud { //interfaces utilizadas en todo el codigo
     monto?: number;
     tarifa?: number;
     banco?: string;
+    cuenta?: string;
     pago?: string;
     aceptada?: boolean;
 }
@@ -46,7 +47,7 @@ export interface Banco {
     cedula?: string;
     nombreBanco?: string;
     nombreCliente?: string;
-    numerocuenta?: number;
+    numeroCuenta?: string;
     aliasBanco?: string;
     usuario?: string; 
 }

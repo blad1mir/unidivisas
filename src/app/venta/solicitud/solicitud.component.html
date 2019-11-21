@@ -1,28 +1,10 @@
-<div>
-  <h1 align=center>Vender:</h1>
-</div>
+<div *ngIf="auth.user$ | async as usuario">
 <div class="row">
-  <div  class="table-wrapper-scroll-y my-custom-scrollbar col-md-3">
-    <h3 align=center>Mercado: </h3>
-      <table class="table table-bordered table-striped mb-0">
-          <thead align=center>
-            <tr>
-              <th scope="col">Monto</th>
-              <th scope="col">Tarifa</th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let item of solicitud">
-              <tr  *ngIf="item.aceptada === false">
-              <td><small>{{item.monto}} $</small></td>
-              <td><small>{{item.tarifa}} Bs.</small></td>
-            </tr>
-          </tbody>
-        </table>
-  </div>
-
-  <div class="col-md-4" *ngIf="auth.user$ | async as useru">
+  
+  <div class="col-md-2  offset-md-1" >
+    <h3 align=center>Vender:</h3>
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
-      <input type="hidden" class="form-control" formControlName="usuario" value={{useru.email}} readonly="readonly">
+      <input type="hidden" class="form-control" formControlName="usuario" value={{usuario.email}} readonly="readonly">
       <div class ="form-group">
         <label for="exampleInputEmail1">Monto a vender ($):</label>
         <input type="number" class="form-control" formControlName="monto">
@@ -47,33 +29,10 @@
         <label for="exampleInputPassword1">Banco:</label>
         <div class="caja">
           <select  name="banco" formControlName="banco">
-            <option *ngFor="let banco of BancosPersonales"  [value]="banco.nombreBanco"> <li> {{banco.nombreBanco}} - {{banco.aliasBanco}}</li></option>
+            <option *ngFor="let banco of BancosPersonales"  [value]="banco.nombreBanco +','+ banco.numeroCuenta"> <li> {{banco.nombreBanco}} - {{banco.aliasBanco}}</li></option>
           </select>
         </div>
       </div>
-
-      <!-- <div class="form-group">
-       <label for="exampleInputPassword1">Banco:</label>
-        <input type="text" class="form-control" placeholder="Banco" formControlName="banco"> 
-        <label for="exampleInputPassword1">Forma de pago:</label>
-        <div class="caja" >
-          <select formControlName="pago" >
-            <option *ngFor="let zelle of ZellePersonal" [value]="zelle.correoZelle">Zelle {{zelle.alias}} - {{zelle.correoZelle}}</option></select>
-        </div>
-      </div> -->
-
-
-
-     <!-- <h2>Debug</h2>
-      <ul>
-        <li>Is my form  valid? {{formGroup.valid}}</li>
-        <li><pre>{{formGroup.controls.monto.errors| json}}</pre></li>
-        <li><pre>{{formGroup.controls.tarifa.errors| json}}</pre></li>
-        <li><pre>{{formGroup.controls.banco.errors| json}}</pre></li>
-        <li><pre>{{formGroup.controls.pago.errors| json}}</pre></li>
-        <li><pre>{{formGroup.controls.usuario.errors| json}}</pre></li>
-      </ul>
-      -->
       <div *ngIf="BancosPersonales?.length > 0 && ZellePersonal?.length > 0">
       <div *ngFor="let banco of BancosPersonales"  > 
       </div>
@@ -88,16 +47,105 @@
       </div>
     
     </form>
+   
     
   </div>
 
 
 
-  <div class="col-md-5">
-    <app-venta></app-venta>
+  <div class="col-md-3">
+      <h3 align=center>Tus solicitudes de venta:</h3>
+      <table class="table">
+          <thead>
+            <tr>
+    
+              <th scope="col">Monto</th>
+              <th scope="col">Tarifa</th>
+              <th scope="col">Banco</th>
+              <th scope="col">Editar</th>
+              <th scope="col">Eliminar</th>
+    
+    
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of solicitud">
+            <!-- <div *ngFor="let comentario of comentarios ">
+                <div *ngIf="comentario.ProductoId == detalle.id"> -->
+            <tr *ngIf="item.usuario === usuario.email">
+    
+              <td>{{item.monto}} $</td>
+              <td>{{item.tarifa}} Bs.</td>
+              <td>{{item.banco}}</td>
+              <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" (click)="colocarID(item)">Editar</button>
+              </td>
+              <td><button type="button" class="btn btn-danger" (click)="EliminarSolicitudes(item)">Eliminar</button></td>
+            </tr>
+    
+          </tbody>
+        </table>
+    
+  </div>
+  <div class="col-sm-6">
+  <h3 align=center>Comprar:</h3>
+  <app-compra></app-compra>
   </div>
 
 </div>
 
+</div>
 <ng-template #other_content style="display: none">  </ng-template>
 <br><br>
+
+
+
+
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modifique su solicitud: </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="formGroupEditar" (ngSubmit)="ActualizarSolicitudes(formGroupEditar.value)">
+            <input type="hidden" class="form-control" formControlName="usuario" value={{usuario.email}} readonly="readonly">
+            <div class ="form-group">
+              <label for="exampleInputEmail1">Monto a vender ($):</label>
+              <input type="number" class="form-control" formControlName="monto">
+              <small id="emailHelp" class="form-text text-muted">el monto está expresado en dólares</small>
+            </div>  
+            <div class="form-group">
+              <label for="exampleInputPassword1">Tarifa (Bolívares por Dólar):</label>
+              <input type="number" class="form-control" formControlName="tarifa">
+              <small id="emailHelp" class="form-text text-muted">tarifa en la que va a vender sus dólares</small>
+            </div>
+            <div class="form-group">
+              <!-- <label for="exampleInputPassword1">Banco:</label>
+              <input type="text" class="form-control" placeholder="Banco" formControlName="banco"> -->
+              <label for="exampleInputPassword1">Banco:</label>
+              <div class="caja">
+                <select  name="banco" formControlName="banco">
+                  <option *ngFor="let banco of BancosPersonales"  [value]="banco.nombreBanco"> <li> {{banco.nombreBanco}} - {{banco.aliasBanco}}</li></option>
+                </select>
+              </div>
+            </div>
+            <div *ngIf="BancosPersonales?.length > 0 && ZellePersonal?.length > 0">
+            <div *ngFor="let banco of BancosPersonales"  > 
+            </div>
+            <div *ngFor="let zelle of ZellePersonal"  > 
+              </div>
+            <button type="submit" [disabled]="!formGroupEditar.valid" class="btn btn-primary btn-block">Actualizar</button>
+          </div>
+          <div *ngIf="BancosPersonales?.length === 0 || ZellePersonal?.length === 0">
+              
+                <button type="button" [routerLink]="['/perfil']" class="btn btn-primary">Añadir Zelle/Banco</button>
+              
+            </div>
+          
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
