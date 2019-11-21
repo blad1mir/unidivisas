@@ -89,19 +89,6 @@ export class TransaccionComponent implements OnInit {
       this.firestore.transferneciaBancaria(this.afAuth.auth.currentUser.email,this.solicitud.usuario,0,this.solicitud.id, this.solicitud.monto,this.solicitud.monto* this.solicitud.tarifa,  this.solicitud.tarifa,idSolicitud);
       this.obtenerListaTransferencia();
       this.router.navigate(['/transferencias']);
-   
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-
-    var y = document.getElementById("desaparecer");
-    if (y.style.display === "block") {
-      y.style.display = "none";
-    } else {
-      y.style.display = "block";
-    }
     }
     
 

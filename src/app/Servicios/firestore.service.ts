@@ -181,7 +181,7 @@ ActualizarZelle(Key, value){
 }
 
 createSolicitud(value){
-  console.log(value); 
+  console.log('Recibo'+value.cuenta); 
   return this.db.collection('Solicitud').add({
     monto: value.monto,
     ref: value.ref,

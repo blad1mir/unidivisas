@@ -158,7 +158,7 @@
 </div>
 
 
-<div class="modal" id="confirmoRecibido" tabindex="-1" role="dialog">
+<div class="modal" id="confirmoRecibido" tabindex="-1" role="dialog" [hidden]="hideModal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -177,24 +177,25 @@
                   <!--
                       --><label for="radio1">★</label>
                   <!--
-                      --><input id="radio2" type="radio" name="estrellas" value="4" formControlName="reaccion">
+                      --><input id="radio2" type="radio" name="reaccion" value="4" formControlName="reaccion">
                   <!--
                       --><label for="radio2">★</label>
                   <!--
-                      --><input id="radio3" type="radio" name="estrellas" value="3" formControlName="reaccion">
+                      --><input id="radio3" type="radio" name="reaccion" value="3" formControlName="reaccion">
                   <!--
                       --><label for="radio3">★</label>
                   <!--
-                      --><input id="radio4" type="radio" name="estrellas" value="2" formControlName="reaccion">
+                      --><input id="radio4" type="radio" name="reaccion" value="2" formControlName="reaccion">
                   <!--
                       --><label for="radio4">★</label>
                   <!--
-                      --><input id="radio5" type="radio" name="estrellas" value="1" formControlName="reaccion">
+                      --><input id="radio5" type="radio" name="reaccion" value="1" formControlName="reaccion">
                   <!--
                       --><label for="radio5">★</label>
                 </p>
                 <button type="submit"  [routerLink]="['/venta']"class="btn btn-primary btn-block">Enviar</button>
             </form>
+            <button hidden="hidden" class="fa fa-close" data-dismiss="modal" id="CerrarModal" #CerrarModal (click)="CerrarModal()"></button>
             <!-- <pre>{{formEnviarExpreriencia.value | json}}</pre>
           <pre>{{formEnviarExpreriencia.reaccion}}</pre> -->
           </div>

@@ -104,17 +104,14 @@ export class SolicitudComponent implements OnInit {
     });
   }
 
-  onSubmit(value: { usuario: string; banco: string; pago: string; cuenta: string; }) {
-    console.log("USUARIOOO: " + this.usuario)
-    console.log(value.banco + '' + value.pago)
+  onSubmit(value: { usuario: string; banco: string; pago: string; cuenta: string; }) { 
     value.usuario = (this.usuario);
-    console.log(value.banco)
     let cadena = value.banco.split(",");
     let nombreBanco = cadena[0];
     let cuentaBanco = cadena[1];
     value.banco = nombreBanco;
     value.cuenta = cuentaBanco;
-
+    console.log("Envio" + value.cuenta)
     this.firebaseService.createSolicitud(value)
       .then(
         res => {

@@ -38,6 +38,7 @@ export class SeguimientoTransaccionComponent implements OnInit {
     this.obtenerListaTransferencia();
     this.obtenerZelle();
     this.buildForm();
+    this.CerrarModal();
   }
 
   obtenerListaTransferencia() {
@@ -59,6 +60,7 @@ export class SeguimientoTransaccionComponent implements OnInit {
   }
 
   obtenerListaBanco() {
+    console.log("Entraa!!")
     this.BancosPersonales = [];
     this.firestore.obtenerListaDeBanco()
       .subscribe(ListaBanco => {
@@ -84,15 +86,16 @@ export class SeguimientoTransaccionComponent implements OnInit {
   }
 
   datosVendedor() {
-    this.ZellesPersonales = [];
+    this.ZellesPersonales.length=0;
     this.Transferencias.forEach(transferencia => {
+    if ((transferencia.vendedor === this.usuario && this.ZellesPersonales.length==0)) {
       this.ListaZelle.forEach(zelle => {
-        if ((transferencia.vendedor === this.usuario)) {
-          if (transferencia.comprador == zelle.usuario) {
-            this.ZellesPersonales.push(zelle);
+          if (transferencia.comprador === zelle.usuario) {
+               this.ZellesPersonales.push(zelle);
           }
-        }
+        
       })
+    }
     })
 
   }
@@ -146,10 +149,7 @@ export class SeguimientoTransaccionComponent implements OnInit {
       this.firestore.updateTransfer(this.transaccion['idventa'], this.transaccion);
     }
 
-    
-
-   
-
+    this.CerrarModal();
   }
 
   buildForm() {
@@ -160,6 +160,9 @@ export class SeguimientoTransaccionComponent implements OnInit {
     });
   }
 
+  private CerrarModal(): void {
+    window.document.getElementById("CerrarModal").click() ;
+}
 
 
 
