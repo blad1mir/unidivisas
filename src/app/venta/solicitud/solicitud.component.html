@@ -42,7 +42,7 @@
     </div>
     <div *ngIf="BancosPersonales?.length === 0 || ZellePersonal?.length === 0">
         
-          <button type="button" [routerLink]="['/perfil']" class="btn btn-primary">Añadir Zelle/Banco</button>
+      <button type="button" [routerLink]="['/datos-transferencia']" class="btn btn-primary">Añadir Zelle/Banco</button>
         
       </div>
     
@@ -139,10 +139,10 @@
             <button type="submit" [disabled]="!formGroupEditar.valid" class="btn btn-primary btn-block">Actualizar</button>
           </div>
           <div *ngIf="BancosPersonales?.length === 0 || ZellePersonal?.length === 0">
-              
-                <button type="button" [routerLink]="['/perfil']" class="btn btn-primary">Añadir Zelle/Banco</button>
-              
-            </div>
+                                  
+            <button type="button" [routerLink]="['/datos-transferencia']" class="btn btn-primary">Añadir Zelle/Banco</button>
+          
+        </div>
           
           </form>
         </div>
