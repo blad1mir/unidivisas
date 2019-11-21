@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../app/user.model';
 
@@ -18,7 +18,8 @@ export class AuthService {
     constructor(
         private afAuth: AngularFireAuth,
         private afs: AngularFirestore,
-        private router: Router
+        private router: Router,
+        public ngZone: NgZone
     ) { 
       this.user$ = this.afAuth.authState.pipe(
         switchMap(user => {
@@ -33,10 +34,16 @@ export class AuthService {
       )
       
     }
+    SendVerificationMail() {
+      return this.afAuth.auth.currentUser.sendEmailVerification()
+      .then(() => {
+        this.router.navigate(['/inicio']);
+      })
+    }
     async registerEmail(email: string, pass: string, displayName: string, tel: string, adm: number){
       const credential = await this.afAuth.auth.createUserWithEmailAndPassword(email, pass)
       return this.updateUserData(credential.user).then((success)=>{
-        this.router.navigate(['/venta']); 
+        this.SendVerificationMail();
         this.updateUserData3(credential.user.uid, displayName,email, tel, adm);
         });
     }
@@ -56,8 +63,18 @@ export class AuthService {
     }
     async loginEmail(email: string, pass: string){
       const credential = await this.afAuth.auth.signInWithEmailAndPassword(email, pass)
-        
-          this.router.navigate(['/venta']);
+      .then((result) => {
+        if (result.user.emailVerified !== true) {
+          this.SendVerificationMail();
+          window.alert('Por favor valida tu email antes de ingresar. Revisa tu buzón de entrada.');
+        } else {
+          this.ngZone.run(() => {
+            this.router.navigate(['/venta']);
+          });
+        }
+      }).catch((error) => {
+        window.alert(error.message)
+      })
       
      }
     async googleSignin() {
@@ -82,14 +99,22 @@ export class AuthService {
       const data = { 
         uid: user.uid, 
         email: user.email, 
-        displayName: user.displayName
+        displayName: user.displayName,
+        emailVerified: user.emailVerified
 
       } 
   
       return userRef.set(data, { merge: true })
   
     }
-  
+    ForgotPassword(passwordResetEmail) {
+      return this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail)
+      .then(() => {
+        window.alert('Email para cambiar la contraseña ha sido enviado, revisa tu buzón de entrada.');
+      }).catch((error) => {
+        window.alert(error)
+      })
+    }
     async signOut() {
       await this.afAuth.auth.signOut();
       this.router.navigate(['/login']);

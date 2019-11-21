@@ -4,4 +4,5 @@ export interface User {
     displayName?: string;
     telf?: number;
     admin?: number;
+    emailVerified?: boolean;
   }

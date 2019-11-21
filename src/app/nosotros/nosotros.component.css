@@ -1,17 +1,23 @@
 
-/* Iconos Sociales */
 
-.social-icons{
-    
-    margin: 0;
-    padding: 0;
-    font-size : 10px;
-}
-.social {
-    margin:7px 7px 7px 0px;
-    color:#232323;
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+#team {
+    background: #eee !important;
 }
 
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #0AAAF0;
+    border-color: #0AAAF0;
+    box-shadow: none;
+    outline: none;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #0AAAF0;
+    border-color: #0AAAF0;
+}
 
 #social-fb:hover {
      color: #3B5998;

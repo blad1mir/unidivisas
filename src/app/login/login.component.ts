@@ -53,11 +53,11 @@ export class LoginComponent implements OnInit {
     */
 
     checkeo(){
-     if( this.name.length >= 3 && this.telf.length > 10 && this.email.endsWith("unimet.edu.ve")){
+     if( this.name.length >= 3 && this.telf.length > 10 && this.telf.startsWith("0") && this.email.endsWith("unimet.edu.ve")){
       this.onAddUser()
      }else if(this.name.length < 3 ){
       alert("Error: Debe ingresar un nombre valido")
-     }else if(this.telf.length < 11 ){
+     }else if(this.telf.length < 11 || !this.telf.startsWith("0") ){
       alert("Error: Debe ingresar un telefono valido")
      }else {
       alert("Error: El correo debe pertenecer a la universidad metropolitana")
@@ -69,6 +69,9 @@ export class LoginComponent implements OnInit {
       }else {
        alert("Error: El correo debe pertenecer a la universidad metropolitana")
       }
+     }
+     check3(){
+       this.auth.ForgotPassword(this.email)
      }
   onAddUser(){
     
