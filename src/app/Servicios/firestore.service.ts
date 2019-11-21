@@ -187,6 +187,7 @@ createSolicitud(value){
     ref: value.ref,
     tarifa: value.tarifa,
     banco: value.banco,
+    cuenta: value.cuenta,
     pago: value.pago,
     usuario: value.usuario,
     aceptada: false

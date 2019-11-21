@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/auth.service';
 })
 export class SolicitudComponent implements OnInit {
   public formGroup: FormGroup;
+  public formGroupEditar: FormGroup;
   usuario="";
   ListaBanco = [];
   ListaZelle = [];
@@ -75,25 +76,48 @@ this.formGroup.get('tarifa').valueChanges
            pago:  new FormControl(''),
            usuario: new FormControl(this.usuario),
          });
+
+         this.formGroupEditar = this.formBuilder.group({
+          ref: [''],
+          monto: new FormControl('', [Validators.required,nega(1)]),
+          tarifa: new FormControl('', [Validators.required,nega(1)]),
+          banco:  new FormControl('', Validators.required),
+          pago:  new FormControl(''),
+          usuario: new FormControl(this.usuario),
+        });
      }
      
-  onSubmit(value: { usuario: string; banco: string; pago: string; }){
+  onSubmit(value: { usuario: string; banco: string; pago: string; cuenta: string; }){
     console.log("USUARIOOO: "+this.usuario)
     console.log(value.banco +''+value.pago)
     value.usuario = (this.usuario);
-    console.log(this.formGroup.controls)
-    
-    this.firebaseService.createSolicitud(value)
-    .then(
-      res => {
-        this.resetForm();
-        //this.router.navigate(['/venta']);
-      }
-    )
+    console.log(value.banco)
+    let cadena = value.banco.split(",");
+    let nombreBanco= cadena[0];
+    let cuentaBanco= cadena[1];
+    value.banco=nombreBanco;
+    value.cuenta=cuentaBanco;
+
+     this.firebaseService.createSolicitud(value)
+     .then(
+       res => {
+         this.resetForm();
+         //this.router.navigate(['/venta']);
+       }
+     )
   }
 
   resetForm() {
     this.formGroup = this.formBuilder.group({
+      ref: [''],
+      monto: new FormControl('', Validators.required),
+      tarifa: new FormControl('', Validators.required),
+      banco:  new FormControl('', Validators.required),
+      pago:  new FormControl('', Validators.required),
+      usuario: [this.usuario, Validators.required ]
+    });
+
+    this.formGroupEditar = this.formBuilder.group({
       ref: [''],
       monto: new FormControl('', Validators.required),
       tarifa: new FormControl('', Validators.required),
@@ -138,29 +162,22 @@ obtenerSolicitudes(){
   this.firebaseService.obtenerSolicitudes()
   .subscribe( solicitud =>{
     this.solicitud = solicitud;
-    this.solicitud.forEach(elemento => {
-    
-      let tem= this.firebaseService.ObtenerUnBanco(elemento.banco)['nombreBanco'];
-      elemento.banco = tem; 
-      console.log(tem);
-    })
-   
-
   })
 
 }
 
 colocarID(item){
+  console.log(item.id)
   this.idColeccionActual=item.id;
   this.solicitudActual=item;
   //console.log("Colección: "+item.id+' '+item.ref+' '+item.banco+' '+item.monto+' '+item.tarifa);
  }
      
- ActualizarSolicitudes(value: { usuario: string; banco: string; pago: string; }){
+ ActualizarSolicitudes(value: { usuario: string; banco: string; pago: string;  aceptada: boolean; }){
    console.log("USUARIOOO: "+this.usuario)
    console.log(value.banco +''+value.pago)
    value.usuario = (this.usuario);
-   console.log(this.formGroup.controls)
+   value.aceptada= false;
    this.firebaseService.ActualizarSolicitudes(this.idColeccionActual,value)
    .then(
      res => {

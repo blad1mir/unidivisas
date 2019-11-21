@@ -1,4 +1,4 @@
-<div class="" *ngIf="auth.user$ | async as usuario">
+<div *ngIf="auth.user$ | async as usuario">
 <div class="row">
   
   <div class="col-md-2  offset-md-1" >
@@ -21,7 +21,7 @@
         <label for="exampleInputPassword1">Banco:</label>
         <div class="caja">
           <select  name="banco" formControlName="banco">
-            <option *ngFor="let banco of BancosPersonales"  [value]="banco.id"> <li> {{banco.nombreBanco}} - {{banco.aliasBanco}}</li></option>
+            <option *ngFor="let banco of BancosPersonales"  [value]="banco.nombreBanco +','+ banco.numeroCuenta"> <li> {{banco.nombreBanco}} - {{banco.aliasBanco}}</li></option>
           </select>
         </div>
       </div>
@@ -68,8 +68,7 @@
               <td>{{item.monto}} $</td>
               <td>{{item.tarifa}} Bs.</td>
               <td>{{item.banco}}</td>
-              <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal"
-                  (click)="setId(item)">Editar</button>
+              <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" (click)="colocarID(item)">Editar</button>
               </td>
               <td><button type="button" class="btn btn-danger" (click)="EliminarSolicitudes(item)">Eliminar</button></td>
             </tr>
@@ -102,7 +101,42 @@
           </button>
         </div>
         <div class="modal-body">
-          aqui  va el modal
+          <form [formGroup]="formGroupEditar" (ngSubmit)="ActualizarSolicitudes(formGroupEditar.value)">
+            <input type="hidden" class="form-control" formControlName="usuario" value={{usuario.email}} readonly="readonly">
+            <div class ="form-group">
+              <label for="exampleInputEmail1">Monto a vender ($):</label>
+              <input type="number" class="form-control" formControlName="monto">
+              <small id="emailHelp" class="form-text text-muted">el monto está expresado en dólares</small>
+            </div>  
+            <div class="form-group">
+              <label for="exampleInputPassword1">Tarifa (Bolívares por Dólar):</label>
+              <input type="number" class="form-control" formControlName="tarifa">
+              <small id="emailHelp" class="form-text text-muted">tarifa en la que va a vender sus dólares</small>
+            </div>
+            <div class="form-group">
+              <!-- <label for="exampleInputPassword1">Banco:</label>
+              <input type="text" class="form-control" placeholder="Banco" formControlName="banco"> -->
+              <label for="exampleInputPassword1">Banco:</label>
+              <div class="caja">
+                <select  name="banco" formControlName="banco">
+                  <option *ngFor="let banco of BancosPersonales"  [value]="banco.nombreBanco"> <li> {{banco.nombreBanco}} - {{banco.aliasBanco}}</li></option>
+                </select>
+              </div>
+            </div>
+            <div *ngIf="BancosPersonales?.length > 0 && ZellePersonal?.length > 0">
+            <div *ngFor="let banco of BancosPersonales"  > 
+            </div>
+            <div *ngFor="let zelle of ZellePersonal"  > 
+              </div>
+            <button type="submit" [disabled]="!formGroupEditar.valid" class="btn btn-primary btn-block">Actualizar</button>
+          </div>
+          <div *ngIf="BancosPersonales?.length === 0 || ZellePersonal?.length === 0">
+              
+                <button type="button" [routerLink]="['/perfil']" class="btn btn-primary">Añadir Zelle/Banco</button>
+              
+            </div>
+          
+          </form>
         </div>
       </div>
     </div>

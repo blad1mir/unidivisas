@@ -64,7 +64,8 @@ export class SeguimientoTransaccionComponent implements OnInit {
       .subscribe(ListaBanco => {
         this.ListaBanco = ListaBanco;
         ListaBanco.forEach(elemento => {
-          if (elemento.usuario == this.solicitud.usuario && elemento.nombreBanco == this.solicitud.banco) {
+          
+          if (elemento.usuario == this.solicitud.usuario && elemento.numeroCuenta == this.solicitud.cuenta) {
             this.BancosPersonales.push(elemento);
 
           }
@@ -145,7 +146,7 @@ export class SeguimientoTransaccionComponent implements OnInit {
       this.firestore.updateTransfer(this.transaccion['idventa'], this.transaccion);
     }
 
-    this.router.navigate(['/inicio']);
+    
 
    
 

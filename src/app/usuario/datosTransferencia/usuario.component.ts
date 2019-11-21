@@ -152,7 +152,7 @@ export class UsuarioComponent implements OnInit {
     )
   }
 
-  RegistrarNuevoBanco(value: { nombreCliente: string; nombreBanco: string;  numeroCuenta: number; cedula: string; aliasBanco: string; usuario: string;}) {
+  RegistrarNuevoBanco(value: { nombreCliente: string; nombreBanco: string;  numeroCuenta: string; cedula: string; aliasBanco: string; usuario: string;}) {
     value.usuario = (this.usuario);
     console.log(value);
     this.firebaseService.agregarNuevoBanco(value)
