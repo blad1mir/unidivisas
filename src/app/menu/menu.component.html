@@ -32,6 +32,26 @@
              
           </ul>
       </li>
+      <li class="dropdown nav-item" *ngIf="notificacion === false; else notificar">
+        <a class=" nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="cursor:pointer;" > <i class="fa fa-bell-o"></i></a>
+        <ul class="dropdown-menu">
+            <li><font size="1" align=center class="negra">No tienes solicitudes aceptadas</font></li>
+            
+           
+        </ul>
+    </li>
+    <ng-template #notificar>
+      <li class="dropdown nav-item">
+        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="cursor:pointer;" > <i class="fa fa-bell"></i></a>
+        <ul class="dropdown-menu" *ngFor="let Transferencia of Transferencias">
+            
+            <li><font size="1" align=center class="negra" style="cursor:pointer;" [routerLink]="['/transferencias']">Alguien aceptó tu solicitud</font></li>
+         
+           
+        </ul>
+    </li>
+    </ng-template>
+      
 
       <li class="nav-item" style="margin-right: 250px;">
        
