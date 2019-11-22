@@ -25,7 +25,7 @@
         <a class="nav-link" [routerLink]="['/preguntas-frecuentes']">Preguntas Frecuentes</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/transferencias']">notificaciones<i class="fa fa-bell-o"></i></a>
+        <a class="nav-link" [routerLink]="['/transferencias']"></a>
       </li>
       <div *ngIf="auth.user$ | async; then authenticated; else guest"></div>
       
