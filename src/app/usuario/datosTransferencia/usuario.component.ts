@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { FirestoreService } from '../../Servicios/firestore.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-usuario',
@@ -127,6 +128,17 @@ export class UsuarioComponent implements OnInit {
   
 
   RegistrarNuevoZelle(value: { correoZelle: string; nombreZelle: string; usuario: string; principal: boolean; }) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      onOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
     value.usuario = (this.usuario);
     let conta=0;
     this.ListaZelle.forEach(lista => {
@@ -147,12 +159,28 @@ export class UsuarioComponent implements OnInit {
     .then(
       res => {
         this.resetFormZelle();
+        this.resetFormBanco();
+        Toast.fire({
+          icon: 'success',
+          title: '¡Has registrado una ceunta de Zelle!'
+        })
         //this.router.navigate(['/venta']);
       }
     )
   }
 
   RegistrarNuevoBanco(value: { nombreCliente: string; nombreBanco: string;  numeroCuenta: string; cedula: string; aliasBanco: string; usuario: string;}) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      onOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
     value.usuario = (this.usuario);
     console.log(value);
     this.firebaseService.agregarNuevoBanco(value)
@@ -160,19 +188,54 @@ export class UsuarioComponent implements OnInit {
       res => {
         this.resetFormBanco();
         //this.router.navigate(['/venta']);
+        this.resetFormZelle();
+        Toast.fire({
+          icon: 'success',
+          title: '¡Has registrado una ceunta de Banco!'
+        })
       }
     )
    
   }
 
   eliminarZelle(valor){
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      onOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
     console.log(valor.id);
     this.firebaseService.eliminarZelle(valor.id);
+    Toast.fire({
+      icon: 'success',
+      title: '¡Has eliminado una cuenta de Zelle!'
+    })
   }
 
   eliminarBanco(valor){
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      onOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
     console.log(valor.id);
     this.firebaseService.eliminarBanco(valor.id);
+    Toast.fire({
+      icon: 'success',
+      title: '¡Has eliminado una cuenta de Banco!'
+    })
   }
 
   resetFormZelle() {

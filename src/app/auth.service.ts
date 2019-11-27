@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../app/user.model';
-
+import Swal from 'sweetalert2';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
@@ -21,6 +21,8 @@ export class AuthService {
         private router: Router,
         public ngZone: NgZone
     ) { 
+      
+
       this.user$ = this.afAuth.authState.pipe(
         switchMap(user => {
             // Logged in
@@ -45,7 +47,15 @@ export class AuthService {
       return this.updateUserData(credential.user).then((success)=>{
         this.SendVerificationMail();
         this.signOut();
-        window.alert('Por favor valida tu email antes de ingresar. Revisa tu buzón de entrada.');
+        Swal.fire({
+          title: '¡Error!',
+          text: 'Por favor valida tu email antes de ingresar. Revisa tu buzón de entrada.',
+          icon: 'warning',
+          confirmButtonText: 'Ok'
+        }).then((result) => {
+          // Reload the Page
+          location.reload();
+        });
           
         this.updateUserData3(credential.user.uid, displayName,email, tel, adm);
         });
@@ -65,37 +75,49 @@ export class AuthService {
       })
     }
     async loginEmail(email: string, pass: string){
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        onOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
       const credential = await this.afAuth.auth.signInWithEmailAndPassword(email, pass)
       .then((result) => {
         if (result.user.emailVerified !== true) {
           this.SendVerificationMail();
           this.signOut();
-          window.alert('Por favor valida tu email antes de ingresar. Revisa tu buzón de entrada.');
+          Swal.fire({
+            title: '¡Error!',
+            text: 'Por favor valida tu email antes de ingresar. Revisa tu buzón de entrada.',
+            icon: 'warning',
+            confirmButtonText: 'Ok'
+          });
           
         } else {
           this.ngZone.run(() => {
             this.router.navigate(['/venta']);
+            
+            Toast.fire({
+              icon: 'success',
+              title: '¡Ha iniciado sesión!'
+            })
           });
         }
       }).catch((error) => {
-        window.alert(error.message)
+        Swal.fire({
+          title: '¡Error!',
+          text: error.message,
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
       })
       
      }
-    async googleSignin() {
-      const provider = new auth.GoogleAuthProvider();
-      const credential = await this.afAuth.auth.signInWithPopup(provider);
-      return this.updateUserData(credential.user),
-      this.router.navigate(['/venta']);
-      
-    }
-    async googleRegister() {
-      const provider = new auth.GoogleAuthProvider();
-      const credential = await this.afAuth.auth.signInWithPopup(provider)
-      return this.updateUserData(credential.user).then((success)=>{
-        this.router.navigate(['/venta']);
-      });
-      }
   
     private updateUserData(user) {
       // Sets user data to firestore on login
@@ -115,14 +137,40 @@ export class AuthService {
     ForgotPassword(passwordResetEmail) {
       return this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
-        window.alert('Email para cambiar la contraseña ha sido enviado, revisa tu buzón de entrada.');
+        Swal.fire({
+          title: '¡Error!',
+          text: 'Email para cambiar la contraseña ha sido enviado, revisa tu buzón de entrada.',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        });
       }).catch((error) => {
-        window.alert(error)
+        Swal.fire({
+          title: '¡Error!',
+          text: error.message,
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
       })
     }
     async signOut() {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        onOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
       await this.afAuth.auth.signOut();
       this.router.navigate(['/login']);
+      Toast.fire({
+        icon: 'success',
+        title: 'Ha cerrado sesión'
+      })
+      
     }
 
 }
