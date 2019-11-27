@@ -27,6 +27,7 @@ export class UsuarioComponent implements OnInit {
     this.buildFormBanco();
     this.obtenerListaZelle();
     this.obtenerListaBanco();
+    this.verificar();
 
   }
   tieneNegativo(input: FormControl) {
@@ -151,6 +152,24 @@ export class UsuarioComponent implements OnInit {
       }
     )
   }
+
+  verificar(){
+    setInterval( ()=>{if(this.ListaZelle.length!=0){
+    let conta=0;
+    this.ListaZelle.forEach(lista => {
+      if (lista.usuario==this.usuario && lista.principal==true) {
+        conta++;
+      }  
+    })
+
+    this.ListaZelle.forEach(lista => {
+      if (lista.usuario==this.usuario && conta==0) {
+        lista.principal=true;
+        conta++;
+      }  
+    })
+    }},10000);
+   }
 
   RegistrarNuevoBanco(value: { nombreCliente: string; nombreBanco: string;  numeroCuenta: string; cedula: string; aliasBanco: string; usuario: string;}) {
     value.usuario = (this.usuario);
