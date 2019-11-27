@@ -5,6 +5,7 @@ import { Solicitud } from '../modelos/interfaces';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -81,15 +82,35 @@ export class TransaccionComponent implements OnInit {
 
 
   confirmartransaccion(){
-    if(confirm('Seguro que quieres realizar esta transacción, no podra cancelar despues de este punto.')){
-      var x = document.getElementById("aparecer"); 
+    Swal.fire({
+      title: '¿Deseas continuar?',
+      text: "No podra cancelar despues de este punto.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '¡Si, comprar!'
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire(
+          '¡Aceptado!',
+          'Recuerde realizar la transferencia.',
+          'success'
+        ).then((result) => {
+          // Reload the Page
+          var x = document.getElementById("aparecer"); 
       const idSolicitud = this.route.snapshot.params['id'];
       this.solicitud.aceptada=true;
       this.firestore.ActualizarSolicitudes(idSolicitud,this.solicitud);
       this.firestore.transferneciaBancaria(this.afAuth.auth.currentUser.email,this.solicitud.usuario,0,this.solicitud.id, this.solicitud.monto,this.solicitud.monto* this.solicitud.tarifa,  this.solicitud.tarifa,idSolicitud);
       this.obtenerListaTransferencia();
-      this.router.navigate(['/transferencias']);
-    }
+          this.router.navigate(['/transferencias']);
+        });
+      };
+      
+      
+    })
+
     
 
 

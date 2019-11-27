@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl } from
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { delay } from 'q';
 import { AuthService } from 'src/app/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-solicitud',
@@ -53,7 +54,7 @@ export class SolicitudComponent implements OnInit {
     const tieneneg = input.value.indexOf('-') >= 0;
     return tieneneg ? null : { necesitaneg: true };
   }
-  buildForm() {
+  buildForm() {  
     //await delay(3000);
     console.log("Verifica esto: " + this.usuario);
 
@@ -110,11 +111,27 @@ export class SolicitudComponent implements OnInit {
     let nombreBanco = cadena[0];
     let cuentaBanco = cadena[1];
     value.banco = nombreBanco;
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      onOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
     value.cuenta = cuentaBanco;
     console.log("Envio" + value.cuenta)
+    
     this.firebaseService.createSolicitud(value)
       .then(
         res => {
+          Toast.fire({
+            icon: 'success',
+            title: 'Ha cerrado sesión'
+          })
           this.resetForm();
           //this.router.navigate(['/venta']);
         }
