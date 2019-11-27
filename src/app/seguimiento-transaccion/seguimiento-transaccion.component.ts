@@ -6,6 +6,7 @@ import { AuthService } from '../auth.service';
 import { Solicitud } from '../modelos/interfaces';
 import { DatePipe } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-seguimiento-transaccion',
@@ -101,6 +102,17 @@ export class SeguimientoTransaccionComponent implements OnInit {
   }
 
   transferirComprador(usuario) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      onOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
     var x = document.getElementById("aparecer2");
     x.style.display = "none";
 
@@ -112,10 +124,25 @@ export class SeguimientoTransaccionComponent implements OnInit {
       }
 
     }
-    alert("Su transferencia fue realizada con exito");
+    Toast.fire({
+      icon: 'success',
+      title: 'Su transferencia fue realizada con exito'
+    })
   }
 
   transferirVendedor(numeroRef, usuario) {
+    if(numeroRef.length>4){
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      onOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
     var x = document.getElementById("aparecer");
     x.style.display = "none";
     console.log(numeroRef)
@@ -127,11 +154,31 @@ export class SeguimientoTransaccionComponent implements OnInit {
         this.firestore.deleteSolicitudes(this.Transferencias[index].idSolicitud);
         index = this.Transferencias.length;
       }
-
+    
     }
 
 
-    alert("Su transferencia fue realizada con exito");
+    Toast.fire({
+      icon: 'success',
+      title: 'Su transferencia fue realizada con exito'
+    })
+  }else{
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      onOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    Toast.fire({
+      icon: 'success',
+      title: 'Su transferencia fue realizada con exito'
+    })
+  }
 
   }
   confirmarTransaccion(transaccion) {

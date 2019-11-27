@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators,AbstractControl  } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
 import { FirestoreService } from '../Servicios/firestore.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     //this.buildForm(); 
+    
   }
 /*
   buildForm() {
@@ -56,18 +58,39 @@ export class LoginComponent implements OnInit {
      if( this.name.length >= 3 && this.telf.length > 10 && this.telf.startsWith("0") && this.email.endsWith("unimet.edu.ve")){
       this.onAddUser()
      }else if(this.name.length < 3 ){
-      alert("Error: Debe ingresar un nombre valido")
+      Swal.fire({
+        title: '¡Error!',
+        text: 'Debe ingresar un nombre valido',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
      }else if(this.telf.length < 11 || !this.telf.startsWith("0") ){
-      alert("Error: Debe ingresar un telefono valido")
+      Swal.fire({
+        title: '¡Error!',
+        text: 'Debe ingresar un numero de telefono valido',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
      }else {
-      alert("Error: El correo debe pertenecer a la universidad metropolitana")
+      Swal.fire({
+        title: '¡Error!',
+        text: 'El correo debe pertenecer a la universidad metropolitana',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
      }
     }
     checkeo2(){
       if(this.email.endsWith("unimet.edu.ve")){
        this.onlogin()
       }else {
-       alert("Error: El correo debe pertenecer a la universidad metropolitana")
+       
+       Swal.fire({
+        title: '¡Error!',
+        text: 'El correo debe pertenecer a la universidad metropolitana',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
       }
      }
      check3(){
@@ -78,14 +101,24 @@ export class LoginComponent implements OnInit {
     this.auth.registerEmail(this.email, this.password, this.name, this.telf, this.admin)
     .then((res)=> {
       this.router.navigate(['/inicio']);
-    }).catch(err => alert("Error: "+err.message));
+    }).catch(err =>Swal.fire({
+      title: '¡Error!',
+      text: err.message,
+      icon: 'error',
+      confirmButtonText: 'Ok'
+    }) );
   }
   onlogin(): void{
     
     this.auth.loginEmail(this.email, this.password)
     .then((res)=>{
       this.router.navigate(['/inicio']);
-    }).catch( err =>alert("Error: "+err.message));
+    }).catch( err =>Swal.fire({
+      title: '¡Error!',
+      text: err.message,
+      icon: 'error',
+      confirmButtonText: 'Ok'
+    }));
     }
   
 }
