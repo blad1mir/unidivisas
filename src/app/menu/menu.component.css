@@ -24,5 +24,9 @@ a {
     text-decoration: none;
 }
 
+.show-on-hover:hover > ul.dropdown-menu {
+    display: block;    
+}
+
 
 
