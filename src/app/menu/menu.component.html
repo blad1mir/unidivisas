@@ -62,7 +62,7 @@
   </div>
 </nav>
 <div class="card-group">
-  <div class="card text-center">
+  <div id="computadoras" class="card text-center">
     <a href="https://dolartoday.com/" target="_blank">
       <img *ngIf="(bgClass === 'inicio' || bgClass === 'bienvenida' || bgClass === 'preguntas-frecuentes' )"  src="../../assets/imgs/Unimet_DT.png" class="card-img-top" alt="Unimet_DT" >
     </a> 
@@ -73,7 +73,7 @@
      
     </div>
   </div>
-  <div class="card text-center">
+  <div id="computadoras" class="card text-center">
     <a href="https://preciocucuta.com/dolar-hoy/" target="_blank">
       <img  *ngIf="(bgClass === 'inicio' || bgClass === 'bienvenida' || bgClass === 'preguntas-frecuentes' )" src="../../assets/imgs/Unimet_cucuta.png" class="card-img-top" alt="...">
     </a>
@@ -83,7 +83,7 @@
       <p class="card-text">{{montoDC | number: '3.1-2'}} BsS</p> <!--Aqui se está llamando a la función del ts que se trae la información de la API Cucuta-->
     </div>
   </div>
-  <div class="card text-center"> 
+  <div id="computadoras" class="card text-center"> 
     <a href="http://www.cencoex.gob.ve/convocatoria-sicad" target="_blank">
       <img  *ngIf="(bgClass === 'inicio' || bgClass === 'bienvenida' || bgClass === 'preguntas-frecuentes' )"  src="../../assets/imgs/Unimet_Sicad.png" class="card-img-top" alt="...">
     </a>

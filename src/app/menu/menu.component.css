@@ -19,6 +19,11 @@ negra {
 a {
     color: #ffffff !important;
 }
+@media screen and (max-width: 675px) {
+
+    #computadoras {display: none;}
+    
+    }
 
 #monitor {
     color: #000000 !important;
