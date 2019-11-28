@@ -87,10 +87,7 @@ export class MenuComponent implements OnInit {
 Toast.fire({
             icon: 'info',
             title: '¡solicitud de venta aceptada!'
-          }).then((result) => {
-            // Reload the Page
-            this.router.navigate(['/transferencias']);
-          });
+          })
 
          this.mostrar=false;
     }

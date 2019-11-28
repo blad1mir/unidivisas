@@ -71,10 +71,7 @@ export class BienvenidaComponent implements OnInit {
     Toast.fire({
       icon: 'info',
       title: 'Inicia Sesión para empezar a vender o comprar Dolares'
-    }).then((result) => {
-      // Reload the Page
-      this.router.navigate(['/login']);
-    });
+    })
 
   }
 
