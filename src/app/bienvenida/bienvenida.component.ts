@@ -3,6 +3,7 @@ import { AuthService } from '../auth.service';
 import { FirestoreService } from '../Servicios/firestore.service'; 4
 import { NavigationEnd, Router } from '@angular/router';
 import { DolartodayService } from "../Servicios/dolartoday.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-bienvenida',
@@ -38,6 +39,17 @@ export class BienvenidaComponent implements OnInit {
   }
 
   ngOnInit() {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top',
+      showConfirmButton: false,
+      timer: 5000,
+      timerProgressBar: true,
+      onOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
     // Aquí es donde el html hace el llamado y se le da la orden de la funcion que extrae la información del API
     this.dolartodayService.getDolarToday().subscribe((data: any[]) => {
       //si quieres ver a cuanto está el Dolar Today quita el comentario del siguiente console.log
@@ -56,6 +68,13 @@ export class BienvenidaComponent implements OnInit {
 
     })
 
+    Toast.fire({
+      icon: 'info',
+      title: 'Inicia Sesión para empezar a vender o comprar Dolares'
+    }).then((result) => {
+      // Reload the Page
+      this.router.navigate(['/login']);
+    });
 
   }
 

@@ -77,7 +77,7 @@ export class MenuComponent implements OnInit {
       toast: true,
       position: 'top-end',
       showConfirmButton: false,
-      timer: 2000,
+      timer: 3000,
       timerProgressBar: true,
       onOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -87,9 +87,12 @@ export class MenuComponent implements OnInit {
 Toast.fire({
             icon: 'info',
             title: '¡solicitud de venta aceptada!'
-          })
+          }).then((result) => {
+            // Reload the Page
+            this.router.navigate(['/transferencias']);
+          });
 
-         // this.mostrar=false;
+         this.mostrar=false;
     }
   
   } },5000);

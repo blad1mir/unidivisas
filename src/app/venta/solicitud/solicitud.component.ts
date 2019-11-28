@@ -33,11 +33,13 @@ export class SolicitudComponent implements OnInit {
   }
 
   ngOnInit() {
+  
     this.buildForm();
     this.buildFormModal();
     this.obtenerListaBanco();
     this.obtenerListaZelle();
     this.obtenerSolicitudes();
+
 
     this.formGroup.get('tarifa').valueChanges
       .subscribe(value => {

@@ -41,7 +41,7 @@
         </ul>
     </li>
     <ng-template #notificar>
-      <li class="dropdown nav-item">
+      <li class="dropdown nav-item show-on-hover">
         <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="cursor:pointer;" > <i class="fa fa-bell" style="color: yellow;"></i></a>
         <ul class="dropdown-menu" *ngFor="let Transferencia of Transferencias">
             
@@ -53,7 +53,7 @@
     </ng-template>
       
 
-      <li class="nav-item" style="margin-right: 250px;">
+      <li class="nav-item" style="margin-right: 150px;">
        
         <a class="nav-link"  (click)="auth.signOut()" style="cursor:pointer;">Cerrar Sesión</a>
       </li>
