@@ -1,7 +1,7 @@
 <div *ngIf="auth.user$ | async as usuario">
 <div class="row" style="max-width: 100%;">
   
-  <div class="col-md-2  offset-md-1" >
+  <div class="col-sm-4  offset-md-1" >
     <h3 align=center>Vender:</h3>
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
       <input type="hidden" class="form-control" formControlName="usuario" value={{usuario.email}} readonly="readonly">
@@ -53,9 +53,9 @@
 
 
 
-  <div class="col-md-3">
+  <div class="col-sm-6">
       <h3 align=center>Tus solicitudes de venta:</h3>
-      <table class="table">
+      <table class="table table-wrapper-scroll-y my-custom-scrollbar">
           <thead>
             <tr>
     
@@ -85,15 +85,13 @@
         </table>
     
   </div>
-  <div class="col-sm-6">
-  <h3 align=center>Comprar:</h3>
+
+</div>
+<br>
+<div class="row" style="max-width: 100%;">
   <app-compra></app-compra>
-  </div>
-
 </div>
-
 </div>
-<ng-template #other_content style="display: none">  </ng-template>
 <br><br>
 
 

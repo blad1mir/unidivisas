@@ -1,5 +1,7 @@
 .tabla{
-  width: 330px;
+  width: 50%;
+  
+  margin-left: 5%;
 }
 
 .custab{
@@ -14,7 +16,7 @@
   transition: 0.5s;
 }
 .filtros{
-  margin: 2%;
+  margin-left: 10%;
   width: 20%;
   float: left;
   color: white;
@@ -25,9 +27,7 @@
 }
 @media screen and (max-width:675px){
   .filtros{
-    margin: 2%;
-    width: 100%;
-    float: left;
+    width: 80%;
     color: white;
     background-color: #0aaaf0;
   }  
@@ -38,7 +38,7 @@
 }
 @media screen and (max-width:1000px){
   .my-custom-scrollbar {
-    min-width: 500px;
+    min-width: 360px;
   }
 }
 

@@ -68,3 +68,18 @@
   input[type="radio"]:checked ~ label {
     color: orange;
   }
+  
+@media screen and (max-width:1000px){
+  .my-custom-scrollbar {
+    min-width: 360px;
+  }
+}
+
+.my-custom-scrollbar {
+  position: relative;
+  height: 550px;
+  overflow: auto;
+}
+.table-wrapper-scroll-y {
+  display: block;
+}
