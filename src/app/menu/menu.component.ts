@@ -4,6 +4,7 @@ import { FirestoreService } from '../Servicios/firestore.service'; 4
 import { NavigationEnd, Router } from '@angular/router';
 import { DolartodayService } from "../Servicios/dolartoday.service";
 import { AngularFireAuth } from '@angular/fire/auth';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-menu',
@@ -15,6 +16,7 @@ export class MenuComponent implements OnInit {
   navbarOpen = false;
   bgClass = '';
   notificacion: boolean = false;
+  mostrar: boolean = true;
   
   Transferencias = [];
   numerosPendiente=0;
@@ -70,8 +72,29 @@ export class MenuComponent implements OnInit {
     this.notificacion=false
   }else{
     this.notificacion=true
+    if(this.mostrar){
+        const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+      onOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+Toast.fire({
+            icon: 'info',
+            title: '¡solicitud de venta aceptada!'
+          })
+
+         // this.mostrar=false;
+    }
+  
   } },5000);
  }
+ 
     
   
 
